@@ -1,5 +1,6 @@
 import {Queue} from "./Queue";
 import {Observable, Subject} from "rxjs";
+import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
 
 
 describe("Queue",()=>{
@@ -121,7 +122,7 @@ describe("Queue",()=>{
 class CommandHelper
 {
   public createCommand(callback:()=>void,
-                        maxDelay:number):()=>Observable<void>
+                        maxDelay:number):IExecuteCommandFunction
   {
     const obs = new Observable<void>(obs=>{
       const delay = Math.floor(Math.random() * maxDelay);
@@ -135,7 +136,7 @@ class CommandHelper
   }
 
   public createRandomCommands(count:number, maxDelay:number)
-  : (()=>Observable<void>)[]
+  : IExecuteCommandFunction[]
   {
     const result : (()=>Observable<void>)[] = [];
 
@@ -147,7 +148,7 @@ class CommandHelper
   }
 
 
-  public createCommandThatThrowsError():()=>Observable<void>
+  public createCommandThatThrowsError():IExecuteCommandFunction
   {
     return ()=>new Observable<void>(obs=>obs.error());
   }

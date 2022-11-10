@@ -23,7 +23,10 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
   }
 
   cancelCommands(): void {
-    throw new Error('Not Implemented');
+    this._queue.cancelAll();
+    this._queue = this.queueFactory
+      .create();
+    this.readViewModel().subscribe();
   }
 
   get commandsInQueue(): number {
@@ -41,18 +44,23 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
     }
     const commandFunction = this.executeCommandFunctionFactory
       .create(this._viewModel,this);
+
+
     this._queue.add(commandFunction);
   }
 
   get onViewModelUpdated(): Subject<void> {
-    throw new Error('Not Implemented');
+    return this._onViewModelUpdated;
   }
+
+  private _onViewModelUpdated : Subject<void> = new Subject<void>();
 
   readViewModel(): Observable<void> {
     return new Observable<void>(obs=>{
       this.reader.read().subscribe(vm=>
       {
         this._viewModel = vm;
+        this._onViewModelUpdated.next();
         obs.complete();
       });
     })
@@ -66,9 +74,15 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
   private _queue! : Queue;
 
   onConcurrencyVersionMismatch(): void {
+    this._queue.cancelAll();
+    this._queue = this.queueFactory
+      .create();
+    this.readViewModel().subscribe();
+    this._concurrencyVersionMismatchOccurred.next();
   }
 
   get ConcurrencyVersionMismatchOccurred(): Subject<void> {
-    throw new Error('Not Implemented');
+    return this._concurrencyVersionMismatchOccurred;
   }
+  private _concurrencyVersionMismatchOccurred : Subject<void> = new Subject<void>();
 }

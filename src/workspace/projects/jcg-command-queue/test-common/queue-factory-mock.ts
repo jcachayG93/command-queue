@@ -39,7 +39,7 @@ class QueueFactoryDouble extends QueueFactory
               private secondReturn : QueueMock) {
     super();
   }
-  private isFirstCall = false;
+  private isFirstCall = true;
 
   createWasCalled = false;
   override create(): Queue {

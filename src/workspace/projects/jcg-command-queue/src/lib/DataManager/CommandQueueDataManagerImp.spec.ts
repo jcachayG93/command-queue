@@ -142,7 +142,6 @@ describe("CommandQueueDataManager",()=>{
         .returnsFirstTime
         .verifyCancelAll();
       expect(queueFactory.createWasCalled()).toBeTrue();
-      expect(reader.verifyRead())
       reader.verifyReadTwice();
       expect(viewModelWasUpdated).toBeTrue();
       expect(concurrencyVersionMismatchOcurred)
@@ -167,7 +166,6 @@ describe("CommandQueueDataManager",()=>{
         .returnsFirstTime
         .verifyCancelAll();
       expect(queueFactory.createWasCalled()).toBeTrue();
-      expect(reader.verifyRead())
       reader.verifyReadTwice();
       expect(viewModelWasUpdated).toBeTrue();
 

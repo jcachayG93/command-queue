@@ -3,6 +3,7 @@ import {UpdateViewModelFunctionFactory} from "../../api/UpdateViewModelFunctionF
 import {DataService} from "../../api/DataService";
 import {Observable} from "rxjs";
 import {IConcurrencyVersionMismatchErrorHandler} from "../IConcurrencyVersionMismatchErrorHandler";
+import {IExecuteCommandFunction} from "./IExecuteCommandFunction";
 
 /**
  * Creates the command function that will be added to
@@ -19,7 +20,7 @@ export class DataManagerExecuteCommandFunctionFactory
 
   create(viewModel : TViewModel,
          errorHandler : IConcurrencyVersionMismatchErrorHandler)
-  : ()=>Observable<void>
+  : IExecuteCommandFunction
   {
     throw new Error('Not Implemented');
 

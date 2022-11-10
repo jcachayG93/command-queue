@@ -1,4 +1,5 @@
 import {Observable} from "rxjs";
+import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
 
 /**
  * A queue of commands that run one after another, and can be cancelled.
@@ -12,7 +13,7 @@ export class Queue
    * representing the action to run, the next command will run as soon as
    * this observable completes
    */
-  public add(f:()=>Observable<void>):void
+  public add(f:IExecuteCommandFunction):void
   {
     const action = this.createAction(f, this.cancellationToken);
 
