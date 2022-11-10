@@ -1,173 +1,84 @@
-import {QueueFactoryMock} from "../../../test-common/queue-factory-mock";
-import {ViewModelReaderMock} from "../../../test-common/view-model-reader-mock";
-import {CommandQueueDataManager} from "../api/CommandQueueDataManager";
-import {ViewModelImp} from "../../../test-common/ViewModelImp";
+import {DmReadRelatedMock} from "../../../test-common/DmReadRelatedMock";
+import {DmExecuteCommandRelated} from "./support/DmExecuteCommandRelated";
 import {CommandQueueDataManagerImp} from "./CommandQueueDataManagerImp";
-import {
-  DataManagerExecuteCommandFunctionFactoryMock
-} from "../../../test-common/DataManagerExecuteCommandFunctionFactoryMock";
-import {DataManagerCommandImp} from "../../../test-common/DataManagerCommandImp";
-import {ViewModelNotReadError} from "../api/errors/view-model-not-read-error";
+import {ViewModelImp} from "../../../test-common/ViewModelImp";
+import {DmExecuteCommandRelatedMock} from "../../../test-common/DmExecuteCommandRelatedMock";
+import {DataManagerCommand} from "../api/DataManagerCommand";
+import {Mock} from "moq.ts";
 
-describe("CommandQueueDataManager",()=>{
-  let queueFactory : QueueFactoryMock;
-  let executeCommandFunctionFactory : DataManagerExecuteCommandFunctionFactoryMock;
-  let reader : ViewModelReaderMock;
-
+describe("CommandQueueDataManagerImp",
+  ()=>{
+  let dmReadReladed : DmReadRelatedMock;
+  let dmExecuteCommandRelated : DmExecuteCommandRelatedMock;
+  let sut : CommandQueueDataManagerImp<ViewModelImp>;
   beforeEach(()=>{
-    queueFactory = new QueueFactoryMock();
-    executeCommandFunctionFactory =
-      new DataManagerExecuteCommandFunctionFactoryMock();
-    reader = new ViewModelReaderMock();
+    dmReadReladed = new DmReadRelatedMock();
+    dmExecuteCommandRelated = new DmExecuteCommandRelatedMock();
+    sut = new CommandQueueDataManagerImp<ViewModelImp>(
+      dmReadReladed.object, dmExecuteCommandRelated.object
+    );
 
   });
-  function createSut():CommandQueueDataManagerImp<ViewModelImp>
-  {
-    return new CommandQueueDataManagerImp<ViewModelImp>(
-      queueFactory.object,
-      executeCommandFunctionFactory.object,
-      reader.object
-    );
-  }
-  function createSutAndRead():CommandQueueDataManagerImp<ViewModelImp>
-  {
-    let result = createSut();
-    result.readViewModel().subscribe();
-    return result;
-  }
-  function randomCommand():DataManagerCommandImp
-  {
-    return new DataManagerCommandImp();
-  }
-  it('constructor, creates queue',
-    () => {
-      // ********* ARRANGE ***********
-      // ********* ACT ***************
-      let sut =
-        new CommandQueueDataManagerImp<ViewModelImp>(
-          queueFactory.object,
-          executeCommandFunctionFactory.object,
-          reader.object
-        );
-      // ********* ASSERT ************
-      expect(queueFactory.createWasCalled()).toBeTrue();
+    function randomCommand():DataManagerCommand
+    {
+      return new Mock<DataManagerCommand>().object();
+    }
+
+
+    it('cancelCommands delegates to dmExecuteCommandRelated', () => {
+      // ******** ARRANGE ********
+      // ******** ACT ********
+      sut.cancelCommands();
+      // ******** ASSERT ********
+      dmExecuteCommandRelated.verifyCancelCommands();
     });
 
-  it('commandsInQueue delegates to queue',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSut();
-      // ********* ACT ***************
+    it('commandsInQueue delegates to dmExecuteCommandRelated', () => {
+      // ******** ARRANGE ********
+      // ******** ACT ********
       let result = sut.commandsInQueue;
-      // ********* ASSERT ************
-      expect(result).toBe(queueFactory.returnsFirstTime.object.commandsInQueue);
+      // ******** ASSERT ********
+      expect(result).toBe(dmExecuteCommandRelated.object.commandsInQueue);
     });
 
-  it('readViewModel delegates to ViewModelReader',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSut();
-      // ********* ACT ***************
-      sut.readViewModel().subscribe();
-      // ********* ASSERT ************
-      reader.verifyRead();
-
-      expect(sut.viewModel)
-        .toBe(reader.returns);
-
-    });
-
-  it('readViewModel emits onViewModelUpdated',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSut();
-      let wasRead = false;
-      sut.onViewModelUpdated
-        .subscribe(()=>{
-          wasRead = true;
-        })
-      // ********* ACT ***************
-      sut.readViewModel().subscribe();
-      // ********* ASSERT ************
-      expect(wasRead).toBeTrue();
-    });
-
-  it('executeCommand, before reading ' +
-    'ViewModel, throws error: ViewModelNotReadError',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSut();
-      // ********* ACT ***************
-      let f = ()=>{sut.executeCommand(randomCommand())};
-      // ********* ASSERT ************
-
-      expect(f).toThrowMatching(e=>e instanceof ViewModelNotReadError);
-
-    });
-  it('executeCommand, creates command function, ' +
-    'adds it to queue',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSutAndRead();
-      let command = randomCommand();
-      // ********* ACT ***************
+    it('executeCommand delegates to dmExecuteCommandRelated', () => {
+      // ******** ARRANGE ********
+      const command = randomCommand();
+      // ******** ACT ********
       sut.executeCommand(command);
-      // ********* ASSERT ************
-      executeCommandFunctionFactory
-        .verifyCreate(sut.viewModel as ViewModelImp,sut);
+      // ******** ASSERT ********
+      dmExecuteCommandRelated.verifyExecuteCommand(command);
+    });
+    it('onWriteErrorOccurred delegates to dmExecuteCommandRelated',
+      () => {
+        // ********* ARRANGE ***********
 
-     queueFactory
-        .returnsFirstTime.verifyAdd(executeCommandFunctionFactory.return);
+        // ********* ACT ***************
+        let result = sut.writeErrorOccurred
+        // ********* ASSERT ************
+        expect(result).toBe(dmExecuteCommandRelated.object.writeErrorOccurred);
+      });
+    it('onViewModelUpdated delegates to dmReadRelated', () => {
+      // ******** ARRANGE ********
+      // ******** ACT ********
+      const result = sut.onViewModelUpdated;
+      // ******** ASSERT ********
+      expect(result).toBe(dmReadReladed.object.onViewModelUpdated);
+    });
+    it('readViewModel delegates to dmReadRelated', () => {
+      // ******** ARRANGE ********
+      // ******** ACT ********
+      const obs = sut.readViewModel();
+      // ******** ASSERT ********
+      expect(obs).toBe(dmReadReladed.object.readViewModel());
+    });
+    it('get viewModel delegates to dmReadRelated', () => {
+      // ******** ARRANGE ********
+      // ******** ACT ********
+      const result = sut.viewModel;
+      // ******** ASSERT ********
+      expect(result).toBe(dmReadReladed.object.viewModel);
     });
 
-  it('onConcurrencyVersionMismatch, ' +
-    'cancels all queue commands, ' +
-    'creates a new queue,' +
-    'read the view model, emits view model updated, ' +
-    'emits ConcurrencyVersionMismatchOcurred subject',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSutAndRead();
-      queueFactory.resetCreateWasCalled();
-      let viewModelWasUpdated = false;
-      let concurrencyVersionMismatchOcurred = false;
-      sut.ConcurrencyVersionMismatchOccurred
-        .subscribe(()=>concurrencyVersionMismatchOcurred = true);
-      sut.onViewModelUpdated.subscribe(
-        ()=>viewModelWasUpdated = true);
-      // ********* ACT ***************
-      sut.onConcurrencyVersionMismatch();
-      // ********* ASSERT ************
-      queueFactory
-        .returnsFirstTime
-        .verifyCancelAll();
-      expect(queueFactory.createWasCalled()).toBeTrue();
-      reader.verifyReadTwice();
-      expect(viewModelWasUpdated).toBeTrue();
-      expect(concurrencyVersionMismatchOcurred)
-        .toBeTrue();
-    });
 
-  it('cancelAllCommands, cancels all queue commands, ' +
-    'creates a new queue,' +
-    'read the view model,' +
-    'and emits view model updated',
-    () => {
-      // ********* ARRANGE ***********
-      let sut = createSutAndRead();
-      queueFactory.resetCreateWasCalled();
-      let viewModelWasUpdated = false;
-      sut.onViewModelUpdated.subscribe(
-        ()=>viewModelWasUpdated = true);
-      // ********* ACT ***************
-      sut.onConcurrencyVersionMismatch();
-      // ********* ASSERT ************
-      queueFactory
-        .returnsFirstTime
-        .verifyCancelAll();
-      expect(queueFactory.createWasCalled()).toBeTrue();
-      reader.verifyReadTwice();
-      expect(viewModelWasUpdated).toBeTrue();
-
-    });
-});
+  });

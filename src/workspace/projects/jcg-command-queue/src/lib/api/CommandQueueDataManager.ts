@@ -43,11 +43,11 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
    */
   abstract cancelCommands():void;
 
+
   /**
-   * Emits when a concurrency version mismatch occurs and the data
-   * is re-loaded
+   * Emits when a write error occurred
    */
-  abstract get ConcurrencyVersionMismatchOccurred():Subject<void>;
+  abstract get writeErrorOccurred():Subject<Error>;
 }
 
 
