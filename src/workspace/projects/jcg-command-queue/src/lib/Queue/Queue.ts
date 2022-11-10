@@ -10,12 +10,13 @@ export class Queue
   /**
    * Adds a command to the queue
    * @param f a function that will be called to create the observable
+   * @param errorCallback, will be invoked if any of the observables created with f throws an error
    * representing the action to run, the next command will run as soon as
    * this observable completes
    */
-  public add(f:IExecuteCommandFunction):void
+  public add(f:IExecuteCommandFunction, errorCallback : (e:Error)=>void ):void
   {
-    const action = this.createAction(f, this.cancellationToken);
+    const action = this.createAction(f, this.cancellationToken, errorCallback);
 
     if (this.current == null)
     {
@@ -56,7 +57,10 @@ export class Queue
 
   private cancellationToken : CancellationToken = new CancellationToken();
 
-  private createAction(f:()=>Observable<void>, ct : CancellationToken):()=>Promise<void>
+  private createAction(
+    f:()=>Observable<void>,
+    ct : CancellationToken,
+    errorCallback : (e:Error)=>void):()=>Promise<void>
   {
 
     return ()=> {
@@ -73,6 +77,7 @@ export class Queue
             this.commandsInQueue--;
             resolve()},
           error:err=>{
+            errorCallback(err);
             reject(err)}
         });
       });

@@ -36,7 +36,7 @@ describe("Queue",()=>{
       // ********* ACT ***************
 
       commands.forEach(c=>
-      sut.add(c));
+      sut.add(c,e=>{}));
 
       // ********* ASSERT ************
 
@@ -61,7 +61,7 @@ describe("Queue",()=>{
       let commands = commandHelper.createRandomCommands(100,10);
       // ********* ACT ***************
       commands.forEach(c=>
-      sut.add(c));
+      sut.add(c,e=>{}));
       // ********* ASSERT ************
       setTimeout(()=>{
         sut.cancelAll();
@@ -84,7 +84,7 @@ describe("Queue",()=>{
       const commands = commandHelper.createRandomCommands(100,10);
       // ********* ACT ***************
       commands.forEach(c=>
-        sut.add(c));
+        sut.add(c,e=>{}));
       // ********* ASSERT ************
       setTimeout(()=>{
         sut.cancelAll();
@@ -96,23 +96,27 @@ describe("Queue",()=>{
 
       },100);
     });
-  it('any observable throws error, cancels all remaining commands',
+  it('any observable throws error, cancels all remaining commands, invokes error callback',
     (done) => {
       // ********* ARRANGE ***********
       const commands = commandHelper.createRandomCommands(100,5);
-      const errorCommand = commandHelper.createCommandThatThrowsError();
+      const error = new Error("");
+
+      const errorCommand = commandHelper.createCommandThatThrowsError(error);
       commands.splice(3,0,errorCommand);
 
+      let callbackError : Error | null = null;
       // ********* ACT ***************
 
       commands.forEach(c=>
-        sut.add(c));
+        sut.add(c,e=>{callbackError = e}));
 
       // ********* ASSERT ************
       setTimeout(()=>{
         setTimeout(()=>{
           expect(sut.commandsCancelled).toBe(96);
           console.log("Cancelled commands: " + sut.commandsCancelled);
+          expect(callbackError).toEqual(error);
           done();
         },100)
       },40);
@@ -148,8 +152,8 @@ class CommandHelper
   }
 
 
-  public createCommandThatThrowsError():IExecuteCommandFunction
+  public createCommandThatThrowsError(e:Error):IExecuteCommandFunction
   {
-    return ()=>new Observable<void>(obs=>obs.error());
+    return ()=>new Observable<void>(obs=>obs.error(e));
   }
 }
