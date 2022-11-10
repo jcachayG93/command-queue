@@ -8,6 +8,7 @@ export class ViewModelReaderMock
   constructor() {
     this.moq = new Mock<ViewModelReader<ViewModelImp>>();
     this.readReturns = new ViewModelImp();
+    this.readReturns.version = 10;
     this.moq.setup(s=>
     s.read()).returns(of(this.readReturns));
   }

@@ -2,9 +2,10 @@ import {IDmReader} from "../IDmReader";
 import {ViewModel} from "../../../api/ViewModel";
 import {Observable, Subject} from "rxjs";
 import {ViewModelReader} from "../../../api/ViewModelReader";
+import {IDmMediator} from "../IDmMediator";
 
 export class DmReader<TViewModel extends ViewModel>
-  implements IDmReader<TViewModel>
+  implements IDmReader<TViewModel>, IDmMediator<TViewModel>
 {
   constructor(
     private reader : ViewModelReader<TViewModel>
@@ -23,6 +24,7 @@ export class DmReader<TViewModel extends ViewModel>
         .subscribe({
           next:v=>{
             this._viewModel = v
+            this.setVersion(v.version);
           },
           error:e=>obs.error(e),
           complete:()=>{
@@ -39,5 +41,23 @@ export class DmReader<TViewModel extends ViewModel>
   }
 
   private _viewModel : TViewModel | null = null;
+
+  emitViewModelUpdated(): void {
+    this._onViewModelUpdated.next();
+  }
+
+  read(): void {
+    this.readViewModel().subscribe();
+  }
+
+  setVersion(value: number): void {
+    this._version = value;
+  }
+
+  get version(): number {
+    return this._version;
+  }
+
+  private _version = 0;
 
 }
