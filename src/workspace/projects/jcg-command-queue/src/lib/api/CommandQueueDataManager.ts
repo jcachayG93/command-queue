@@ -52,10 +52,3 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
 
 
 
-export class ConcurrencyVersionMismatchException
-{
-
-}
-
-
-
