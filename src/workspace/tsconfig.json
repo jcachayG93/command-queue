@@ -11,6 +11,9 @@
     "paths": {
       "jcg-command-queue": [
         "dist/jcg-command-queue"
+      ],
+      "jcg-command-queue-components": [
+        "dist/jcg-command-queue-components"
       ]
     },
     "noImplicitReturns": true,
