@@ -47,7 +47,7 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
    * Emits when a concurrency version mismatch occurs and the data
    * is re-loaded
    */
-  abstract get ConcurrencyVersionMismatchOccurred():Subject<void>;
+  abstract get concurrencyVersionMismatchOccurred():Subject<void>;
 }
 
 

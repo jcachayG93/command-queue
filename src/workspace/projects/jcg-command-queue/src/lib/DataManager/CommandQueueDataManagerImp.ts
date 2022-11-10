@@ -1,88 +1,45 @@
-import {ViewModel} from "../api/ViewModel";
 import {CommandQueueDataManager} from "../api/CommandQueueDataManager";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {ViewModel} from "../api/ViewModel";
 import {Observable, Subject} from "rxjs";
-import {Queue} from "../Queue/Queue";
-import {QueueFactory} from "../Queue/QueueFactory";
-import {ViewModelReader} from "../api/ViewModelReader";
-import {DataManagerExecuteCommandFunctionFactory} from "./support/DataManagerExecuteCommandFunctionFactory";
-import {IConcurrencyVersionMismatchErrorHandler} from "./IConcurrencyVersionMismatchErrorHandler";
-import {ViewModelNotReadError} from "../api/errors/view-model-not-read-error";
+import {DataManagerCommand} from "../api/DataManagerCommand";
+import {DmReadRelated} from "./support/DmReadRelated";
+import {DmExecuteCommandRelated} from "./support/DmExecuteCommandRelated";
 
 export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
   extends CommandQueueDataManager<TViewModel>
-  implements IConcurrencyVersionMismatchErrorHandler
 {
   constructor(
-    private queueFactory : QueueFactory,
-    private executeCommandFunctionFactory : DataManagerExecuteCommandFunctionFactory<TViewModel>,
-    private reader : ViewModelReader<TViewModel>
+    private dmReadRelated : DmReadRelated<TViewModel>,
+    private dmExecuteCommandRelated : DmExecuteCommandRelated
   ) {
     super();
-    this._queue = this.queueFactory.create();
+  }
+  get concurrencyVersionMismatchOccurred(): Subject<void> {
+    throw new Error('not implemented');
   }
 
   cancelCommands(): void {
-    this._queue.cancelAll();
-    this._queue = this.queueFactory
-      .create();
-    this.readViewModel().subscribe();
+    throw new Error('not implemented');
   }
 
   get commandsInQueue(): number {
-    if (this._queue)
-    {
-      return this._queue.commandsInQueue;
-    }
-    return 0;
+    throw new Error('not implemented');
   }
 
   executeCommand(cmd: DataManagerCommand): void {
-    if (this._viewModel == null)
-    {
-      throw new ViewModelNotReadError();
-    }
-    const commandFunction = this.executeCommandFunctionFactory
-      .create(this._viewModel,this);
-
-
-    this._queue.add(commandFunction);
+    throw new Error('not implemented');
   }
 
   get onViewModelUpdated(): Subject<void> {
-    return this._onViewModelUpdated;
+    throw new Error('not implemented');
   }
 
-  private _onViewModelUpdated : Subject<void> = new Subject<void>();
-
   readViewModel(): Observable<void> {
-    return new Observable<void>(obs=>{
-      this.reader.read().subscribe(vm=>
-      {
-        this._viewModel = vm;
-        this._onViewModelUpdated.next();
-        obs.complete();
-      });
-    })
+    throw new Error('not implemented');
   }
 
   get viewModel(): TViewModel | null {
-    return this._viewModel;
+    throw new Error('not implemented');
   }
 
-  private _viewModel : TViewModel | null = null;
-  private _queue! : Queue;
-
-  onConcurrencyVersionMismatch(): void {
-    this._queue.cancelAll();
-    this._queue = this.queueFactory
-      .create();
-    this.readViewModel().subscribe();
-    this._concurrencyVersionMismatchOccurred.next();
-  }
-
-  get ConcurrencyVersionMismatchOccurred(): Subject<void> {
-    return this._concurrencyVersionMismatchOccurred;
-  }
-  private _concurrencyVersionMismatchOccurred : Subject<void> = new Subject<void>();
 }
