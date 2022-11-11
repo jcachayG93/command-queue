@@ -5,6 +5,7 @@ import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {DmWritter} from "./DmWritter";
 import {DataManagerCommand} from "../../../api/DataManagerCommand";
 import {Mock} from "moq.ts";
+import {Logger} from "../Logger";
 
 describe("DmWritter",()=>{
   let queueFactory : QueueFactoryDouble;
@@ -13,7 +14,7 @@ describe("DmWritter",()=>{
 
   let cmd : DataManagerCommand;
   beforeEach(()=>{
-    queueFactory = new QueueFactoryDouble();
+    queueFactory = new QueueFactoryDouble(new Logger());
     executeCommandFunctionFactory = new ExecuteCommandFunctionFactoryMock();
     mediator = new DmMediatorMock();
     cmd = (new Mock<DataManagerCommand>()).object();

@@ -1,6 +1,7 @@
 import {Queue} from "./Queue";
 import {Observable, Subject} from "rxjs";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
+import {Logger} from "../DataManager/support/Logger";
 
 
 describe("Queue",()=>{
@@ -9,7 +10,7 @@ describe("Queue",()=>{
 
   beforeEach(()=>{
     commandHelper = new CommandHelper();
-    sut = new Queue();
+    sut = new Queue(new Logger());
   })
 
  it('Runs the commands in a queue',

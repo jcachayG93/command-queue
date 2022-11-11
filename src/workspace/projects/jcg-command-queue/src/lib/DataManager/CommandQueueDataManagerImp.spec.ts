@@ -4,6 +4,7 @@ import {CommandQueueDataManagerImp} from "./CommandQueueDataManagerImp";
 import {ViewModelImp} from "../test-common/ViewModelImp";
 import {DataManagerCommand} from "../api/DataManagerCommand";
 import {Mock} from "moq.ts";
+import {Logger} from "./support/Logger";
 
 describe("CommandQueueDataManagerImp",()=>{
   let reader : DmReaderMock;
@@ -13,7 +14,7 @@ describe("CommandQueueDataManagerImp",()=>{
   beforeEach(()=>{
     reader = new DmReaderMock();
     writer = new DmWriterMock();
-    sut = new CommandQueueDataManagerImp<ViewModelImp>(reader.object, writer.object);
+    sut = new CommandQueueDataManagerImp<ViewModelImp>(reader.object, writer.object, new Logger());
     cmd = (new Mock<DataManagerCommand>()).object();
   });
   it('cancelCommands delegates to writer',

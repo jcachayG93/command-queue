@@ -1,6 +1,7 @@
 import {Queue} from "../Queue/Queue";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
 import {Mock} from "moq.ts";
+import {Logger} from "../DataManager/support/Logger";
 
 /**
    * @deprecated The method should not be used
@@ -10,7 +11,7 @@ import {Mock} from "moq.ts";
 export class QueueDouble extends Queue
 {
   constructor() {
-    super();
+    super(new Logger());
     this.commandsInQueue = 10;
     this.commandsCancelled = 5;
     this.commandsRan = 5;
