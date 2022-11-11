@@ -6,7 +6,7 @@ import {IDmMediator} from "../IDmMediator";
 import {Logger} from "../Logger";
 
 export class DmReader<TViewModel extends ViewModel>
-  implements IDmReader<TViewModel>, IDmMediator<TViewModel>
+  implements IDmReader<TViewModel>, IDmMediator
 {
   constructor(
     private reader : ViewModelReader<TViewModel>,

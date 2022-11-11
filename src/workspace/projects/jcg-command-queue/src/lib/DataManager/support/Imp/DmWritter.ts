@@ -13,7 +13,7 @@ export class DmWritter<TViewModel extends ViewModel>
   constructor(
     private queueFactory : QueueFactory,
     private executeCommandFunctionFactory : IExecuteCommandFunctionFactory,
-    private mediator : IDmMediator<TViewModel>
+    private mediator : IDmMediator
   ) {
     this._queue = this.queueFactory.create();
   }

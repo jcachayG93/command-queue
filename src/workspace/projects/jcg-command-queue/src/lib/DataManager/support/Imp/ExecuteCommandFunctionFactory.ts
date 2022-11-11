@@ -11,7 +11,7 @@ export class ExecuteCommandFunctionFactory<TViewModel extends ViewModel>
   implements IExecuteCommandFunctionFactory
 {
   constructor(
-    private mediator : IDmMediator<TViewModel>,
+    private mediator : IDmMediator,
     private updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
     private dataService : DataService
   ) {
@@ -19,7 +19,7 @@ export class ExecuteCommandFunctionFactory<TViewModel extends ViewModel>
   create(cmd: DataManagerCommand): IExecuteCommandFunction {
     let updateVmFn = this.updateViewModelFunctionFactory
       .create(cmd);
-    updateVmFn(this.mediator.viewModel!);
+    updateVmFn(this.mediator.viewModel! as TViewModel);
     return ()=> new Observable<void>(obs=>{
       this.dataService.execute(this.mediator.version, cmd)
         .subscribe({

@@ -9,12 +9,12 @@ import {Logger} from "./support/Logger";
 describe("CommandQueueDataManagerImp",()=>{
   let reader : DmReaderMock;
   let writer : DmWriterMock;
-  let sut : CommandQueueDataManagerImp<ViewModelImp>;
+  let sut : CommandQueueDataManagerImp;
   let cmd : DataManagerCommand;
   beforeEach(()=>{
     reader = new DmReaderMock();
     writer = new DmWriterMock();
-    sut = new CommandQueueDataManagerImp<ViewModelImp>(reader.object, writer.object, new Logger());
+    sut = new CommandQueueDataManagerImp(reader.object, writer.object, new Logger());
     cmd = (new Mock<DataManagerCommand>()).object();
   });
   it('cancelCommands delegates to writer',
