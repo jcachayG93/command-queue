@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {commandQueueDataManagerProvider} from "./api/commandQueueDataManagerProvider";
 
 
 
@@ -6,6 +7,9 @@ import { NgModule } from '@angular/core';
   declarations: [
   ],
   imports: [
+  ],
+  providers:[
+    commandQueueDataManagerProvider
   ]
 })
 export class JcgCommandQueueModule { }

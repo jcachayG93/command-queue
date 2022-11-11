@@ -1,6 +1,7 @@
 import {Observable, Subject} from "rxjs";
 import {DataManagerCommand} from "./DataManagerCommand";
 import {ViewModel} from "./ViewModel";
+import {Injectable} from "@angular/core";
 
 /**
  * Allows for adding commands to a queue so they can be processed at the server speed, while updating a copy of a
@@ -9,6 +10,10 @@ import {ViewModel} from "./ViewModel";
  * If there is an optimistic concurrency mismatch error, the remaining commands are cancelled, and the view model is
  * reloaded from the server, together with the current model version.
  */
+
+@Injectable({
+  providedIn:'root'
+})
 export abstract class CommandQueueDataManager
 {
   /**

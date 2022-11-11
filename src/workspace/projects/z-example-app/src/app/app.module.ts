@@ -35,7 +35,7 @@ import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-vie
   ],
   providers: [
     {provide: PetsDataManager},
-    commandQueueDataManagerProvider,
+
     { provide: DataService, useClass: PetsDataService},
     { provide: ViewModelReader, useClass: PetsReader},
     { provide: UpdateViewModelFunctionFactory, useClass: PetsUpdateViewModelFunctionFactory}
