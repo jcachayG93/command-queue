@@ -6,12 +6,11 @@ import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
 import {Logger} from "./support/Logger";
 
-export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
-  extends CommandQueueDataManager<TViewModel>
+export class CommandQueueDataManagerImp extends CommandQueueDataManager
 {
 
   constructor(
-    private reader : IDmReader<TViewModel>,
+    private reader : IDmReader<ViewModel>,
     private writer : IDmWriter,
     private logger : Logger
   ) {
@@ -37,7 +36,7 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
     return this.reader.readViewModel();
   }
 
-  get viewModel(): TViewModel | null {
+  get viewModel(): ViewModel | null {
     return this.reader.viewModel;
   }
 

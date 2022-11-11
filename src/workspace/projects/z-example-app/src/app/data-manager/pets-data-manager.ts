@@ -11,7 +11,7 @@ import {PetsDataService} from "./pets-data-service";
 export class PetsDataManager
 {
   constructor(
-    private dm : CommandQueueDataManager<PetsViewModel>
+    private dm : CommandQueueDataManager
   ) {
   }
 
@@ -21,7 +21,7 @@ export class PetsDataManager
   }
   get viewModel():PetsViewModel | null
   {
-    return this.dm.viewModel;
+    return this.dm.viewModel as PetsViewModel;
   }
   get onViewModelUpdated():Subject<void>
   {

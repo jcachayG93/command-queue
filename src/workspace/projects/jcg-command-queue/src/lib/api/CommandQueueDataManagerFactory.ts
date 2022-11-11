@@ -21,7 +21,7 @@ export class CommandQueueDataManagerFactory
     dataService : DataService,
     updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
     reader : ViewModelReader<TViewModel>
-  ):CommandQueueDataManager<TViewModel>
+  ):CommandQueueDataManager
   {
     const logger = new Logger();
     const dmReader = new DmReader(reader, logger);

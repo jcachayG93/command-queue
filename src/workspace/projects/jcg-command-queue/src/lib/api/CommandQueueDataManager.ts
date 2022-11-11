@@ -9,7 +9,7 @@ import {ViewModel} from "./ViewModel";
  * If there is an optimistic concurrency mismatch error, the remaining commands are cancelled, and the view model is
  * reloaded from the server, together with the current model version.
  */
-export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
+export abstract class CommandQueueDataManager
 {
   /**
    * Reads the view model from the server
@@ -19,7 +19,7 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
   /**
    * The view model, which will be null if it was not read
    */
-  abstract get viewModel() : TViewModel | null;
+  abstract get viewModel() : ViewModel | null;
 
   /**
    * The number of commands in the queue
