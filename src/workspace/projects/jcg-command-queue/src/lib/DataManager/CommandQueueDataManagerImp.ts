@@ -4,6 +4,7 @@ import {DataManagerCommand} from "../api/DataManagerCommand";
 import {Observable, Subject} from "rxjs";
 import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
+import {Logger} from "./support/Logger";
 
 export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
   extends CommandQueueDataManager<TViewModel>
@@ -11,7 +12,8 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
 
   constructor(
     private reader : IDmReader<TViewModel>,
-    private writer : IDmWriter
+    private writer : IDmWriter,
+    private logger : Logger
   ) {
     super();
   }
@@ -45,6 +47,14 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
 
   get modelVersion(): number {
     return this.reader.version;
+  }
+
+  get developerLogs(): string[] {
+    return this.logger.logs;
+  }
+
+  resetLogs(): void {
+    this.logger.reset();
   }
 
 }

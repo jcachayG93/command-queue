@@ -1,5 +1,7 @@
 import {Observable} from "rxjs";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
+import {Logger} from "../DataManager/support/Logger";
+import {ConcurrencyVersionMismatchError} from "../api/errors/concurrency-version-mismatch-error";
 
 /**
  * A queue of commands that run one after another, and can be cancelled.
@@ -7,6 +9,10 @@ import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFun
  */
 export class Queue
 {
+  constructor(
+    private logger : Logger
+  ) {
+  }
   /**
    * Adds a command to the queue
    * @param f a function that will be called to create the observable
@@ -20,7 +26,7 @@ export class Queue
 
     if (this.current == null)
     {
-      this.current = action();
+      this.current = action().catch(()=>this.cancelAll());
     } else
     {
       this.current = this.current.then(action,()=>this.cancelAll());
@@ -50,7 +56,13 @@ export class Queue
    */
   public cancelAll():void
   {
+    this.log("Cancel all was called");
     this.cancellationToken.CancellationRequested = true;
+  }
+
+  private log(message : string):void
+  {
+    this.logger.addLog("Queue",message);
   }
 
   private current : Promise<void> | null = null;
@@ -77,6 +89,13 @@ export class Queue
             this.commandsInQueue--;
             resolve()},
           error:err=>{
+            if (err instanceof ConcurrencyVersionMismatchError)
+            {
+              this.log(`observable threw concurrency mismatch error`);
+            } else
+            {
+              this.log(`observable threw non concurrency version mismatch error`);
+            }
             errorCallback(err);
             reject(err)}
         });

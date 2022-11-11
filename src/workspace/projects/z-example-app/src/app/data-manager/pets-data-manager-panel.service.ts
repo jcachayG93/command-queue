@@ -29,4 +29,20 @@ export class PetsDataManagerPanelService
     return this.dm.modelVersion;
   }
 
+  get developerLogs(): string[] {
+    return this.dm.developerLogs;
+  }
+
+  resetLogs(): void {
+    this.dm.resetLogs();
+  }
+
+  get viewModelVersion(): number {
+    if (this.dm.viewModel)
+    {
+      return this.dm.viewModel.version;
+    }
+    return -1;
+  }
+
 }

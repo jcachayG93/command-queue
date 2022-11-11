@@ -53,6 +53,16 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
    * Gets the current model version
    */
   abstract get modelVersion():number;
+
+  /**
+   * Gets the developer logs
+   */
+  abstract get developerLogs():string[];
+
+  /**
+   * Resets the developer logs
+   */
+  abstract resetLogs():void;
 }
 
 

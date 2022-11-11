@@ -45,4 +45,14 @@ export class PetsDataManager
     return this.dm.modelVersion;
   }
 
+  get developerLogs():string[]
+  {
+    return this.dm.developerLogs;
+  }
+
+  resetLogs():void
+  {
+    this.dm.resetLogs();
+  }
+
 }

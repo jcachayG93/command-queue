@@ -3,16 +3,18 @@ import { DeveloperPanelComponent } from './developer-panel/developer-panel.compo
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
+import {NgForOf} from "@angular/common";
 
 @NgModule({
   declarations: [
     DeveloperPanelComponent
   ],
-  imports: [
-    MatCardModule,
-    MatProgressBarModule,
-    MatButtonModule
-  ],
+    imports: [
+        MatCardModule,
+        MatProgressBarModule,
+        MatButtonModule,
+        NgForOf
+    ],
   exports: [
     DeveloperPanelComponent
   ]

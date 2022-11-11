@@ -1,9 +1,18 @@
-<div class="container">
-  <mat-card>
-    <mat-progress-bar mode="determinate" [value]="progressBarPercentage"></mat-progress-bar>
-      <div class="controls">
-        <button mat-flat-button color="primary" (click)="incrementModelVersion()">Increment Model Version</button>
-        <p>Model version: {{modelVersion}}</p>
+
+<mat-card>
+  <div class="container">
+    <div class="progress">
+      <mat-progress-bar mode="determinate" [value]="progressBarPercentage"></mat-progress-bar>
+      <button mat-flat-button color="primary" (click)="incrementModelVersion()">Increment Model Version</button>
+      <button mat-flat-button class="reset-logs" color="secondary" (click)="resetLogs()">Reset logs</button>
+      <p>Model version/view model version: {{modelVersion}}/{{viewModelVersion}}</p>
+    </div>
+    <div class="logs">
+      <div class="title">logs</div>
+      <div class="logs-container">
+        <p *ngFor="let log of developerLogs">{{log}}</p>
       </div>
-  </mat-card>
-</div>
+
+    </div>
+  </div>
+</mat-card>

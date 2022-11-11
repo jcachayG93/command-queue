@@ -9,6 +9,7 @@ import {CommandQueueDataManagerImp} from "../DataManager/CommandQueueDataManager
 import {DmWritter} from "../DataManager/support/Imp/DmWritter";
 import {QueueFactory} from "../Queue/QueueFactory";
 import {Injectable} from "@angular/core";
+import {Logger} from "../DataManager/support/Logger";
 
 
 @Injectable({
@@ -22,15 +23,16 @@ export class CommandQueueDataManagerFactory
     reader : ViewModelReader<TViewModel>
   ):CommandQueueDataManager<TViewModel>
   {
-    const dmReader = new DmReader(reader);
+    const logger = new Logger();
+    const dmReader = new DmReader(reader, logger);
 
     const executeFnFactory =
       new ExecuteCommandFunctionFactory(dmReader, updateViewModelFunctionFactory, dataService);
 
-    const queueFactory = new QueueFactory();
+    const queueFactory = new QueueFactory(logger);
     const dmWriter = new DmWritter(queueFactory, executeFnFactory, dmReader);
 
-    const dm = new CommandQueueDataManagerImp(dmReader, dmWriter);
+    const dm = new CommandQueueDataManagerImp(dmReader, dmWriter, logger);
 
     return dm;
   }

@@ -36,4 +36,21 @@ export class DeveloperPanelComponent implements OnInit {
     return this.panelService.modelVersion;
   }
 
+  get viewModelVersion():number
+  {
+    return this.panelService.viewModelVersion;
+  }
+
+  get developerLogs():string[]
+  {
+    return this.panelService.developerLogs;
+  }
+
+  resetLogs():void
+  {
+    this.panelService.resetLogs();
+  }
+
+
+
 }

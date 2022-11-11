@@ -16,4 +16,10 @@ export abstract class CommandQueueDeveloperPanelService
   abstract incrementModelVersion():void;
 
   abstract get modelVersion():number;
+
+  abstract get viewModelVersion():number;
+
+  abstract get developerLogs():string[];
+
+  abstract resetLogs():void;
 }

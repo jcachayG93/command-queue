@@ -3,12 +3,14 @@ import {ViewModel} from "../../../api/ViewModel";
 import {Observable, Subject} from "rxjs";
 import {ViewModelReader} from "../../../api/ViewModelReader";
 import {IDmMediator} from "../IDmMediator";
+import {Logger} from "../Logger";
 
 export class DmReader<TViewModel extends ViewModel>
   implements IDmReader<TViewModel>, IDmMediator<TViewModel>
 {
   constructor(
-    private reader : ViewModelReader<TViewModel>
+    private reader : ViewModelReader<TViewModel>,
+    private logger : Logger
   ) {
   }
 
@@ -28,7 +30,7 @@ export class DmReader<TViewModel extends ViewModel>
           },
           error:e=>obs.error(e),
           complete:()=>{
-
+            this.logger.addLog("DmReader","View model was read from server");
             this._onViewModelUpdated.next();
             obs.complete();
           }
