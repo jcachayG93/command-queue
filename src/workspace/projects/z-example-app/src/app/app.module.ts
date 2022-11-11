@@ -15,11 +15,13 @@ import {
 } from "../../../jcg-command-queue-components/src/lib/jcg-command-queue-components.module";
 import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
+import { SpyServerModelVersionComponent } from './spy-server-model-version/spy-server-model-version.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PetsGridComponent
+    PetsGridComponent,
+    SpyServerModelVersionComponent
   ],
   imports: [
     BrowserModule,

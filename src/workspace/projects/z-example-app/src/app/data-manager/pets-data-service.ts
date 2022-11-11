@@ -8,6 +8,10 @@ import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/Data
 import {PetsViewModel} from "./pets-view-model";
 import {Injectable} from "@angular/core";
 
+export class DataRepository
+{
+
+}
 @Injectable({
   providedIn:'root'
 })
@@ -15,15 +19,21 @@ export class PetsDataService extends DataService {
   constructor() {
     super();
     const data = new PetsViewModel();
-    this.writeToRaw(data);
+    this.writeToRaw(data,0);
   }
   private raw = '';
+  // Overrides the raw data model version to avoid race conditions
+  private version = 0;
 
   readRaw(): PetsViewModel {
-    return JSON.parse(this.raw) as PetsViewModel;
+    const result = JSON.parse(this.raw) as PetsViewModel;
+    result.version = this.version;
+    return result;
   }
 
-  writeToRaw(model: PetsViewModel) {
+  writeToRaw(model: PetsViewModel, version:number) {
+    this.version = version;
+    model.version =version;
     this.raw = JSON.stringify(model);
   }
 
@@ -38,19 +48,18 @@ export class PetsDataService extends DataService {
   incrementModelVersion():void
   {
     const data = this.readRaw();
-    data.version++;
-    this.writeToRaw(data);
+    this.writeToRaw(data,this.version+1);
   }
 
   private handle_AddPet(version: number, cmd: AddPetCommand): Observable<number> {
     return new Observable<number>(obs => {
       const data = this.readRaw();
       if (data.version != version) {
+
         obs.error(new ConcurrencyVersionMismatchError());
       }
       data.petNames.push(cmd.name);
-      data.version++;
-      this.writeToRaw(data);
+      this.writeToRaw(data, version+1);
       obs.next(data.version);
       obs.complete();
     }).pipe(delay(this.delay(500, 3000)));
@@ -61,5 +70,10 @@ export class PetsDataService extends DataService {
       return this.handle_AddPet(version, cmd);
     }
     throw new Error('Unhandled command');
+  }
+
+  get modelVersion():number
+  {
+    return this.readRaw().version;
   }
 }
