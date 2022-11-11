@@ -5,8 +5,8 @@ import {ViewModelReader} from "../../../api/ViewModelReader";
 import {IDmMediator} from "../IDmMediator";
 import {Logger} from "../Logger";
 
-export class DmReader<TViewModel extends ViewModel>
-  implements IDmReader<TViewModel>, IDmMediator
+export class DmReader
+  implements IDmReader, IDmMediator
 {
   constructor(
     private reader : ViewModelReader,
@@ -25,7 +25,7 @@ export class DmReader<TViewModel extends ViewModel>
       this.reader.read()
         .subscribe({
           next:v=>{
-            this._viewModel = v as TViewModel
+            this._viewModel = v;
             this.setVersion(v.version);
           },
           error:e=>obs.error(e),
@@ -38,11 +38,11 @@ export class DmReader<TViewModel extends ViewModel>
     });
   }
 
-  get viewModel(): TViewModel | null {
+  get viewModel(): ViewModel | null {
     return this._viewModel;
   }
 
-  private _viewModel : TViewModel | null = null;
+  private _viewModel : ViewModel | null = null;
 
   emitViewModelUpdated(): void {
     this._onViewModelUpdated.next();

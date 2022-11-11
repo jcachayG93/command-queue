@@ -10,7 +10,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManager
 {
 
   constructor(
-    private reader : IDmReader<ViewModel>,
+    private reader : IDmReader,
     private writer : IDmWriter,
     private logger : Logger
   ) {
