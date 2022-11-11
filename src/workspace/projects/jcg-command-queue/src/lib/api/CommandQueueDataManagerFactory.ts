@@ -20,7 +20,7 @@ export class CommandQueueDataManagerFactory
   public create<TViewModel extends ViewModel>(
     dataService : DataService,
     updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
-    reader : ViewModelReader<TViewModel>
+    reader : ViewModelReader
   ):CommandQueueDataManager
   {
     const logger = new Logger();

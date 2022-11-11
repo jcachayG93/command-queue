@@ -9,7 +9,7 @@ export class DmReader<TViewModel extends ViewModel>
   implements IDmReader<TViewModel>, IDmMediator
 {
   constructor(
-    private reader : ViewModelReader<TViewModel>,
+    private reader : ViewModelReader,
     private logger : Logger
   ) {
   }
@@ -25,7 +25,7 @@ export class DmReader<TViewModel extends ViewModel>
       this.reader.read()
         .subscribe({
           next:v=>{
-            this._viewModel = v
+            this._viewModel = v as TViewModel
             this.setVersion(v.version);
           },
           error:e=>obs.error(e),
