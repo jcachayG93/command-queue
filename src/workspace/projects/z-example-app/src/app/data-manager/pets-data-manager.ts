@@ -11,17 +11,18 @@ import {PetsDataService} from "./pets-data-service";
 export class PetsDataManager
 {
   constructor(
-    private dm : CommandQueueDataManager<PetsViewModel>
+    private dm : CommandQueueDataManager
   ) {
   }
 
   readViewModel(): Observable<void>
   {
+
     return this.dm.readViewModel();
   }
   get viewModel():PetsViewModel | null
   {
-    return this.dm.viewModel;
+    return this.dm.viewModel as PetsViewModel;
   }
   get onViewModelUpdated():Subject<void>
   {
@@ -29,6 +30,7 @@ export class PetsDataManager
   }
   executeCommand(cmd:DataManagerCommand):void
   {
+
     this.dm.executeCommand(cmd);
   }
   cancelCommands():void

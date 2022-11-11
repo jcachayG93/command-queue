@@ -1,14 +1,13 @@
 import {ViewModelReaderMock} from "../../../test-common/ViewModelReaderMock";
 import {DmReader} from "./DmReader";
-import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {Logger} from "../Logger";
 
 describe("DmReader",()=>{
   let reader : ViewModelReaderMock;
-  let sut : DmReader<ViewModelImp>;
+  let sut : DmReader;
   beforeEach(()=>{
     reader = new ViewModelReaderMock();
-    sut = new DmReader<ViewModelImp>(reader.object, new Logger());
+    sut = new DmReader(reader.object, new Logger());
   });
   it('readViewModel delegates to reader, ' +
     'sets viewModel, emits onViewModelUpdated and ' +

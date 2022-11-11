@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {CommandQueueDataManagerFactory} from "./api/CommandQueueDataManagerFactory";
+import {commandQueueDataManagerProvider} from "./api/commandQueueDataManagerProvider";
 
 
 
@@ -9,7 +9,7 @@ import {CommandQueueDataManagerFactory} from "./api/CommandQueueDataManagerFacto
   imports: [
   ],
   providers:[
-    {provide: CommandQueueDataManagerFactory}
+    commandQueueDataManagerProvider
   ]
 })
 export class JcgCommandQueueModule { }

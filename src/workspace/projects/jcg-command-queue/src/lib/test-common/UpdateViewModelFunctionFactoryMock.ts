@@ -7,14 +7,14 @@ import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
 export class UpdateViewModelFunctionFactoryMock
 {
   constructor() {
-    this.moq = new Mock<UpdateViewModelFunctionFactory<ViewModelImp>>();
+    this.moq = new Mock<UpdateViewModelFunctionFactory>();
     this.returns = new UpdateViewModelFunctionMock();
     this.moq.setup(s=>s.create(It.IsAny()))
       .returns(this.returns.object);
   }
-  private moq : Mock<UpdateViewModelFunctionFactory<ViewModelImp>>;
+  private moq : Mock<UpdateViewModelFunctionFactory>;
 
-  get object():UpdateViewModelFunctionFactory<ViewModelImp>
+  get object():UpdateViewModelFunctionFactory
   {
     return this.moq.object();
   }
@@ -31,13 +31,13 @@ export class UpdateViewModelFunctionFactoryMock
 export class UpdateViewModelFunctionMock
 {
   constructor() {
-    this.moq = new Mock<IUpdateViewModelFunction<ViewModelImp>>();
+    this.moq = new Mock<IUpdateViewModelFunction>();
     this.moq.setup(instance=>
     instance(It.IsAny())).returns();
   }
-  private moq : Mock<IUpdateViewModelFunction<ViewModelImp>>;
+  private moq : Mock<IUpdateViewModelFunction>;
 
-  get object():IUpdateViewModelFunction<ViewModelImp>
+  get object():IUpdateViewModelFunction
   {
     return this.moq.object();
   }

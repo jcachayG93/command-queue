@@ -4,16 +4,16 @@ import {DataManagerCommand} from "../../../api/DataManagerCommand";
 import {QueueFactory} from "../../../Queue/QueueFactory";
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {IDmMediator} from "../IDmMediator";
-import {ViewModel} from "../../../api/ViewModel";
 import {Queue} from "../../../Queue/Queue";
 
-export class DmWritter<TViewModel extends ViewModel>
+// TODO: Correct spelling mistake
+export class DmWritter
   implements IDmWriter
 {
   constructor(
     private queueFactory : QueueFactory,
     private executeCommandFunctionFactory : IExecuteCommandFunctionFactory,
-    private mediator : IDmMediator<TViewModel>
+    private mediator : IDmMediator
   ) {
     this._queue = this.queueFactory.create();
   }

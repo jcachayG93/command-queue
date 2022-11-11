@@ -6,16 +6,16 @@ import {It, Mock} from "moq.ts";
 export class DmMediatorMock
 {
   constructor() {
-    this.moq = new Mock<IDmMediator<ViewModelImp>>();
+    this.moq = new Mock<IDmMediator>();
     this.moq.setup(s=>s.read()).returns();
     this.moq.setup(s=>s.setVersion(It.IsAny())).returns();
     this.moq.setup(s=>s.version).returns(10);
     this.moq.setup(s=>s.viewModel).returns(new ViewModelImp());
     this.moq.setup(s=>s.emitViewModelUpdated()).returns();
   }
-  private moq : Mock<IDmMediator<ViewModelImp>>;
+  private moq : Mock<IDmMediator>;
 
-  get object():IDmMediator<ViewModelImp>
+  get object():IDmMediator
   {
     return this.moq.object();
   }

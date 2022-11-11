@@ -20,9 +20,9 @@ describe("DmWritter",()=>{
     cmd = (new Mock<DataManagerCommand>()).object();
 
   })
-  function createSut():DmWritter<ViewModelImp>
+  function createSut():DmWritter
   {
-    return new DmWritter<ViewModelImp>(
+    return new DmWritter(
       queueFactory,
       executeCommandFunctionFactory.object,
       mediator.object

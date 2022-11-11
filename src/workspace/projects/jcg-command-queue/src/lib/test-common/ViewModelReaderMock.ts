@@ -6,15 +6,15 @@ import {of} from "rxjs";
 export class ViewModelReaderMock
 {
   constructor() {
-    this.moq = new Mock<ViewModelReader<ViewModelImp>>();
+    this.moq = new Mock<ViewModelReader>();
     this.readReturns = new ViewModelImp();
     this.readReturns.version = 10;
     this.moq.setup(s=>
     s.read()).returns(of(this.readReturns));
   }
-  private moq : Mock<ViewModelReader<ViewModelImp>>;
+  private moq : Mock<ViewModelReader>;
 
-  get object():ViewModelReader<ViewModelImp>
+  get object():ViewModelReader
   {
     return this.moq.object();
   }

@@ -10,19 +10,12 @@ import {DmWritter} from "../DataManager/support/Imp/DmWritter";
 import {QueueFactory} from "../Queue/QueueFactory";
 import {Injectable} from "@angular/core";
 import {Logger} from "../DataManager/support/Logger";
+import {UpdateViewModelFunctionFactoryMock} from "../test-common/UpdateViewModelFunctionFactoryMock";
 
-
-@Injectable({
-  providedIn:'root'
-})
-export class CommandQueueDataManagerFactory
-{
-  public create<TViewModel extends ViewModel>(
-    dataService : DataService,
-    updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
-    reader : ViewModelReader<TViewModel>
-  ):CommandQueueDataManager<TViewModel>
-  {
+const commandQueueDataManagerFactory =
+  (dataService : DataService,
+   updateViewModelFunctionFactory : UpdateViewModelFunctionFactory,
+   reader : ViewModelReader) => {
     const logger = new Logger();
     const dmReader = new DmReader(reader, logger);
 
@@ -36,4 +29,9 @@ export class CommandQueueDataManagerFactory
 
     return dm;
   }
-}
+
+  export const commandQueueDataManagerProvider = {
+  provide: CommandQueueDataManager,
+    useFactory: commandQueueDataManagerFactory,
+    deps:[DataService, UpdateViewModelFunctionFactory, ViewModelReader]
+  }

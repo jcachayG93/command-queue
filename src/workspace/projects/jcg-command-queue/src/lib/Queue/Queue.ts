@@ -22,6 +22,7 @@ export class Queue
    */
   public add(f:IExecuteCommandFunction, errorCallback : (e:Error)=>void ):void
   {
+
     const action = this.createAction(f, this.cancellationToken, errorCallback);
 
     if (this.current == null)
