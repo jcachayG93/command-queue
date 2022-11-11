@@ -5,9 +5,9 @@ import {IUpdateViewModelFunction} from "../../../../jcg-command-queue/src/lib/ap
 import {AddPetCommand} from "./add-pet-command";
 
 export class PetsUpdateViewModelFunctionFactory
-  extends UpdateViewModelFunctionFactory<PetsViewModel>
+  extends UpdateViewModelFunctionFactory
 {
-  create(cmd: DataManagerCommand): IUpdateViewModelFunction<PetsViewModel> {
+  create(cmd: DataManagerCommand): IUpdateViewModelFunction {
     if (cmd instanceof AddPetCommand)
     {
       return this.handle_AddPet(cmd);
@@ -15,10 +15,11 @@ export class PetsUpdateViewModelFunctionFactory
     throw new Error('Unhandled command');
   }
 
-  private handle_AddPet(cmd : AddPetCommand) : IUpdateViewModelFunction<PetsViewModel>
+  private handle_AddPet(cmd : AddPetCommand) : IUpdateViewModelFunction
   {
     return (vm)=>{
-      vm.petNames.push(cmd.name);
+      const cast = vm as PetsViewModel;
+      cast.petNames.push(cmd.name);
     }
   }
 

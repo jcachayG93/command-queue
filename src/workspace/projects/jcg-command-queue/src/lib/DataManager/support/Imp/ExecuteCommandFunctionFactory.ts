@@ -12,7 +12,7 @@ export class ExecuteCommandFunctionFactory<TViewModel extends ViewModel>
 {
   constructor(
     private mediator : IDmMediator,
-    private updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
+    private updateViewModelFunctionFactory : UpdateViewModelFunctionFactory,
     private dataService : DataService
   ) {
   }

@@ -12,14 +12,15 @@ import {Injectable} from "@angular/core";
 import {Logger} from "../DataManager/support/Logger";
 
 
+
 @Injectable({
   providedIn:'root'
 })
 export class CommandQueueDataManagerFactory
 {
-  public create<TViewModel extends ViewModel>(
+  public create(
     dataService : DataService,
-    updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
+    updateViewModelFunctionFactory : UpdateViewModelFunctionFactory,
     reader : ViewModelReader
   ):CommandQueueDataManager
   {
