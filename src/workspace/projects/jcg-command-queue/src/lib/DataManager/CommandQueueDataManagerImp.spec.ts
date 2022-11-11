@@ -72,5 +72,13 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ASSERT ************
       expect(result).toBe(writer.object.writeErrorOccurred);
     });
+  it('get modelVersion delegates to dmReader',
+    () => {
+      // ********* ARRANGE ***********
 
+      // ********* ACT ***************
+      const result = sut.modelVersion;
+      // ********* ASSERT ************
+      expect(result).toBe(reader.object.version);
+    });
 });

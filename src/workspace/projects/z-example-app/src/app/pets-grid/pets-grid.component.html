@@ -1,0 +1,9 @@
+
+<ng-container *ngIf="viewModel; else loading">
+  <input [(ngModel)]="inputValue">
+  <button (click)="addPet()">Add</button>
+  <ul>
+    <li *ngFor="let name of viewModel.petNames">{{name}}</li>
+  </ul>
+</ng-container>
+<ng-template #loading><p>loading...</p></ng-template>

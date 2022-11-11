@@ -48,6 +48,11 @@ export abstract class CommandQueueDataManager<TViewModel extends ViewModel>
    * Emits when a write error occurred
    */
   abstract get writeErrorOccurred():Subject<Error>;
+
+  /**
+   * Gets the current model version
+   */
+  abstract get modelVersion():number;
 }
 
 

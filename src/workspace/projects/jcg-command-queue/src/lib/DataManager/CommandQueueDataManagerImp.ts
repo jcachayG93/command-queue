@@ -8,6 +8,7 @@ import {IDmWriter} from "./support/IDmWriter";
 export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
   extends CommandQueueDataManager<TViewModel>
 {
+
   constructor(
     private reader : IDmReader<TViewModel>,
     private writer : IDmWriter
@@ -40,6 +41,10 @@ export class CommandQueueDataManagerImp<TViewModel extends ViewModel>
 
   get writeErrorOccurred(): Subject<Error> {
     return this.writer.writeErrorOccurred;
+  }
+
+  get modelVersion(): number {
+    return this.reader.version;
   }
 
 }

@@ -23,4 +23,9 @@ export interface IDmReader<TViewModel extends ViewModel>
    */
   get onViewModelUpdated():Subject<void>;
 
+  /**
+   * The current model version
+   */
+  get version(): number
+
 }

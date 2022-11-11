@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CommandQueueDeveloperPanelService} from "./api/command-queue-developer-panel.service";
 
 @Component({
   selector: 'jcg-developer-panel',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeveloperPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private panelService : CommandQueueDeveloperPanelService) { }
 
   ngOnInit(): void {
+  }
+
+  get commandsInQueue():number
+  {
+    return this.panelService.commandsInQueue;
+  }
+  get progressBarPercentage():number
+  {
+    if (this.commandsInQueue>20)
+    {
+      return 100;
+    }
+    return this.commandsInQueue/20*100;
+  }
+
+  incrementModelVersion():void
+  {
+    this.panelService.incrementModelVersion();
+  }
+
+  get modelVersion():number
+  {
+    return this.panelService.modelVersion;
   }
 
 }

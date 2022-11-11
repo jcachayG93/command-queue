@@ -14,9 +14,9 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn:'root'
 })
-export class CommandQueueDataManagerFactory<TViewModel extends ViewModel>
+export class CommandQueueDataManagerFactory
 {
-  public create(
+  public create<TViewModel extends ViewModel>(
     dataService : DataService,
     updateViewModelFunctionFactory : UpdateViewModelFunctionFactory<TViewModel>,
     reader : ViewModelReader<TViewModel>

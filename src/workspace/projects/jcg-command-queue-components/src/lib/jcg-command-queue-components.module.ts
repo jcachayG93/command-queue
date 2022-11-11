@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { DeveloperPanelComponent } from './developer-panel/developer-panel.component';
-import {JcgCommandQueueModule} from "jcg-command-queue";
-
-
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     DeveloperPanelComponent
   ],
   imports: [
-    JcgCommandQueueModule
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule
   ],
   exports: [
+    DeveloperPanelComponent
   ]
 })
 export class JcgCommandQueueComponentsModule { }

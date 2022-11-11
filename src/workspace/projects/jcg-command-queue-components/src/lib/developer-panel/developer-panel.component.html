@@ -1,1 +1,9 @@
-<p>developer-panel works!</p>
+<div class="container">
+  <mat-card>
+    <mat-progress-bar mode="determinate" [value]="progressBarPercentage"></mat-progress-bar>
+      <div class="controls">
+        <button mat-flat-button color="primary" (click)="incrementModelVersion()">Increment Model Version</button>
+        <p>Model version: {{modelVersion}}</p>
+      </div>
+  </mat-card>
+</div>
