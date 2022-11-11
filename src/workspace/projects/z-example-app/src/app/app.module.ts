@@ -8,7 +8,6 @@ import {JcgCommandQueueModule} from "../../../jcg-command-queue/src/lib/jcg-comm
 
 import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
-import { SpyServerModelVersionComponent } from './spy-server-model-version/spy-server-model-version.component';
 import {PetsDataManager} from "./data-manager/pets-data-manager";
 import {DataService} from "../../../jcg-command-queue/src/lib/api/DataService";
 import {PetsDataService} from "./data-manager/pets-data-service";
@@ -16,18 +15,25 @@ import {ViewModelReader} from "../../../jcg-command-queue/src/lib/api/ViewModelR
 import {PetsReader} from "./data-manager/pets-reader";
 import {UpdateViewModelFunctionFactory} from "../../../jcg-command-queue/src/lib/api/UpdateViewModelFunctionFactory";
 import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-view-model-function-factory";
+import { DeveloperPanelComponent } from './developer-panel/developer-panel.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     PetsGridComponent,
-    SpyServerModelVersionComponent
+    DeveloperPanelComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     JcgCommandQueueModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule
   ],
   providers: [
     {provide: PetsDataManager},

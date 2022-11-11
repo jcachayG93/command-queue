@@ -44,8 +44,7 @@ export class PetsDataService extends DataService {
 
   incrementModelVersion():void
   {
-    const data = this.readRaw();
-    this.writeToRaw(data,this.version+1);
+    this.version++;
   }
 
   private handle_AddPet(version: number, cmd: AddPetCommand): Observable<number> {
