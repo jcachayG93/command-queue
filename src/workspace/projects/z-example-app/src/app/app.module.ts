@@ -5,13 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {JcgCommandQueueModule} from "../../../jcg-command-queue/src/lib/jcg-command-queue.module";
 
-import {
-  JcgCommandQueueComponentsModule
-} from "../../../jcg-command-queue-components/src/lib/jcg-command-queue-components.module";
+
 import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
 import { SpyServerModelVersionComponent } from './spy-server-model-version/spy-server-model-version.component';
-import {commandQueueDataManagerProvider} from "../../../jcg-command-queue/src/lib/api/commandQueueDataManagerProvider";
 import {PetsDataManager} from "./data-manager/pets-data-manager";
 import {DataService} from "../../../jcg-command-queue/src/lib/api/DataService";
 import {PetsDataService} from "./data-manager/pets-data-service";
@@ -30,7 +27,6 @@ import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-vie
     BrowserModule,
     BrowserAnimationsModule,
     JcgCommandQueueModule,
-    JcgCommandQueueComponentsModule,
     FormsModule
   ],
   providers: [
