@@ -8,10 +8,7 @@ import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/Data
 import {PetsViewModel} from "./pets-view-model";
 import {Injectable} from "@angular/core";
 
-export class DataRepository
-{
 
-}
 @Injectable({
   providedIn:'root'
 })
@@ -52,6 +49,7 @@ export class PetsDataService extends DataService {
   }
 
   private handle_AddPet(version: number, cmd: AddPetCommand): Observable<number> {
+
     return new Observable<number>(obs => {
       const data = this.readRaw();
       if (data.version != version) {

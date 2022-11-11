@@ -3,7 +3,11 @@ import {PetsViewModel} from "./pets-view-model";
 import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/DataManagerCommand";
 import {IUpdateViewModelFunction} from "../../../../jcg-command-queue/src/lib/api/IUpdateViewModelFunction";
 import {AddPetCommand} from "./add-pet-command";
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn:'root'
+})
 export class PetsUpdateViewModelFunctionFactory
   extends UpdateViewModelFunctionFactory
 {

@@ -17,6 +17,7 @@ export class PetsDataManager
 
   readViewModel(): Observable<void>
   {
+
     return this.dm.readViewModel();
   }
   get viewModel():PetsViewModel | null
@@ -29,6 +30,7 @@ export class PetsDataManager
   }
   executeCommand(cmd:DataManagerCommand):void
   {
+
     this.dm.executeCommand(cmd);
   }
   cancelCommands():void

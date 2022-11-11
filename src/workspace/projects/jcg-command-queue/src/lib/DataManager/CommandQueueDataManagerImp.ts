@@ -25,6 +25,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManager
   }
 
   executeCommand(cmd: DataManagerCommand): void {
+
     this.writer.executeCommand(cmd);
   }
 
