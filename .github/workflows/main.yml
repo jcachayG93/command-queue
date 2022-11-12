@@ -7,7 +7,9 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-    run: echo 'hello world'
+    steps:
+      - name: say-hello
+        run: echo 'hello world'
 #jobs:
 #  build:
 #    runs-on: ubuntu-latest
