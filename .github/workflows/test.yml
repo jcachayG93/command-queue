@@ -7,6 +7,9 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    defaults:
+     run:
+     working-directory: ./src/workspace
     permissions:
      contents: read
     steps:
@@ -17,11 +20,9 @@ jobs:
         with:
           node-version: '18.x'
       - name: install packages
-        run: npm --prefix ./src/workspace i
-      - name: install cli
-        run: npm install @angular/cli
-      - name: test
-        run: npm --prefix ./src/workspace ng test --browsers ChromeHeadless
+        run: npm i                    #run: npm --prefix ./src/workspace i
+  #    - name: test
+   #     run: npm --prefix ./src/workspace ng test --browsers ChromeHeadless
 
 #jobs:
 #  build:
