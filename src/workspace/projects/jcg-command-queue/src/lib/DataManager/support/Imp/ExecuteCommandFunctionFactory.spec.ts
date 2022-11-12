@@ -2,7 +2,7 @@ import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {UpdateViewModelFunctionFactoryMock} from "../../../test-common/UpdateViewModelFunctionFactoryMock";
 import {ExecuteCommandFunctionFactory} from "./ExecuteCommandFunctionFactory";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
-import {DataManagerCommand} from "../../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
 import {Mock} from "moq.ts";
 import {DataServiceMock} from "../../../test-common/DataServiceMock";
 
@@ -10,13 +10,13 @@ describe("ExecuteCommandFunctionFactory",()=>{
   let mediator : DmMediatorMock;
   let updateViewModelFunctionFactory : UpdateViewModelFunctionFactoryMock;
   let dataService : DataServiceMock;
-  let cmd : DataManagerCommand;
+  let cmd : CommandQueueCommand;
   let sut : ExecuteCommandFunctionFactory<ViewModelImp>;
   beforeEach(()=>{
     mediator = new DmMediatorMock();
     updateViewModelFunctionFactory = new UpdateViewModelFunctionFactoryMock();
     dataService = new DataServiceMock();
-    cmd = (new Mock<DataManagerCommand>()).object();
+    cmd = (new Mock<CommandQueueCommand>()).object();
     sut = new ExecuteCommandFunctionFactory<ViewModelImp>(
       mediator.object,updateViewModelFunctionFactory.object,
       dataService.object);

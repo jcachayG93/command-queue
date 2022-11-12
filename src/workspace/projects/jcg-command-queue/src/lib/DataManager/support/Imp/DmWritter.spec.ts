@@ -3,7 +3,7 @@ import {ExecuteCommandFunctionFactoryMock} from "../../../test-common/ExecuteCom
 import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {DmWritter} from "./DmWritter";
-import {DataManagerCommand} from "../../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
 import {Mock} from "moq.ts";
 import {Logger} from "../Logger";
 
@@ -12,12 +12,12 @@ describe("DmWritter",()=>{
   let executeCommandFunctionFactory : ExecuteCommandFunctionFactoryMock;
   let mediator : DmMediatorMock;
 
-  let cmd : DataManagerCommand;
+  let cmd : CommandQueueCommand;
   beforeEach(()=>{
     queueFactory = new QueueFactoryDouble(new Logger());
     executeCommandFunctionFactory = new ExecuteCommandFunctionFactoryMock();
     mediator = new DmMediatorMock();
-    cmd = (new Mock<DataManagerCommand>()).object();
+    cmd = (new Mock<CommandQueueCommand>()).object();
 
   })
   function createSut():DmWritter

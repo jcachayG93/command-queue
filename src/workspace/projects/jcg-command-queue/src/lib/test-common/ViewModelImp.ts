@@ -1,7 +1,7 @@
-import {ViewModel} from "../api/ViewModel";
+import {CommandQueueViewModel} from "../api/CommandQueueViewModel";
 
 export class ViewModelImp
-  extends ViewModel
+  extends CommandQueueViewModel
 {
   version: number = 0;
 

@@ -1,6 +1,6 @@
 import {Observable, Subject} from "rxjs";
-import {DataManagerCommand} from "./DataManagerCommand";
-import {ViewModel} from "./ViewModel";
+import {CommandQueueCommand} from "./CommandQueueCommand";
+import {CommandQueueViewModel} from "./CommandQueueViewModel";
 import {Injectable} from "@angular/core";
 
 /**
@@ -24,7 +24,7 @@ export abstract class CommandQueueDataManagerService
   /**
    * The view model, which will be null if it was not read
    */
-  abstract get viewModel() : ViewModel | null;
+  abstract get viewModel() : CommandQueueViewModel | null;
 
   /**
    * The number of commands in the queue
@@ -41,7 +41,7 @@ export abstract class CommandQueueDataManagerService
    * Adds a command to the queue
    * @param cmd
    */
-  abstract executeCommand(cmd : DataManagerCommand):void;
+  abstract executeCommand(cmd : CommandQueueCommand):void;
 
   /**
    * Cancel all remaining commands, reload the view model

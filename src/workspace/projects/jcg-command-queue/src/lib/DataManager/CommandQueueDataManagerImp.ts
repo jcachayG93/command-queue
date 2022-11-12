@@ -1,6 +1,6 @@
-import {ViewModel} from "../api/ViewModel";
+import {CommandQueueViewModel} from "../api/CommandQueueViewModel";
 import {CommandQueueDataManagerService} from "../api/command-queue-data-manager.service";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {Observable, Subject} from "rxjs";
 import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
@@ -24,7 +24,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
     return this.writer.commandsInQueue;
   }
 
-  executeCommand(cmd: DataManagerCommand): void {
+  executeCommand(cmd: CommandQueueCommand): void {
 
     this.writer.executeCommand(cmd);
   }
@@ -37,7 +37,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
     return this.reader.readViewModel();
   }
 
-  get viewModel(): ViewModel | null {
+  get viewModel(): CommandQueueViewModel | null {
     return this.reader.viewModel;
   }
 

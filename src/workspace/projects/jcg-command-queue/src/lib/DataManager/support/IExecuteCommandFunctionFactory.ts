@@ -1,4 +1,4 @@
-import {DataManagerCommand} from "../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../api/CommandQueueCommand";
 import {IExecuteCommandFunction} from "./IExecuteCommandFunction";
 
 export interface IExecuteCommandFunctionFactory
@@ -6,6 +6,6 @@ export interface IExecuteCommandFunctionFactory
   /**
    * Creates the execute command function
    */
-  create(cmd : DataManagerCommand)
+  create(cmd : CommandQueueCommand)
   : IExecuteCommandFunction;
 }

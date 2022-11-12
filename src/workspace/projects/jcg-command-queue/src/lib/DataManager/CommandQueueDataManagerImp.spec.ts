@@ -2,7 +2,7 @@ import {DmReaderMock} from "../test-common/DmReaderMock";
 import {DmWriterMock} from "../test-common/DmWritterMock";
 import {CommandQueueDataManagerImp} from "./CommandQueueDataManagerImp";
 import {ViewModelImp} from "../test-common/ViewModelImp";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {Mock} from "moq.ts";
 import {Logger} from "./support/Logger";
 
@@ -10,12 +10,12 @@ describe("CommandQueueDataManagerImp",()=>{
   let reader : DmReaderMock;
   let writer : DmWriterMock;
   let sut : CommandQueueDataManagerImp;
-  let cmd : DataManagerCommand;
+  let cmd : CommandQueueCommand;
   beforeEach(()=>{
     reader = new DmReaderMock();
     writer = new DmWriterMock();
     sut = new CommandQueueDataManagerImp(reader.object, writer.object, new Logger());
-    cmd = (new Mock<DataManagerCommand>()).object();
+    cmd = (new Mock<CommandQueueCommand>()).object();
   });
   it('cancelCommands delegates to writer',
     () => {

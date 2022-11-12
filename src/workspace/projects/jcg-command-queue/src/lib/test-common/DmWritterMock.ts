@@ -1,6 +1,6 @@
 import {IDmWriter} from "../DataManager/support/IDmWriter";
 import {It, Mock} from "moq.ts";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {Subject} from "rxjs";
 
 export class DmWriterMock
@@ -20,7 +20,7 @@ export class DmWriterMock
     return this.moq.object();
   }
 
-  verifyExecuteCommand(cmd:DataManagerCommand):void
+  verifyExecuteCommand(cmd:CommandQueueCommand):void
   {
     this.moq.verify(s=>s.executeCommand(cmd));
   }

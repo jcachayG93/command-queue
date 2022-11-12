@@ -1,26 +1,22 @@
-import {ViewModelReader} from "../../../../jcg-command-queue/src/lib/api/ViewModelReader";
+import {CommandQueueViewModelReader} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReader";
 
-import {PetsDmDataService} from "./pets-dm-data.service";
 import {Observable} from "rxjs";
-import {ViewModel} from "../../../../jcg-command-queue/src/lib/api/ViewModel";
+import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModel";
 import {Injectable} from "@angular/core";
-import {DataService} from "../../../../jcg-command-queue/src/lib/api/DataService";
+import {ServerDataService} from "../server-data.service";
 
 @Injectable({
   providedIn:'root'
 })
 export class PetsReader
-  extends ViewModelReader
+  extends CommandQueueViewModelReader
 {
-  constructor(private ds : DataService) {
+  constructor(private ds : ServerDataService) {
     super();
   }
 
-  private get dataService():PetsDmDataService
-  {
-    return this.ds as PetsDmDataService;
-  }
-  read(): Observable<ViewModel> {
-    return this.dataService.getPets();
+
+  read(): Observable<CommandQueueViewModel> {
+    return this.ds.getData();
   }
 }

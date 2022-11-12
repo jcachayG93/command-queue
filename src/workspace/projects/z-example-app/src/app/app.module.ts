@@ -8,12 +8,11 @@ import {JcgCommandQueueModule} from "../../../jcg-command-queue/src/lib/jcg-comm
 
 import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
-import {PetsDataManager} from "./data-manager/pets-data-manager";
-import {DataService} from "../../../jcg-command-queue/src/lib/api/DataService";
-import {PetsDmDataService} from "./data-manager/pets-dm-data.service";
-import {ViewModelReader} from "../../../jcg-command-queue/src/lib/api/ViewModelReader";
+import {CommandQueueDataService} from "../../../jcg-command-queue/src/lib/api/command-queue-data.service";
+import {PetsDataService} from "./data-manager/pets-data.service";
+import {CommandQueueViewModelReader} from "../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReader";
 import {PetsReader} from "./data-manager/pets-reader";
-import {UpdateViewModelFunctionFactory} from "../../../jcg-command-queue/src/lib/api/UpdateViewModelFunctionFactory";
+import {UpdateViewModelFunctionFactoryService} from "../../../jcg-command-queue/src/lib/api/update-viewModel-function-factory.service";
 import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-view-model-function-factory";
 import { DeveloperPanelComponent } from './developer-panel/developer-panel.component';
 import {MatCardModule} from '@angular/material/card';
@@ -40,10 +39,9 @@ import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrenc
     MatDialogModule
   ],
   providers: [
-    {provide: PetsDataManager},
-    { provide: DataService, useClass: PetsDmDataService},
-    { provide: ViewModelReader, useClass: PetsReader},
-    { provide: UpdateViewModelFunctionFactory, useClass: PetsUpdateViewModelFunctionFactory}
+    { provide: CommandQueueDataService, useClass: PetsDataService},
+    { provide: CommandQueueViewModelReader, useClass: PetsReader},
+    { provide: UpdateViewModelFunctionFactoryService, useClass: PetsUpdateViewModelFunctionFactory}
   ],
   bootstrap: [AppComponent]
 })

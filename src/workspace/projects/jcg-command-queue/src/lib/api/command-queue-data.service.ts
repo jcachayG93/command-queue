@@ -1,7 +1,11 @@
-import {DataManagerCommand} from "./DataManagerCommand";
+import {CommandQueueCommand} from "./CommandQueueCommand";
 import {Observable} from "rxjs";
+import {Injectable} from "@angular/core";
 
-export abstract class DataService {
+@Injectable({
+  providedIn:'root'
+})
+export abstract class CommandQueueDataService {
   /**
    * A data service that can run commands on a remote server
    * @param version the optimistic concurrency version value
@@ -9,7 +13,7 @@ export abstract class DataService {
    * @throws ConcurrencyVersionMismatchError when the server determines that the version sent did not match the
    * expected value
    */
-  abstract execute(version: number, cmd: DataManagerCommand): Observable<number>;
+  abstract execute(version: number, cmd: CommandQueueCommand): Observable<number>;
 
 }
 

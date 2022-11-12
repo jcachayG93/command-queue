@@ -1,6 +1,6 @@
-import {UpdateViewModelFunctionFactory} from "../../../../jcg-command-queue/src/lib/api/UpdateViewModelFunctionFactory";
+import {UpdateViewModelFunctionFactoryService} from "../../../../jcg-command-queue/src/lib/api/update-viewModel-function-factory.service";
 import {PetsViewModel} from "./pets-view-model";
-import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/DataManagerCommand";
+import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/CommandQueueCommand";
 import {IUpdateViewModelFunction} from "../../../../jcg-command-queue/src/lib/api/IUpdateViewModelFunction";
 import {AddPetCommand} from "./add-pet-command";
 import {Injectable} from "@angular/core";
@@ -9,9 +9,9 @@ import {Injectable} from "@angular/core";
   providedIn:'root'
 })
 export class PetsUpdateViewModelFunctionFactory
-  extends UpdateViewModelFunctionFactory
+  extends UpdateViewModelFunctionFactoryService
 {
-  create(cmd: DataManagerCommand): IUpdateViewModelFunction {
+  create(cmd: CommandQueueCommand): IUpdateViewModelFunction {
     if (cmd instanceof AddPetCommand)
     {
       return this.handle_AddPet(cmd);

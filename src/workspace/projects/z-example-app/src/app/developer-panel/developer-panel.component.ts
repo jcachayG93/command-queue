@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
-import {PetsDmDataService} from "../data-manager/pets-dm-data.service";
-import {DataService} from "../../../../jcg-command-queue/src/lib/api/DataService";
+import {PetsDataService} from "../data-manager/pets-data.service";
+import {CommandQueueDataService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data.service";
+import {ServerDataService} from "../server-data.service";
 
 @Component({
   selector: 'app-developer-panel',
@@ -12,11 +13,12 @@ export class DeveloperPanelComponent {
 
   constructor(
     private commandQueueDataManager : CommandQueueDataManagerService,
-    private dataService : DataService) { }
+    private dataService : CommandQueueDataService,
+    private serverDataService : ServerDataService) { }
 
-  private get petsDataService():PetsDmDataService
+  private get petsDataService():PetsDataService
   {
-    return this.dataService as PetsDmDataService;
+    return this.dataService as PetsDataService;
   }
   get commandsInQueue():number {
     return this.commandQueueDataManager.commandsInQueue;
@@ -27,11 +29,11 @@ export class DeveloperPanelComponent {
   }
   get remoteServerVersion():number {
 
-    return this.petsDataService.modelVersion;
+    return this.serverDataService.modelVersion;
   }
   incrementServerModelVersion():void
   {
-    this.petsDataService.incrementModelVersion();
+    this.serverDataService.incrementModelVersion();
   }
 
   get developerLogs():string[]

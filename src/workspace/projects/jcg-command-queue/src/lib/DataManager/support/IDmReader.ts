@@ -2,7 +2,7 @@
  * Implements all CommandQueue data manager operations related to reading data
  */
 import {Observable, Subject} from "rxjs";
-import {ViewModel} from "../../api/ViewModel";
+import {CommandQueueViewModel} from "../../api/CommandQueueViewModel";
 
 export interface IDmReader
 {
@@ -15,7 +15,7 @@ export interface IDmReader
    * Gets the view model that was read last. Null if readViewModel has not
    * been called or resolved yet.
    */
-  get viewModel() : ViewModel | null;
+  get viewModel() : CommandQueueViewModel | null;
 
   /**
    * A subject that emits each time the ViewModel is updated (reloaded or

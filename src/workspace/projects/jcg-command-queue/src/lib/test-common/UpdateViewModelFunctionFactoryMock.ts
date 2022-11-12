@@ -1,25 +1,25 @@
 import {ViewModelImp} from "./ViewModelImp";
-import {UpdateViewModelFunctionFactory} from "../api/UpdateViewModelFunctionFactory";
+import {UpdateViewModelFunctionFactoryService} from "../api/update-viewModel-function-factory.service";
 import {It, Mock} from "moq.ts";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
 
 export class UpdateViewModelFunctionFactoryMock
 {
   constructor() {
-    this.moq = new Mock<UpdateViewModelFunctionFactory>();
+    this.moq = new Mock<UpdateViewModelFunctionFactoryService>();
     this.returns = new UpdateViewModelFunctionMock();
     this.moq.setup(s=>s.create(It.IsAny()))
       .returns(this.returns.object);
   }
-  private moq : Mock<UpdateViewModelFunctionFactory>;
+  private moq : Mock<UpdateViewModelFunctionFactoryService>;
 
-  get object():UpdateViewModelFunctionFactory
+  get object():UpdateViewModelFunctionFactoryService
   {
     return this.moq.object();
   }
 
-  verifyCreate(cmd:DataManagerCommand)
+  verifyCreate(cmd:CommandQueueCommand)
   {
     this.moq.verify(s=>
     s.create(cmd));

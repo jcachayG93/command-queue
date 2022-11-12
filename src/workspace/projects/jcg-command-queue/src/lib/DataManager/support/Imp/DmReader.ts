@@ -1,7 +1,7 @@
 import {IDmReader} from "../IDmReader";
-import {ViewModel} from "../../../api/ViewModel";
+import {CommandQueueViewModel} from "../../../api/CommandQueueViewModel";
 import {Observable, Subject} from "rxjs";
-import {ViewModelReader} from "../../../api/ViewModelReader";
+import {CommandQueueViewModelReader} from "../../../api/CommandQueueViewModelReader";
 import {IDmMediator} from "../IDmMediator";
 import {Logger} from "../Logger";
 
@@ -9,7 +9,7 @@ export class DmReader
   implements IDmReader, IDmMediator
 {
   constructor(
-    private reader : ViewModelReader,
+    private reader : CommandQueueViewModelReader,
     private logger : Logger
   ) {
   }
@@ -38,11 +38,11 @@ export class DmReader
     });
   }
 
-  get viewModel(): ViewModel | null {
+  get viewModel(): CommandQueueViewModel | null {
     return this._viewModel;
   }
 
-  private _viewModel : ViewModel | null = null;
+  private _viewModel : CommandQueueViewModel | null = null;
 
   emitViewModelUpdated(): void {
     this._onViewModelUpdated.next();

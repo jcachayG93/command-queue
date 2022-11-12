@@ -1,6 +1,6 @@
 /**
  * The view model
  */
-export abstract class ViewModel {
+export abstract class CommandQueueViewModel {
   abstract version : number;
 }

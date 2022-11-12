@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {PetsDataManager} from "../data-manager/pets-data-manager";
 import {PetsViewModel} from "../data-manager/pets-view-model";
 import {AddPetCommand} from "../data-manager/add-pet-command";
 import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";

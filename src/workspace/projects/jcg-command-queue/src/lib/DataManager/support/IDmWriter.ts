@@ -2,7 +2,7 @@
  * Implements all CommandQueue data manager operations related to
  * writting data
  */
-import {DataManagerCommand} from "../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../api/CommandQueueCommand";
 import {Subject} from "rxjs";
 
 export interface IDmWriter
@@ -15,7 +15,7 @@ export interface IDmWriter
   /**
    * Adds the command to the queue
    */
-  executeCommand(cmd : DataManagerCommand):void;
+  executeCommand(cmd : CommandQueueCommand):void;
 
   /**
    * Cancels all the commands in the queue, which will have the

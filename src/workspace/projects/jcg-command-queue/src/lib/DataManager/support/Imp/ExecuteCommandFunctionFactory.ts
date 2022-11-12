@@ -1,22 +1,22 @@
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
-import {DataManagerCommand} from "../../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
 import {IExecuteCommandFunction} from "../IExecuteCommandFunction";
 import {IDmMediator} from "../IDmMediator";
-import {ViewModel} from "../../../api/ViewModel";
-import {UpdateViewModelFunctionFactory} from "../../../api/UpdateViewModelFunctionFactory";
-import {DataService} from "../../../api/DataService";
+import {CommandQueueViewModel} from "../../../api/CommandQueueViewModel";
+import {UpdateViewModelFunctionFactoryService} from "../../../api/update-viewModel-function-factory.service";
+import {CommandQueueDataService} from "../../../api/command-queue-data.service";
 import {Observable, observable} from "rxjs";
 
-export class ExecuteCommandFunctionFactory<TViewModel extends ViewModel>
+export class ExecuteCommandFunctionFactory<TViewModel extends CommandQueueViewModel>
   implements IExecuteCommandFunctionFactory
 {
   constructor(
     private mediator : IDmMediator,
-    private updateViewModelFunctionFactory : UpdateViewModelFunctionFactory,
-    private dataService : DataService
+    private updateViewModelFunctionFactory : UpdateViewModelFunctionFactoryService,
+    private dataService : CommandQueueDataService
   ) {
   }
-  create(cmd: DataManagerCommand): IExecuteCommandFunction {
+  create(cmd: CommandQueueCommand): IExecuteCommandFunction {
     let updateVmFn = this.updateViewModelFunctionFactory
       .create(cmd);
     updateVmFn(this.mediator.viewModel! as TViewModel);

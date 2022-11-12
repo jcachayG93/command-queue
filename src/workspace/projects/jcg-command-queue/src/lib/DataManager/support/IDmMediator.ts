@@ -1,7 +1,7 @@
 /**
  * Mediates between parts that compose the DataManager
  */
-import {ViewModel} from "../../api/ViewModel";
+import {CommandQueueViewModel} from "../../api/CommandQueueViewModel";
 
 export interface IDmMediator
 {
@@ -23,7 +23,7 @@ export interface IDmMediator
   /**
    * Gets the current view model from the DmReaderRelated
    */
-  get viewModel() : ViewModel | null;
+  get viewModel() : CommandQueueViewModel | null;
 
   /**
    * commands the DmReaderRelated to emit onViewModelUpdated

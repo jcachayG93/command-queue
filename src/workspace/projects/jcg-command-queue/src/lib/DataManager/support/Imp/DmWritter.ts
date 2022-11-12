@@ -1,6 +1,6 @@
 import {IDmWriter} from "../IDmWriter";
 import {Subject} from "rxjs";
-import {DataManagerCommand} from "../../../api/DataManagerCommand";
+import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
 import {QueueFactory} from "../../../Queue/QueueFactory";
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {IDmMediator} from "../IDmMediator";
@@ -29,7 +29,7 @@ export class DmWritter
     return this._queue.commandsInQueue;
   }
 
-  executeCommand(cmd: DataManagerCommand): void {
+  executeCommand(cmd: CommandQueueCommand): void {
     let fn = this.executeCommandFunctionFactory
       .create(cmd);
     this._queue?.add(fn,(e)=>{

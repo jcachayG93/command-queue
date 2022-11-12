@@ -1,26 +1,26 @@
-import {DataService} from "../api/DataService";
+import {CommandQueueDataService} from "../api/command-queue-data.service";
 import {It, Mock} from "moq.ts";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {Observable, of} from "rxjs";
 
 export class DataServiceMock
 {
   constructor() {
-    this.moq = new Mock<DataService>();
+    this.moq = new Mock<CommandQueueDataService>();
     this.returnsValue = 10;
     this.returns = of(this.returnsValue);
     this.moq.setup(s=>
     s.execute(It.IsAny(), It.IsAny()))
       .returns(this.returns);
   }
-  private moq : Mock<DataService>;
+  private moq : Mock<CommandQueueDataService>;
 
-  get object():DataService
+  get object():CommandQueueDataService
   {
     return this.moq.object();
   }
 
-  verifyExecute(version: number, cmd: DataManagerCommand):void
+  verifyExecute(version: number, cmd: CommandQueueCommand):void
   {
     this.moq.verify(s=>
     s.execute(version, cmd));

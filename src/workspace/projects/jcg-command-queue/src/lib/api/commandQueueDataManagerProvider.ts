@@ -1,8 +1,8 @@
 import {CommandQueueDataManagerService} from "./command-queue-data-manager.service";
-import {DataService} from "./DataService";
-import {UpdateViewModelFunctionFactory} from "./UpdateViewModelFunctionFactory";
-import {ViewModel} from "./ViewModel";
-import {ViewModelReader} from "./ViewModelReader";
+import {CommandQueueDataService} from "./command-queue-data.service";
+import {UpdateViewModelFunctionFactoryService} from "./update-viewModel-function-factory.service";
+import {CommandQueueViewModel} from "./CommandQueueViewModel";
+import {CommandQueueViewModelReader} from "./CommandQueueViewModelReader";
 import {DmReader} from "../DataManager/support/Imp/DmReader";
 import {ExecuteCommandFunctionFactory} from "../DataManager/support/Imp/ExecuteCommandFunctionFactory";
 import {CommandQueueDataManagerImp} from "../DataManager/CommandQueueDataManagerImp";
@@ -13,9 +13,9 @@ import {Logger} from "../DataManager/support/Logger";
 import {UpdateViewModelFunctionFactoryMock} from "../test-common/UpdateViewModelFunctionFactoryMock";
 
 const commandQueueDataManagerFactory =
-  (dataService : DataService,
-   updateViewModelFunctionFactory : UpdateViewModelFunctionFactory,
-   reader : ViewModelReader) => {
+  (dataService : CommandQueueDataService,
+   updateViewModelFunctionFactory : UpdateViewModelFunctionFactoryService,
+   reader : CommandQueueViewModelReader) => {
     const logger = new Logger();
     const dmReader = new DmReader(reader, logger);
 
@@ -33,5 +33,5 @@ const commandQueueDataManagerFactory =
   export const commandQueueDataManagerProvider = {
   provide: CommandQueueDataManagerService,
     useFactory: commandQueueDataManagerFactory,
-    deps:[DataService, UpdateViewModelFunctionFactory, ViewModelReader]
+    deps:[CommandQueueDataService, UpdateViewModelFunctionFactoryService, CommandQueueViewModelReader]
   }

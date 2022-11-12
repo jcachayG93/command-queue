@@ -1,6 +1,6 @@
 import {IExecuteCommandFunctionFactory} from "../DataManager/support/IExecuteCommandFunctionFactory";
 import {It, Mock} from "moq.ts";
-import {DataManagerCommand} from "../api/DataManagerCommand";
+import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
 
 
@@ -19,7 +19,7 @@ export class ExecuteCommandFunctionFactoryMock
     return this.moq.object();
   }
 
-  verifyCreate(cmd:DataManagerCommand):void
+  verifyCreate(cmd:CommandQueueCommand):void
   {
     this.moq.verify(s=>s.create(cmd));
   }

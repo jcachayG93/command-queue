@@ -1,4 +1,4 @@
-import {ViewModelReader} from "../api/ViewModelReader";
+import {CommandQueueViewModelReader} from "../api/CommandQueueViewModelReader";
 import {ViewModelImp} from "./ViewModelImp";
 import {Mock} from "moq.ts";
 import {of} from "rxjs";
@@ -6,15 +6,15 @@ import {of} from "rxjs";
 export class ViewModelReaderMock
 {
   constructor() {
-    this.moq = new Mock<ViewModelReader>();
+    this.moq = new Mock<CommandQueueViewModelReader>();
     this.readReturns = new ViewModelImp();
     this.readReturns.version = 10;
     this.moq.setup(s=>
     s.read()).returns(of(this.readReturns));
   }
-  private moq : Mock<ViewModelReader>;
+  private moq : Mock<CommandQueueViewModelReader>;
 
-  get object():ViewModelReader
+  get object():CommandQueueViewModelReader
   {
     return this.moq.object();
   }
