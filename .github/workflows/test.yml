@@ -25,7 +25,7 @@ jobs:
       - name: test
         run: npm run test
       - name: copy the npmrc file
-        run: cp .npmrc src/workspace/dist/jcg-command-queue/.npmrc
+        run: cp .npmrc /dist/jcg-command-queue/.npmrc
 #      - name: npm publish
 #        run: npm --prefix src/workspace/dist/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
