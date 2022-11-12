@@ -1,11 +1,20 @@
 {
-  "name": "jcg-command-queue",
-  "version": "1.0.0",
+  "name": "@jcachay/command-queue",
+  "description": "Angular library that adds commands to a queue so they can be processed at the server speed while updating a local copy of the view model automatically",
+  "version": "1.0.1-apha.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcachayG93/jcg-command-queue"
+  },
+  "keywords": [],
+  "author": "Julio Cachay <jcachay@mktg33.com>",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
   },
+  "license": "MIT",
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "homepage": "https://github.com/jcachayG93/jcg-command-queue/wiki"
 }

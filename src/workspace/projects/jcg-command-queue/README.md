@@ -1,24 +1,16 @@
-# JcgCommandQueue
+# CommandQueue
+An angular library that adds commands to a queue so they can be processed at the server speed while updating a local copy of the view model
+immediately.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+## Features
+- Implements optimistic concurrency.
+- Updates a local copy of the View-Model immediately, so the user doesn't have to wait for the server.
+- Because it does not have to read the View-Model after each command, it saves internet bandwidth.
+- Rolls back the pending commands when an error occurs, notifying the user and reloading the View-Model.
 
-## Code scaffolding
+## Install
+> npm install @jcachay/command-queue
 
-Run `ng generate component component-name --project jcg-command-queue` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project jcg-command-queue`.
-> Note: Don't forget to add `--project jcg-command-queue` or else it will be added to the default project in your `angular.json` file. 
+## Setup and usage
+[See the wiki](https://github.com/jcachayG93/jcg-command-queue/wiki)
 
-## Build
-
-Run `ng build jcg-command-queue` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build jcg-command-queue`, go to the dist folder `cd dist/jcg-command-queue` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test jcg-command-queue` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
