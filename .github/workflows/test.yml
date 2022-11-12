@@ -19,8 +19,8 @@ jobs:
           node-version: '18.x'
       - name: install packages
         run: npm i                    #run: npm --prefix ./src/workspace i
-  #    - name: test
-   #     run: npm --prefix ./src/workspace ng test --browsers ChromeHeadless
+      - name: test
+        run: npm run ng test --browsers ChromeHeadless
 
 #jobs:
 #  build:
