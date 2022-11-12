@@ -20,11 +20,22 @@ jobs:
          registry-url: 'https://registry.npmjs.org'
          scope: '@jcachay'
       - name: install packages
-        run: npm i
+        run: npm ci
       - name: build
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/workspace
+      permissions:
+        contents: read
+      steps:
+        - name: test-again
+          run: npm run test
+
 
 #jobs:
 #  build:
