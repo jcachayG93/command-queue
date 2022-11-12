@@ -25,11 +25,13 @@ jobs:
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
-      - name: say-hello
-        run: echo "Hello World!"
+      - run: npm publish
+        env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
-#jobs:
+
+      #jobs:
 #  build:
 #    runs-on: ubuntu-latest
 #    defaults:
