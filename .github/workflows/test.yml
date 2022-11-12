@@ -16,10 +16,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - name: go to directory
-        run: cd src/workspace
-      - name: npm install
-        run: npm i
+      - name: install packages
+        run: npm --prefix ./src/workspace i
 
 #jobs:
 #  build:
