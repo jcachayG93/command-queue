@@ -19,13 +19,15 @@ import { DeveloperPanelComponent } from './developer-panel/developer-panel.compo
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
-import {commandQueueDataManagerProvider} from "../../../jcg-command-queue/src/lib/api/commandQueueDataManagerProvider";
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrency-version-mismatch-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PetsGridComponent,
-    DeveloperPanelComponent
+    DeveloperPanelComponent,
+    ConcurrencyVersionMismatchDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import {commandQueueDataManagerProvider} from "../../../jcg-command-queue/src/li
     FormsModule,
     MatCardModule,
     MatProgressBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     {provide: PetsDataManager},
