@@ -18,6 +18,7 @@ jobs:
         with:
          node-version: '18.x'
          registry-url: 'https://registry.npmjs.org'
+         scope: '@jcachay'
       - name: install packages
         run: npm ci
       - name: build
@@ -25,7 +26,7 @@ jobs:
       - name: test
         run: npm run test
       - name: npm publish
-        run: npm --prefix src/workspace/dist/jcg-command-queue publish # by default, scoped packages are publish as private
+        run: npm --prefix src/workspace/dist/jcg-command-queue publish --access restricted # by default, scoped packages are publish as private
         env:
          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
