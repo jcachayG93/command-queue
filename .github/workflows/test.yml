@@ -18,9 +18,11 @@ jobs:
         with:
           node-version: '18.x'
       - name: install packages
-        run: npm i                    #run: npm --prefix ./src/workspace i
+        run: npm i
+      - name: build
+        run: npm run ng build --project jcg-command-queue
       - name: test
-        run: npm run ng test jcg-command-queue --browsers ChromeHeadless
+        run: npm run ng test --project jcg-command-queue --watch false
 
 #jobs:
 #  build:
