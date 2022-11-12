@@ -1,9 +1,23 @@
 
 table
 {
+  font-size:small;
   margin:20px;
   th,td {
     padding: 10px 20px;
     text-align: center;
+  }
+}
+.content-container
+{
+  display: flex;
+  gap:20px;
+ .col
+ {
+   min-width: 250px;
+ }
+  .logs
+  {
+    overflow-y: scroll;
   }
 }

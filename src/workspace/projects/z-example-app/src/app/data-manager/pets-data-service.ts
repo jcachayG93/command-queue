@@ -13,50 +13,36 @@ import {Injectable} from "@angular/core";
   providedIn:'root'
 })
 export class PetsDataService extends DataService {
-  constructor() {
-    super();
-    const data = new PetsViewModel();
-    this.writeToRaw(data,0);
-  }
-  private raw = '';
-  // Overrides the raw data model version to avoid race conditions
-  private version = 0;
 
-  readRaw(): PetsViewModel {
-    const result = JSON.parse(this.raw) as PetsViewModel;
-    result.version = this.version;
-    return result;
-  }
+  private ds : DataSource = new DataSource();
 
-  writeToRaw(model: PetsViewModel, version:number) {
-    this.version = version;
-    model.version =version;
-    this.raw = JSON.stringify(model);
-  }
 
   delay(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
   getPets(): Observable<PetsViewModel> {
-    return of(this.readRaw()).pipe(delay(this.delay(500, 3000)));
+    return of(this.ds.data).pipe(delay(this.delay(500, 3000)));
   }
 
   incrementModelVersion():void
   {
-    this.version++;
+    const data = this.ds.data;
+    data.version++;
+    this.ds.data = data;
   }
 
   private handle_AddPet(version: number, cmd: AddPetCommand): Observable<number> {
 
     return new Observable<number>(obs => {
-      const data = this.readRaw();
+      const data = this.ds.data;
+     // console.log(`command version: ${version}, server version: ${data.version}`);
       if (data.version != version) {
-
         obs.error(new ConcurrencyVersionMismatchError());
       }
       data.petNames.push(cmd.name);
-      this.writeToRaw(data, version+1);
+      data.version++;
+      this.ds.data = data;
       obs.next(data.version);
       obs.complete();
     }).pipe(delay(this.delay(500, 3000)));
@@ -71,6 +57,35 @@ export class PetsDataService extends DataService {
 
   get modelVersion():number
   {
-    return this.readRaw().version;
+    return this.ds.data.version;
+  }
+
+
+}
+
+class DataSource
+{
+  constructor() {
+    this._data = new PetsViewModel();
+    this._data.version = 0;
+  }
+  private _data : PetsViewModel;
+
+  get data():PetsViewModel
+  {
+    return this.clone(this._data);
+  }
+
+  set data(data : PetsViewModel)
+  {
+    this._data = this.clone(data);
+  }
+
+  private clone(data: PetsViewModel) : PetsViewModel
+  {
+      const result = new PetsViewModel();
+      result.version = data.version;
+      data.petNames.forEach(n=> result.petNames.push(n));
+      return result;
   }
 }

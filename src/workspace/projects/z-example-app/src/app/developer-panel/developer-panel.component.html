@@ -2,22 +2,37 @@
 <mat-card>
   <mat-card-title>Developer Panel</mat-card-title>
   <mat-card-content>
-    <h3>Commands In Queue: ({{commandsInQueue}})</h3>
-    <mat-progress-bar mode="determinate" [value]="commandsPercentage"></mat-progress-bar>
-    <table>
-      <tr>
-        <th>Commands In Queue</th>
-        <th>Local view model version</th>
-        <th>Remote view model version</th>
-      </tr>
-      <tr>
-        <td>{{commandsInQueue}}</td>
-        <td>{{localVersion}}</td>
-        <td>{{remoteServerVersion}}</td>
-      </tr>
-    </table>
+    <div class="content-container">
+      <div class="col">
+        <h3>Commands In Queue: ({{commandsInQueue}})</h3>
+        <mat-progress-bar mode="determinate" [value]="commandsPercentage"></mat-progress-bar>
+        <table>
+          <tr>
+            <th>Commands In Queue</th>
+            <th>Local view model version</th>
+            <th>Remote view model version</th>
+          </tr>
+          <tr>
+            <td>{{commandsInQueue}}</td>
+            <td>{{localVersion}}</td>
+            <td>{{remoteServerVersion}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col logs">
+        <table>
+          <tr>
+            <th>Logs:</th>
+          </tr>
+          <tr *ngFor="let log of developerLogs">
+            <td>{{log}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="incrementServerModelVersion()">INCREMENT SERVER VERSION</button>
+    <button mat-button (click)="incrementServerModelVersion()">Increment Server Version</button>
+    <button mat-button (click)="resetLogs()">Reset Logs</button>
   </mat-card-actions>
 </mat-card>

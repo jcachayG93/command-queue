@@ -19,6 +19,7 @@ import { DeveloperPanelComponent } from './developer-panel/developer-panel.compo
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
+import {commandQueueDataManagerProvider} from "../../../jcg-command-queue/src/lib/api/commandQueueDataManagerProvider";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,6 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   providers: [
     {provide: PetsDataManager},
-
     { provide: DataService, useClass: PetsDataService},
     { provide: ViewModelReader, useClass: PetsReader},
     { provide: UpdateViewModelFunctionFactory, useClass: PetsUpdateViewModelFunctionFactory}
