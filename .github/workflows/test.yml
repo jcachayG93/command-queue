@@ -7,11 +7,18 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    permissions:
+     contents: read
     steps:
       - name: say-hello
         run: echo 'hello world'
-      - name: list files
-        run: ls
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version:'18.x'
+      - name: go to directory
+        run: cd src/workspace
+
 #jobs:
 #  build:
 #    runs-on: ubuntu-latest
