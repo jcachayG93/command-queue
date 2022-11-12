@@ -18,6 +18,8 @@ jobs:
           node-version: '18.x'
       - name: install packages
         run: npm --prefix ./src/workspace i
+      - name: install cli
+        run: npm install @angular/cli
       - name: test
         run: npm --prefix ./src/workspace ng test --browsers ChromeHeadless
 
