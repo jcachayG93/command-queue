@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
      run:
-      working-directory: ./src/workspace
+      working-directory: src/workspace
     permissions:
      contents: read
     steps:
