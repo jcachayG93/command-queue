@@ -40,11 +40,13 @@ export class PetsDataService extends DataService {
       if (data.version != version) {
         obs.error(new ConcurrencyVersionMismatchError());
       }
-      data.petNames.push(cmd.name);
-      data.version++;
-      this.ds.data = data;
-      obs.next(data.version);
-      obs.complete();
+      else {
+        data.petNames.push(cmd.name);
+        data.version++;
+        this.ds.data = data;
+        obs.next(data.version);
+        obs.complete();
+      }
     }).pipe(delay(this.delay(500, 3000)));
   }
 
