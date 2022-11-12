@@ -10,7 +10,7 @@ import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
 import {PetsDataManager} from "./data-manager/pets-data-manager";
 import {DataService} from "../../../jcg-command-queue/src/lib/api/DataService";
-import {PetsDataService} from "./data-manager/pets-data-service";
+import {PetsDmDataService} from "./data-manager/pets-dm-data.service";
 import {ViewModelReader} from "../../../jcg-command-queue/src/lib/api/ViewModelReader";
 import {PetsReader} from "./data-manager/pets-reader";
 import {UpdateViewModelFunctionFactory} from "../../../jcg-command-queue/src/lib/api/UpdateViewModelFunctionFactory";
@@ -41,7 +41,7 @@ import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrenc
   ],
   providers: [
     {provide: PetsDataManager},
-    { provide: DataService, useClass: PetsDataService},
+    { provide: DataService, useClass: PetsDmDataService},
     { provide: ViewModelReader, useClass: PetsReader},
     { provide: UpdateViewModelFunctionFactory, useClass: PetsUpdateViewModelFunctionFactory}
   ],

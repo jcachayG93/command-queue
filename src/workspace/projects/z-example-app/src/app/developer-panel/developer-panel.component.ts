@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
-import {PetsDataService} from "../data-manager/pets-data-service";
+import {PetsDmDataService} from "../data-manager/pets-dm-data.service";
 import {DataService} from "../../../../jcg-command-queue/src/lib/api/DataService";
 
 @Component({
@@ -14,9 +14,9 @@ export class DeveloperPanelComponent {
     private commandQueueDataManager : CommandQueueDataManagerService,
     private dataService : DataService) { }
 
-  private get petsDataService():PetsDataService
+  private get petsDataService():PetsDmDataService
   {
-    return this.dataService as PetsDataService;
+    return this.dataService as PetsDmDataService;
   }
   get commandsInQueue():number {
     return this.commandQueueDataManager.commandsInQueue;

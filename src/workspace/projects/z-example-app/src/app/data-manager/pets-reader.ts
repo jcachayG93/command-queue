@@ -1,6 +1,6 @@
 import {ViewModelReader} from "../../../../jcg-command-queue/src/lib/api/ViewModelReader";
 
-import {PetsDataService} from "./pets-data-service";
+import {PetsDmDataService} from "./pets-dm-data.service";
 import {Observable} from "rxjs";
 import {ViewModel} from "../../../../jcg-command-queue/src/lib/api/ViewModel";
 import {Injectable} from "@angular/core";
@@ -16,9 +16,9 @@ export class PetsReader
     super();
   }
 
-  private get dataService():PetsDataService
+  private get dataService():PetsDmDataService
   {
-    return this.ds as PetsDataService;
+    return this.ds as PetsDmDataService;
   }
   read(): Observable<ViewModel> {
     return this.dataService.getPets();

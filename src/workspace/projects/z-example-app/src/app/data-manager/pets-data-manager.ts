@@ -3,7 +3,7 @@ import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/
 import {PetsViewModel} from "./pets-view-model";
 import {Observable, Subject} from "rxjs";
 import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/DataManagerCommand";
-import {PetsDataService} from "./pets-data-service";
+import {PetsDmDataService} from "./pets-dm-data.service";
 
 @Injectable({
   providedIn:'root'
