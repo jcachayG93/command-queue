@@ -21,6 +21,7 @@ jobs:
          registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm install @angular/cli --save-dev
+      - run: npm install @angular-devkit/build-angular:ng-packagr
       - name: build
         run: npm run ng build
       - name: test
