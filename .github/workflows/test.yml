@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
      run:
-      working-directory: src/workspace/projects/jcg-command-queue
+      working-directory: src/workspace
     permissions:
      contents: read
      packages: write
@@ -20,19 +20,50 @@ jobs:
          node-version: '18.x'
          registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm install @angular/cli --save-dev
-      - run: npm install @angular-devkit/build-angular:ng-packagr
       - name: build
-        run: npm run ng build
+        run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
       - name: npm publish
-        run: npm publish
-       # run: npm --prefix src/workspace/projects/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
+        run: npm --prefix src/workspace/dist/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
         env:
          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
+
+#name: test
+#on:
+#  push:
+#    branches: [main] # remove later
+#  release:
+#    types: [created]
+#jobs:
+#  say-hello:
+#    runs-on: ubuntu-latest
+#    defaults:
+#      run:
+#        working-directory: src/workspace/projects/jcg-command-queue
+#    permissions:
+#      contents: read
+#      packages: write
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '18.x'
+#          registry-url: 'https://registry.npmjs.org'
+#      - run: npm ci
+#      - run: npm install @angular/cli --save-dev
+#      - run: npm install @angular-devkit/build-angular:ng-packagr
+#      - name: build
+#        run: npm run ng build
+#      - name: test
+#        run: npm run test
+#      - name: npm publish
+#        run: npm publish
+#        # run: npm --prefix src/workspace/projects/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       #jobs:
 #  build:
