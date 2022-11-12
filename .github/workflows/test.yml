@@ -22,7 +22,7 @@ jobs:
       - name: build
         run: npm run ng build --project jcg-command-queue
       - name: test
-        run: npm run ng test --project jcg-command-queue --watch false
+        run: npm run test
 
 #jobs:
 #  build:
