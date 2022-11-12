@@ -30,11 +30,11 @@ jobs:
     defaults:
       run:
         working-directory: src/workspace
-      permissions:
-        contents: read
-      steps:
-        - name: test-again
-          run: npm run test
+    permissions:
+      contents: read
+    steps:
+      - name: test-again
+        run: npm run test
 
 
 #jobs:
