@@ -24,8 +24,8 @@ jobs:
       - name: test
         run: npm run test
       - name: npm publish
-        run: npm publish
-      #  run: npm --prefix src/workspace/dist/jcg-command-queue publish --scope='@jcachay' --access=restricted  # by default, scoped packages are publish as private
+       # run: npm publish
+        run: npm --prefix src/workspace/projects/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
         env:
          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
