@@ -22,10 +22,10 @@ jobs:
       - name: install packages
         run: npm ci
       - name: build
-        run: npm run ng build --project jcg-command-queue
+        run: npm run ng build --project jcg-command-queue --configuration production
       - name: test
         run: npm run test
-      - run: npm publish
+      - run: npm --prefix src/workspace/dist/jcg-command-queue publish
         env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
