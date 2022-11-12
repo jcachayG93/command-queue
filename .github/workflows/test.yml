@@ -10,6 +10,10 @@ jobs:
     steps:
       - name: say-hello
         run: echo 'hello world'
+      - name: go to workspace
+        run: cd src/workspace
+      - name: list files
+        run: ls
 #jobs:
 #  build:
 #    runs-on: ubuntu-latest
