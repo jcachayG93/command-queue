@@ -1,25 +1,31 @@
 name: Publish Package to npmjs
 on:
+  push:
+    branches: [master] # remove later
   release:
     types: [created]
 jobs:
-  build:
+  say-hello:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./dist/jcg-command-queue
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@jcachay'
-      - run: npm ci
+    run: echo 'hello world'
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    defaults:
+#      run:
+#        working-directory: ./dist/jcg-command-queue
+#    permissions:
+#      contents: read
+#      packages: write
+#    steps:
+#      - uses: actions/checkout@v3
+#      # Setup .npmrc file to publish to npm
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '18.x'
+#          registry-url: 'https://registry.npmjs.org'
+#          scope: '@jcachay'
+#      - run: npm ci
       #- run: npm publish
       #  env:
       #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
