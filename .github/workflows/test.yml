@@ -27,7 +27,7 @@ jobs:
         run: npm publish
       #  run: npm --prefix src/workspace/dist/jcg-command-queue publish --scope='@jcachay' --access=restricted  # by default, scoped packages are publish as private
         env:
-         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
 
