@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
      run:
-      working-directory: src/workspace
+      working-directory: src/workspace/projects/jcg-command-queue
     permissions:
      contents: read
      packages: write
@@ -18,16 +18,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
          node-version: '18.x'
+         registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - name: build
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
       - name: npm publish
-       # run: npm publish
-        run: npm --prefix src/workspace/projects/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
+        run: npm publish
+       # run: npm --prefix src/workspace/projects/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
         env:
-         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
 
