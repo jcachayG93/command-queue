@@ -13,15 +13,6 @@ describe("Queue",()=>{
     sut = new Queue(new Logger());
   })
 
-  it('delete this tests',
-    () => {
-      // ********* ARRANGE ***********
-
-      // ********* ACT ***************
-
-      // ********* ASSERT ************
-      expect(true).toBeFalse();
-    });
 
  it('Runs the commands in a queue',
     (done) => {
