@@ -1,4 +1,4 @@
-import {CommandQueueDataManager} from "./CommandQueueDataManager";
+import {CommandQueueDataManagerService} from "./command-queue-data-manager.service";
 import {DataService} from "./DataService";
 import {UpdateViewModelFunctionFactory} from "./UpdateViewModelFunctionFactory";
 import {ViewModel} from "./ViewModel";
@@ -31,7 +31,7 @@ const commandQueueDataManagerFactory =
   }
 
   export const commandQueueDataManagerProvider = {
-  provide: CommandQueueDataManager,
+  provide: CommandQueueDataManagerService,
     useFactory: commandQueueDataManagerFactory,
     deps:[DataService, UpdateViewModelFunctionFactory, ViewModelReader]
   }

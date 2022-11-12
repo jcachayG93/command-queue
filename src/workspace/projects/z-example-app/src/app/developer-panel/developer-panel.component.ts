@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CommandQueueDataManager} from "../../../../jcg-command-queue/src/lib/api/CommandQueueDataManager";
+import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
 import {PetsDataService} from "../data-manager/pets-data-service";
 import {DataService} from "../../../../jcg-command-queue/src/lib/api/DataService";
 
@@ -11,7 +11,7 @@ import {DataService} from "../../../../jcg-command-queue/src/lib/api/DataService
 export class DeveloperPanelComponent {
 
   constructor(
-    private dm : CommandQueueDataManager,
+    private commandQueueDataManager : CommandQueueDataManagerService,
     private dataService : DataService) { }
 
   private get petsDataService():PetsDataService
@@ -19,11 +19,11 @@ export class DeveloperPanelComponent {
     return this.dataService as PetsDataService;
   }
   get commandsInQueue():number {
-    return this.dm.commandsInQueue;
+    return this.commandQueueDataManager.commandsInQueue;
   }
 
   get localVersion():number {
-    return this.dm.modelVersion;
+    return this.commandQueueDataManager.modelVersion;
   }
   get remoteServerVersion():number {
 
@@ -36,12 +36,12 @@ export class DeveloperPanelComponent {
 
   get developerLogs():string[]
   {
-    return this.dm.developerLogs;
+    return this.commandQueueDataManager.developerLogs;
   }
 
   resetLogs():void
   {
-    this.dm.resetLogs();
+    this.commandQueueDataManager.resetLogs();
   }
 
   get commandsPercentage():number

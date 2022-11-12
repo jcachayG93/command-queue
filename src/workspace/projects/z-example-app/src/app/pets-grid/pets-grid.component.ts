@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PetsDataManager} from "../data-manager/pets-data-manager";
 import {PetsViewModel} from "../data-manager/pets-view-model";
 import {AddPetCommand} from "../data-manager/add-pet-command";
-import {CommandQueueDataManager} from "../../../../jcg-command-queue/src/lib/api/CommandQueueDataManager";
+import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
 import {
   ConcurrencyVersionMismatchError
 } from "../../../../jcg-command-queue/src/lib/api/errors/concurrency-version-mismatch-error";
@@ -15,12 +15,12 @@ import {ConcurrencyVersionMismatchDialogService} from "../services/concurrency-v
 })
 export class PetsGridComponent implements OnInit {
 
-  constructor(private dm : CommandQueueDataManager,
+  constructor(private commandQueueDataManager : CommandQueueDataManagerService,
               private dialog : ConcurrencyVersionMismatchDialogService) { }
 
   ngOnInit(): void {
-    this.dm.readViewModel().subscribe();
-    this.dm.writeErrorOccurred.subscribe({
+    this.commandQueueDataManager.readViewModel().subscribe();
+    this.commandQueueDataManager.writeErrorOccurred.subscribe({
       next:e=>{
         if (e instanceof ConcurrencyVersionMismatchError)
         {
@@ -32,7 +32,7 @@ export class PetsGridComponent implements OnInit {
 
   get viewModel():PetsViewModel | null
   {
-    return this.dm.viewModel as PetsViewModel;
+    return this.commandQueueDataManager.viewModel as PetsViewModel;
   }
 
   inputValue = "";
@@ -42,7 +42,7 @@ export class PetsGridComponent implements OnInit {
     if (this.inputValue != "")
     {
       const cmd = new AddPetCommand(this.inputValue);
-      this.dm.executeCommand(cmd);
+      this.commandQueueDataManager.executeCommand(cmd);
     }
   }
 

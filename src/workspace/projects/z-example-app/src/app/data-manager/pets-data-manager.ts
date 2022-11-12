@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {CommandQueueDataManager} from "../../../../jcg-command-queue/src/lib/api/CommandQueueDataManager";
+import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
 import {PetsViewModel} from "./pets-view-model";
 import {Observable, Subject} from "rxjs";
 import {DataManagerCommand} from "../../../../jcg-command-queue/src/lib/api/DataManagerCommand";
@@ -11,7 +11,7 @@ import {PetsDataService} from "./pets-data-service";
 export class PetsDataManager
 {
   constructor(
-    private dm : CommandQueueDataManager
+    private dm : CommandQueueDataManagerService
   ) {
   }
 

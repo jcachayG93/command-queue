@@ -1,12 +1,12 @@
 import {ViewModel} from "../api/ViewModel";
-import {CommandQueueDataManager} from "../api/CommandQueueDataManager";
+import {CommandQueueDataManagerService} from "../api/command-queue-data-manager.service";
 import {DataManagerCommand} from "../api/DataManagerCommand";
 import {Observable, Subject} from "rxjs";
 import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
 import {Logger} from "./support/Logger";
 
-export class CommandQueueDataManagerImp extends CommandQueueDataManager
+export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
 {
 
   constructor(
