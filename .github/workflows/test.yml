@@ -22,8 +22,6 @@ jobs:
       - run: npm ci
       - name: build
         run: npm run ng build --project jcg-command-queue
-#       - name: test
-#         run: npm run test
       - name: npm publish
         run: |
               cd dist/jcg-command-queue
