@@ -1,7 +1,7 @@
 {
   "name": "@jcachay/command-queue",
   "description": "Angular library that adds commands to a queue so they can be processed at the server speed while updating a local copy of the view model automatically",
-  "version": "1.0.3-apha.0",
+  "version": "1.0.4-apha.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

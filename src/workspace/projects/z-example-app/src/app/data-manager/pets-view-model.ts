@@ -1,9 +1,9 @@
 import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModel";
 
-export class PetsViewModel extends CommandQueueViewModel
+export class PetsViewModel implements CommandQueueViewModel
 {
   petNames : string[] = [];
-  override version: number = 0;
+  version: number = 0;
 }
 
 
