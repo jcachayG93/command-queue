@@ -1,7 +1,7 @@
 import {CommandQueueViewModel} from "../api/CommandQueueViewModel";
 
 export class ViewModelImp
-  extends CommandQueueViewModel
+  implements CommandQueueViewModel
 {
   version: number = 0;
 
