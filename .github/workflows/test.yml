@@ -25,7 +25,9 @@ jobs:
 #       - name: test
 #         run: npm run test
       - name: npm publish
-        run: npm publish --prefix dist/jcg-command-queue --access=restricted
+        run: |
+              cd dist/jcg-command-queue
+              npm publish --access=restricted
         env:
          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
