@@ -32,7 +32,7 @@ jobs:
       - name: set token
         run: npm set //registry.npmjs.org/:_authToken $NODE_AUTH_TOKEN
       - name: npm publish
-        run: npm publish --prefix dist/jcg-command-queue --access=restricted --dry-run  # by default, scoped packages are publish as private
+        run: npm publish --prefix dist/jcg-command-queue --access=restricted  # by default, scoped packages are publish as private
 #        env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
