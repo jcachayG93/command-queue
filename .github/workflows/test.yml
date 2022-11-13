@@ -27,6 +27,8 @@ jobs:
         run: npm run test
       - name: navigate to package
         run: cd projects/jcg-command-queue
+      - name: set token
+        run: npm config set _authToken = ${{ secrets.NPM_TOKEN }}
       - name: npm publish
         run: npm publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
