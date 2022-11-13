@@ -20,17 +20,14 @@ jobs:
          node-version: '18.x'
          # registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+        env:
+         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: build
         run: npm run ng build --project jcg-command-queue
-   #   - name: test
-   #     run: npm run test
-      - name: copy npmrc
-        uses: canastro/copy-file-action@master
-        with:
-         source: "/.npmrc"
-         target: "/dist/jcg-command-queue"
-#      - name: npm publish
-#        run: npm --prefix src/workspace/dist/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
+      - name: test
+        run: npm run test
+      - name: npm publish
+        run: npm --prefix src/workspace/dist/jcg-command-queue publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
