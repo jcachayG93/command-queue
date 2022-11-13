@@ -32,7 +32,7 @@ jobs:
       - name: set auth
         run: npm set always-auth true
       - name: set token
-        run: npm set '//registry.npmjs.org/:_authToken' ${{NODE_AUTH_TOKEN}}
+        run: npm set '//registry.npmjs.org/:_authToken' ${NODE_AUTH_TOKEN}
       - name: npm publish
         run: npm publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
