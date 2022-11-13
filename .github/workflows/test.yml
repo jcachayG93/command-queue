@@ -25,12 +25,10 @@ jobs:
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
-      - name: navigate to package
-        run: cd projects/jcg-command-queue
-      - name: set token
-        run: npm config set _authToken = ${{ secrets.NPM_TOKEN }}
+      - name: go to dist directory
+        run: cd dist/jcg-command-queue
       - name: npm publish
-        run: npm publish --prefix projects/command-queue --access=restricted  # by default, scoped packages are publish as private
+        run: npm publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
