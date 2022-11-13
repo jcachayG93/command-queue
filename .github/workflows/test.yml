@@ -25,16 +25,14 @@ jobs:
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
-      - name: go to dist directory
-        run: cd dist/jcg-command-queue
       - name: login
         run: npm set registry 'https://registry.npmjs.org'
       - name: set auth
         run: npm set always-auth true
       - name: set token
-        run: npm set '//registry.npmjs.org/:_authToken' ${NODE_AUTH_TOKEN}
+        run: npm set //registry.npmjs.org/:_authToken $NODE_AUTH_TOKEN
       - name: npm publish
-        run: npm publish --access=restricted  # by default, scoped packages are publish as private
+        run: npm publish --prefix dist/jcg-command-queue --access=restricted --dry-run  # by default, scoped packages are publish as private
 #        env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
