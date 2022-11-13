@@ -30,7 +30,7 @@ jobs:
       - name: set token
         run: npm config set _authToken = ${{ secrets.NPM_TOKEN }}
       - name: npm publish
-        run: npm publish --access=restricted  # by default, scoped packages are publish as private
+        run: npm publish --prefix projects/command-queue --access=restricted  # by default, scoped packages are publish as private
 #        env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
