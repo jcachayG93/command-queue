@@ -3,7 +3,7 @@ import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
 import {IExecuteCommandFunction} from "../IExecuteCommandFunction";
 import {IDmMediator} from "../IDmMediator";
 import {CommandQueueViewModel} from "../../../api/CommandQueueViewModel";
-import {UpdateViewModelFunctionFactoryService} from "../../../api/update-viewModel-function-factory.service";
+import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../api/command-queue-update-view-model-function-factory.service";
 import {CommandQueueDataService} from "../../../api/command-queue-data.service";
 import {Observable, observable} from "rxjs";
 
@@ -12,7 +12,7 @@ export class ExecuteCommandFunctionFactory<TViewModel extends CommandQueueViewMo
 {
   constructor(
     private mediator : IDmMediator,
-    private updateViewModelFunctionFactory : UpdateViewModelFunctionFactoryService,
+    private updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService,
     private dataService : CommandQueueDataService
   ) {
   }

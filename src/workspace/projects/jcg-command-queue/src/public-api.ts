@@ -11,6 +11,6 @@ export * from './lib/api/commandQueueDataManagerProvider';
 export * from './lib/api/CommandQueueCommand';
 export * from './lib/api/command-queue-data.service';
 export * from './lib/api/IUpdateViewModelFunction';
-export * from './lib/api/update-viewModel-function-factory.service';
+export * from './lib/api/command-queue-update-view-model-function-factory.service';
 export * from './lib/api/CommandQueueViewModel';
 export * from './lib/api/CommandQueueViewModelReader';

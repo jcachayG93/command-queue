@@ -1,5 +1,5 @@
 import {ViewModelImp} from "./ViewModelImp";
-import {UpdateViewModelFunctionFactoryService} from "../api/update-viewModel-function-factory.service";
+import {CommandQueueUpdateViewModelFunctionFactoryService} from "../api/command-queue-update-view-model-function-factory.service";
 import {It, Mock} from "moq.ts";
 import {CommandQueueCommand} from "../api/CommandQueueCommand";
 import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
@@ -7,14 +7,14 @@ import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
 export class UpdateViewModelFunctionFactoryMock
 {
   constructor() {
-    this.moq = new Mock<UpdateViewModelFunctionFactoryService>();
+    this.moq = new Mock<CommandQueueUpdateViewModelFunctionFactoryService>();
     this.returns = new UpdateViewModelFunctionMock();
     this.moq.setup(s=>s.create(It.IsAny()))
       .returns(this.returns.object);
   }
-  private moq : Mock<UpdateViewModelFunctionFactoryService>;
+  private moq : Mock<CommandQueueUpdateViewModelFunctionFactoryService>;
 
-  get object():UpdateViewModelFunctionFactoryService
+  get object():CommandQueueUpdateViewModelFunctionFactoryService
   {
     return this.moq.object();
   }
