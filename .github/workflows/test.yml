@@ -18,7 +18,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
          node-version: '18.x'
-         registry-url: 'https://registry.npmjs.org'
       - run: npm ci
         env:
          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -26,6 +25,8 @@ jobs:
         run: npm run ng build --project jcg-command-queue
       - name: test
         run: npm run test
+      - name: navigate to package
+        run: cd projects/jcg-command-queue
       - name: npm publish
         run: npm publish --access=restricted  # by default, scoped packages are publish as private
 #        env:
