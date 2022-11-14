@@ -25,7 +25,7 @@ jobs:
       - name: npm publish
         run: |
               cd dist/jcg-command-queue
-              npm publish --access=restricted --dry-run true
+              npm publish --access=public --dry-run false
         env:
          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       # REMOVE DRY RUN!
