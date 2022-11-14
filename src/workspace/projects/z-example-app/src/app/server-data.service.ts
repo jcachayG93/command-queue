@@ -28,7 +28,6 @@ export class ServerDataService
          data.version++;
          this.ds.data = data;
          obs.next(data.version);
-         obs.complete();
        }
      }).pipe(delay(this.delay(500, 3000)));
    }

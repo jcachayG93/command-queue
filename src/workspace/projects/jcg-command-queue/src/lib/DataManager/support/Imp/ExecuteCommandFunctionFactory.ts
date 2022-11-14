@@ -23,9 +23,11 @@ export class ExecuteCommandFunctionFactory<TViewModel extends CommandQueueViewMo
     return ()=> new Observable<void>(obs=>{
       this.dataService.execute(this.mediator.version, cmd)
         .subscribe({
-          next:v=>{this.mediator.setVersion(v);},
-          error:e=>obs.error(e),
-          complete:()=>obs.complete()
+          next:v=>{
+            this.mediator.setVersion(v);
+            obs.complete()
+            },
+          error:e=>obs.error(e)
         });
     });
   }
