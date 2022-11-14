@@ -1,7 +1,7 @@
 import {CommandQueueDataService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data.service";
 import {delay, Observable, of} from "rxjs";
 import {AddPetCommand} from "./add-pet-command";
-import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/command-queue-command";
 import {PetsViewModel} from "./pets-view-model";
 import {Injectable} from "@angular/core";
 import {ServerDataService} from "../server-data.service";

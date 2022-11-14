@@ -1,4 +1,4 @@
-import {CommandQueueCommand} from "../../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../api/command-queue-command";
 import {IExecuteCommandFunction} from "./IExecuteCommandFunction";
 
 export interface IExecuteCommandFunctionFactory

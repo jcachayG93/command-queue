@@ -3,7 +3,7 @@ import {ExecuteCommandFunctionFactoryMock} from "../../../test-common/ExecuteCom
 import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {DmWritter} from "./DmWritter";
-import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {Logger} from "../Logger";
 

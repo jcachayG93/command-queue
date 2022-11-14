@@ -2,7 +2,7 @@
  * Implements all CommandQueue data manager operations related to
  * writting data
  */
-import {CommandQueueCommand} from "../../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../api/command-queue-command";
 import {Subject} from "rxjs";
 
 export interface IDmWriter

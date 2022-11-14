@@ -2,7 +2,7 @@
  * Implements all CommandQueue data manager operations related to reading data
  */
 import {Observable, Subject} from "rxjs";
-import {CommandQueueViewModel} from "../../api/CommandQueueViewModel";
+import {CommandQueueViewModel} from "../../api/command-queue-view-model";
 
 export interface IDmReader
 {

@@ -2,7 +2,7 @@ import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {UpdateViewModelFunctionFactoryMock} from "../../../test-common/UpdateViewModelFunctionFactoryMock";
 import {ExecuteCommandFunctionFactory} from "./ExecuteCommandFunctionFactory";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
-import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {DataServiceMock} from "../../../test-common/DataServiceMock";
 

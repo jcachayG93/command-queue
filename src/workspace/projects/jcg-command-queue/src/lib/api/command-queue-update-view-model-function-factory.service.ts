@@ -1,5 +1,5 @@
-import {CommandQueueViewModel} from "./CommandQueueViewModel";
-import {CommandQueueCommand} from "./CommandQueueCommand";
+import {CommandQueueViewModel} from "./command-queue-view-model";
+import {CommandQueueCommand} from "./command-queue-command";
 import {IUpdateViewModelFunction} from "./IUpdateViewModelFunction";
 import {Injectable} from "@angular/core";
 

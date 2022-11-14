@@ -1,4 +1,4 @@
-import {CommandQueueViewModelReaderService} from "../api/CommandQueueViewModelReaderService";
+import {CommandQueueViewModelReaderService} from "../api/command-queue-view-model-reader.service";
 import {ViewModelImp} from "./ViewModelImp";
 import {Mock} from "moq.ts";
 import {of} from "rxjs";

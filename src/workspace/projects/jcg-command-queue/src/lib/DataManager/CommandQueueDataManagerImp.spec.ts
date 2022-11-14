@@ -2,7 +2,7 @@ import {DmReaderMock} from "../test-common/DmReaderMock";
 import {DmWriterMock} from "../test-common/DmWritterMock";
 import {CommandQueueDataManagerImp} from "./CommandQueueDataManagerImp";
 import {ViewModelImp} from "../test-common/ViewModelImp";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {Logger} from "./support/Logger";
 

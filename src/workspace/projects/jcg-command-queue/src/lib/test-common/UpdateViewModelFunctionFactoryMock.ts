@@ -1,7 +1,7 @@
 import {ViewModelImp} from "./ViewModelImp";
 import {CommandQueueUpdateViewModelFunctionFactoryService} from "../api/command-queue-update-view-model-function-factory.service";
 import {It, Mock} from "moq.ts";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
 
 export class UpdateViewModelFunctionFactoryMock

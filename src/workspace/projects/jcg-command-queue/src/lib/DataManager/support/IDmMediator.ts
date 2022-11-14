@@ -1,7 +1,7 @@
 /**
  * Mediates between parts that compose the DataManager
  */
-import {CommandQueueViewModel} from "../../api/CommandQueueViewModel";
+import {CommandQueueViewModel} from "../../api/command-queue-view-model";
 
 export interface IDmMediator
 {

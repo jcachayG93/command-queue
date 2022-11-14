@@ -1,4 +1,4 @@
-import {CommandQueueCommand} from "./CommandQueueCommand";
+import {CommandQueueCommand} from "./command-queue-command";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 

@@ -1,6 +1,6 @@
 import {IExecuteCommandFunctionFactory} from "../DataManager/support/IExecuteCommandFunctionFactory";
 import {It, Mock} from "moq.ts";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
 
 

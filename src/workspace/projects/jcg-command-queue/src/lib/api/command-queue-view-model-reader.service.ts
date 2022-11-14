@@ -1,4 +1,4 @@
-import {CommandQueueViewModel} from "./CommandQueueViewModel";
+import {CommandQueueViewModel} from "./command-queue-view-model";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 

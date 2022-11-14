@@ -1,6 +1,6 @@
 import {CommandQueueDataService} from "../api/command-queue-data.service";
 import {It, Mock} from "moq.ts";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {Observable, of} from "rxjs";
 
 export class DataServiceMock

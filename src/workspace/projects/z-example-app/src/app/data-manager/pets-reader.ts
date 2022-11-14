@@ -1,7 +1,7 @@
-import {CommandQueueViewModelReaderService} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReaderService";
+import {CommandQueueViewModelReaderService} from "../../../../jcg-command-queue/src/lib/api/command-queue-view-model-reader.service";
 
 import {Observable} from "rxjs";
-import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModel";
+import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/command-queue-view-model";
 import {Injectable} from "@angular/core";
 import {ServerDataService} from "../server-data.service";
 

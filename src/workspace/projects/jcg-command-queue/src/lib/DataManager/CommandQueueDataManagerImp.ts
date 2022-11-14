@@ -1,6 +1,6 @@
-import {CommandQueueViewModel} from "../api/CommandQueueViewModel";
+import {CommandQueueViewModel} from "../api/command-queue-view-model";
 import {CommandQueueDataManagerService} from "../api/command-queue-data-manager.service";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {Observable, Subject} from "rxjs";
 import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";

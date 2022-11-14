@@ -1,4 +1,4 @@
-import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/command-queue-command";
 
 export class AddPetCommand extends CommandQueueCommand {
 

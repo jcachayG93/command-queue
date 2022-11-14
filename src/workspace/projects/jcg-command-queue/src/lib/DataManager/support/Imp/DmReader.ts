@@ -1,7 +1,7 @@
 import {IDmReader} from "../IDmReader";
-import {CommandQueueViewModel} from "../../../api/CommandQueueViewModel";
+import {CommandQueueViewModel} from "../../../api/command-queue-view-model";
 import {Observable, Subject} from "rxjs";
-import {CommandQueueViewModelReaderService} from "../../../api/CommandQueueViewModelReaderService";
+import {CommandQueueViewModelReaderService} from "../../../api/command-queue-view-model-reader.service";
 import {IDmMediator} from "../IDmMediator";
 import {Logger} from "../Logger";
 

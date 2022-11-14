@@ -1,6 +1,6 @@
 import {IDmWriter} from "../DataManager/support/IDmWriter";
 import {It, Mock} from "moq.ts";
-import {CommandQueueCommand} from "../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../api/command-queue-command";
 import {Subject} from "rxjs";
 
 export class DmWriterMock

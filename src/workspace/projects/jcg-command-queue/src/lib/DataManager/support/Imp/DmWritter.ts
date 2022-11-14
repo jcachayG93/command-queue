@@ -1,6 +1,6 @@
 import {IDmWriter} from "../IDmWriter";
 import {Subject} from "rxjs";
-import {CommandQueueCommand} from "../../../api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {QueueFactory} from "../../../Queue/QueueFactory";
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {IDmMediator} from "../IDmMediator";

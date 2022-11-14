@@ -1,6 +1,6 @@
 import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory.service";
 import {PetsViewModel} from "./pets-view-model";
-import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/CommandQueueCommand";
+import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/command-queue-command";
 import {IUpdateViewModelFunction} from "../../../../jcg-command-queue/src/lib/api/IUpdateViewModelFunction";
 import {AddPetCommand} from "./add-pet-command";
 import {Injectable} from "@angular/core";
