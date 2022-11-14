@@ -19,7 +19,7 @@ export class PetsGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.commandQueueDataManager.readViewModel().subscribe();
-    this.commandQueueDataManager.writeErrorOccurred.subscribe({
+    this.commandQueueDataManager.onWriteErrorOccurred.subscribe({
       next:e=>{
         if (e instanceof ConcurrencyVersionMismatchError)
         {

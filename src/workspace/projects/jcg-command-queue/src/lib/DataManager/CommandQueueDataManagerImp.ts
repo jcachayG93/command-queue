@@ -41,7 +41,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
     return this.reader.viewModel;
   }
 
-  get writeErrorOccurred(): Subject<Error> {
+  get onWriteErrorOccurred(): Subject<Error> {
     return this.writer.writeErrorOccurred;
   }
 

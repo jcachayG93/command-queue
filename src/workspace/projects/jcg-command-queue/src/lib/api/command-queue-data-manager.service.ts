@@ -34,7 +34,6 @@ export abstract class CommandQueueDataManagerService
   /**
    * Emits when the view model is updated
    */
-  // TODO: Possible but, check if this is emitted each time the model is updated or only when the ViewModel reloads from the server.
   abstract get onViewModelChanged():Subject<void>;
 
   /**
@@ -57,7 +56,7 @@ export abstract class CommandQueueDataManagerService
   /**
    * Emits when a write error occurred
    */
-  abstract get writeErrorOccurred():Subject<Error>;
+  abstract get onWriteErrorOccurred():Subject<Error>;
 
   /**
    * Gets the current model version

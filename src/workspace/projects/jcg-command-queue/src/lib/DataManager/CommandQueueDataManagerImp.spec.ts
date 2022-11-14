@@ -79,7 +79,7 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ARRANGE ***********
 
       // ********* ACT ***************
-      const result = sut.writeErrorOccurred;
+      const result = sut.onWriteErrorOccurred;
       // ********* ASSERT ************
       expect(result).toBe(writer.object.writeErrorOccurred);
     });

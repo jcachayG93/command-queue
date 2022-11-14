@@ -1,4 +1,4 @@
-import {CommandQueueViewModelReader} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReader";
+import {CommandQueueViewModelReaderService} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReaderService";
 
 import {Observable} from "rxjs";
 import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/CommandQueueViewModel";
@@ -9,7 +9,7 @@ import {ServerDataService} from "../server-data.service";
   providedIn:'root'
 })
 export class PetsReader
-  extends CommandQueueViewModelReader
+  extends CommandQueueViewModelReaderService
 {
   constructor(private ds : ServerDataService) {
     super();

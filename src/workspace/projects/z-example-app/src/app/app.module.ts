@@ -10,7 +10,7 @@ import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
 import {CommandQueueDataService} from "../../../jcg-command-queue/src/lib/api/command-queue-data.service";
 import {PetsDataService} from "./data-manager/pets-data.service";
-import {CommandQueueViewModelReader} from "../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReader";
+import {CommandQueueViewModelReaderService} from "../../../jcg-command-queue/src/lib/api/CommandQueueViewModelReaderService";
 import {PetsReader} from "./data-manager/pets-reader";
 import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory.service";
 import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-view-model-function-factory";
@@ -40,7 +40,7 @@ import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrenc
   ],
   providers: [
     { provide: CommandQueueDataService, useClass: PetsDataService},
-    { provide: CommandQueueViewModelReader, useClass: PetsReader},
+    { provide: CommandQueueViewModelReaderService, useClass: PetsReader},
     { provide: CommandQueueUpdateViewModelFunctionFactoryService, useClass: PetsUpdateViewModelFunctionFactory}
   ],
   bootstrap: [AppComponent]
