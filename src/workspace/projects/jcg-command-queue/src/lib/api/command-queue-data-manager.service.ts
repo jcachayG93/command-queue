@@ -32,9 +32,9 @@ export abstract class CommandQueueDataManagerService
   abstract get commandsInQueue():number;
 
   /**
-   * Emits when the view model changes, either because it was updated after applying a command or because it
-   * was loaded/reloaded from the server
+   * Emits when the view model is updated
    */
+  // TODO: Possible but, check if this is emitted each time the model is updated or only when the ViewModel reloads from the server.
   abstract get onViewModelUpdated():Subject<void>;
 
   /**
