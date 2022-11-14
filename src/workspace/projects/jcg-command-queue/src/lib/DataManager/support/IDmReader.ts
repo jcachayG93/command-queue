@@ -21,7 +21,12 @@ export interface IDmReader
    * A subject that emits each time the ViewModel is updated (reloaded or
    * changed)
    */
-  get onViewModelUpdated():Subject<void>;
+  get onViewModelChanged():Subject<void>;
+
+  /**
+   * Emits each time the view model is read from the server
+   */
+  get onViewModelReadFromServer():Subject<void>;
 
   /**
    * The current model version
