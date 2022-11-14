@@ -27,8 +27,8 @@ export class DmReader
           next:v=>{
             this._viewModel = v;
             this.setVersion(v.version);
-            this._onViewModelUpdated.next();
             this._onViewModelReadFromServer.next();
+            this._onViewModelUpdated.next();
             this.logger.addLog("DmReader","View model was read from server");
             obs.complete();
           },
