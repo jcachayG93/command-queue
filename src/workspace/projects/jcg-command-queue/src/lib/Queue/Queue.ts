@@ -85,9 +85,10 @@ export class Queue
       }
       return new Promise<void>((resolve,reject)=>{
         this.commandsRan++;
-        f().subscribe({
+        const subscription = f().subscribe({
           complete:()=>{
             this.commandsInQueue--;
+            subscription.unsubscribe();
             resolve()},
           error:err=>{
             if (err instanceof ConcurrencyVersionMismatchError)

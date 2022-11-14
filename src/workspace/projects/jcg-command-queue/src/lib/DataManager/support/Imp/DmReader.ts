@@ -27,13 +27,11 @@ export class DmReader
           next:v=>{
             this._viewModel = v;
             this.setVersion(v.version);
-          },
-          error:e=>obs.error(e),
-          complete:()=>{
-            this.logger.addLog("DmReader","View model was read from server");
             this._onViewModelUpdated.next();
+            this.logger.addLog("DmReader","View model was read from server");
             obs.complete();
-          }
+          },
+          error:e=>obs.error(e)
         });
     });
   }
