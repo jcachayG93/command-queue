@@ -16,7 +16,7 @@ export class DmReader
 
   private _onViewModelUpdated = new Subject<void>();
 
-  get onViewModelUpdated(): Subject<void> {
+  get onViewModelChanged(): Subject<void> {
     return this._onViewModelUpdated;
   }
 
@@ -28,6 +28,7 @@ export class DmReader
             this._viewModel = v;
             this.setVersion(v.version);
             this._onViewModelUpdated.next();
+            this._onViewModelReadFromServer.next();
             this.logger.addLog("DmReader","View model was read from server");
             obs.complete();
           },
@@ -59,5 +60,12 @@ export class DmReader
   }
 
   private _version = 0;
+
+  get onViewModelReadFromServer(): Subject<void> {
+    return this._onViewModelReadFromServer;
+  }
+
+
+  private _onViewModelReadFromServer = new Subject<void>();
 
 }

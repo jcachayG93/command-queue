@@ -45,15 +45,25 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ASSERT ************
       writer.verifyExecuteCommand(cmd);
     });
-  it('onViewModelUpdated, delegates to reader',
+  it('onViewModelChanged, delegates to reader',
     () => {
       // ********* ARRANGE ***********
 
       // ********* ACT ***************
-      const result = sut.onViewModelUpdated;
+      const result = sut.onViewModelChanged;
       // ********* ASSERT ************
       expect(result)
-        .toBe(reader.object.onViewModelUpdated);
+        .toBe(reader.object.onViewModelChanged);
+    });
+  it('onViewModelReadeFromSelver, delegates to reader',
+    () => {
+      // ********* ARRANGE ***********
+
+      // ********* ACT ***************
+      const result = sut.onViewModelReadFromServer;
+      // ********* ASSERT ************
+      expect(result)
+        .toBe(reader.object.onViewModelReadFromServer);
     });
   it('get viewModel delegates to reader',
     () => {

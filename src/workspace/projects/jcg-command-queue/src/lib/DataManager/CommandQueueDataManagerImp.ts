@@ -29,8 +29,8 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
     this.writer.executeCommand(cmd);
   }
 
-  get onViewModelUpdated(): Subject<void> {
-    return this.reader.onViewModelUpdated;
+  get onViewModelChanged(): Subject<void> {
+    return this.reader.onViewModelChanged;
   }
 
   readViewModel(): Observable<void> {
@@ -55,6 +55,10 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
 
   resetLogs(): void {
     this.logger.reset();
+  }
+
+  get onViewModelReadFromServer(): Subject<void> {
+    return this.reader.onViewModelReadFromServer;
   }
 
 }

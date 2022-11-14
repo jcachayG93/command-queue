@@ -34,7 +34,7 @@ describe("ExecuteCommandFunctionFactory",()=>{
         .verifyCreate(cmd);
     });
 
-  it('updates the viewModel',
+  it('updates the viewModel and emits view-model updated',
     () => {
       // ********* ARRANGE ***********
 
@@ -43,6 +43,7 @@ describe("ExecuteCommandFunctionFactory",()=>{
       // ********* ASSERT ************
       updateViewModelFunctionFactory
         .returns.verify(mediator.object.viewModel!);
+      mediator.verifyEmitViewModelUpdated();
     });
   it('returns function that creates an observable that calls the dataService ' +
     'passing the command and model version',

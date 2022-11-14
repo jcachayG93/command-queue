@@ -35,7 +35,12 @@ export abstract class CommandQueueDataManagerService
    * Emits when the view model is updated
    */
   // TODO: Possible but, check if this is emitted each time the model is updated or only when the ViewModel reloads from the server.
-  abstract get onViewModelUpdated():Subject<void>;
+  abstract get onViewModelChanged():Subject<void>;
+
+  /**
+   * Emits each time the view model is read from the server
+   */
+  abstract get onViewModelReadFromServer():Subject<void>;
 
   /**
    * Adds a command to the queue

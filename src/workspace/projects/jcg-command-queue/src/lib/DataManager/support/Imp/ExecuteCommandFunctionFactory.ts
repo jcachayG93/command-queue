@@ -20,6 +20,7 @@ export class ExecuteCommandFunctionFactory<TViewModel extends CommandQueueViewMo
     let updateVmFn = this.updateViewModelFunctionFactory
       .create(cmd);
     updateVmFn(this.mediator.viewModel! as TViewModel);
+    this.mediator.emitViewModelUpdated();
     return ()=> new Observable<void>(obs=>{
       this.dataService.execute(this.mediator.version, cmd)
         .subscribe({

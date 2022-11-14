@@ -15,7 +15,7 @@ describe("DmReader",()=>{
     () => {
       // ********* ARRANGE ***********
       let emitted = false;
-      sut.onViewModelUpdated
+      sut.onViewModelChanged
         .subscribe({next:()=>emitted = true});
       // ********* ACT ***************
       sut.readViewModel().subscribe();
@@ -29,7 +29,7 @@ describe("DmReader",()=>{
     () => {
       // ********* ARRANGE ***********
       let emitted = false;
-      sut.onViewModelUpdated.subscribe(()=>
+      sut.onViewModelChanged.subscribe(()=>
       emitted = true);
       // ********* ACT ***************
       sut.emitViewModelUpdated();
@@ -38,19 +38,23 @@ describe("DmReader",()=>{
     });
   it('read, readsViewModel, ' +
     'sets version with viewModel version value' +
-    'emits view model updated',
+    'emits onViewModelReadFromServer and onViewModelUpdated',
     (done) => {
       // ********* ARRANGE ***********
-      let emitted = false;
-      sut.onViewModelUpdated.subscribe(()=>
-        emitted = true);
+      let onViewModelChangedEmitted = false;
+      let onViewModelReadFromServerEmitted = false;
+      sut.onViewModelChanged.subscribe(()=>
+        onViewModelChangedEmitted = true);
+      sut.onViewModelReadFromServer.subscribe(()=>
+      onViewModelReadFromServerEmitted = true);
       // ********* ACT ***************
       sut.read();
       // ********* ASSERT ************
       setTimeout(()=>{
         reader.verifyRead();
         expect(sut.version).toBe(reader.readReturns.version);
-        expect(emitted).toBeTrue();
+        expect(onViewModelChangedEmitted).toBeTrue();
+        expect(onViewModelReadFromServerEmitted).toBeTrue();
         done();
       },10);
     });
