@@ -3,6 +3,7 @@
  */
 import {Observable, Subject} from "rxjs";
 import {CommandQueueViewModel} from "../../api/command-queue-view-model";
+import {ConcurrencyToken} from "../../api/concurrency-token";
 
 export interface IDmReader
 {
@@ -29,8 +30,13 @@ export interface IDmReader
   get onViewModelReadFromServer():Subject<void>;
 
   /**
-   * The current model version
+   * TODO: Remove deprecated code
+   * @deprecated The method should not be used
    */
   get version(): number
 
+  /**
+   * The response from the previous command
+   */
+  get currentToken():ConcurrencyToken | null;
 }

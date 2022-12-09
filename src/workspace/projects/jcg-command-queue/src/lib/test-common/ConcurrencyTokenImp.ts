@@ -3,5 +3,5 @@ import {ConcurrencyToken} from "../api/concurrency-token";
 export class ConcurrencyTokenImp
   extends ConcurrencyToken
 {
-  version:number;
+  version:number=0;
 }

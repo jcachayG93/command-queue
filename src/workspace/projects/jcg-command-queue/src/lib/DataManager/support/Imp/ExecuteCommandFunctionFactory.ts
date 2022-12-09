@@ -22,10 +22,10 @@ export class ExecuteCommandFunctionFactory<TViewModel extends CommandQueueViewMo
     updateVmFn(this.mediator.viewModel! as TViewModel);
     this.mediator.emitViewModelUpdated();
     return ()=> new Observable<void>(obs=>{
-      this.dataService.executeOLD(this.mediator.version, cmd)
+      this.dataService.execute(this.mediator.currentToken!, cmd)
         .subscribe({
-          next:v=>{
-            this.mediator.setVersion(v);
+          next:token=>{
+            this.mediator.setCurrentToken(token);
             obs.complete()
             },
           error:e=>obs.error(e)

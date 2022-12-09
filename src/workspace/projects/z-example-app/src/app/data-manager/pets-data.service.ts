@@ -5,6 +5,7 @@ import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/com
 import {PetsViewModel} from "./pets-view-model";
 import {Injectable} from "@angular/core";
 import {ServerDataService} from "../server-data.service";
+import {ConcurrencyToken} from "../../../../jcg-command-queue/src/lib/api/concurrency-token";
 
 
 @Injectable({
@@ -28,6 +29,10 @@ export class PetsDataService extends CommandQueueDataService {
       return this.handle_AddPet(version, cmd);
     }
     throw new Error('Unhandled command');
+  }
+
+  execute(token: ConcurrencyToken, cmd: CommandQueueCommand): Observable<ConcurrencyToken> {
+    throw new Error('not implemented');
   }
 
 
