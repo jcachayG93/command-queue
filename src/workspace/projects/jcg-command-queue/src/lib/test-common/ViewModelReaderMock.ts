@@ -6,7 +6,7 @@ import {Mock} from "moq.ts";
 import {of} from "rxjs";
 import {ConcurrencyTokenImp} from "./ConcurrencyTokenImp";
 import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
-import {CommandQueueReaderResponseDto} from "../api/command-queue-reader-response.dto";
+import {CommandQueueReaderResponseDto} from "../api/command-queue-reader-response-dto";
 
 export class ViewModelReaderMock
 {

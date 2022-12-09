@@ -8,7 +8,7 @@ import {Injectable} from "@angular/core";
 import {ServerDataService} from "../server-data.service";
 import {ServerResponse} from "./server-response";
 import {PetsViewModel} from "./pets-view-model";
-import {CommandQueueReaderResponseDto} from "../../../../jcg-command-queue/src/lib/api/command-queue-reader-response.dto";
+import {CommandQueueReaderResponseDto} from "../../../../jcg-command-queue/src/lib/api/command-queue-reader-response-dto";
 
 @Injectable({
   providedIn:'root'
