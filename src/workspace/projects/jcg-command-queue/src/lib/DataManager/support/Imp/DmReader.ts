@@ -15,6 +15,7 @@ export class DmReader
   ) {
   }
 
+
   private _onViewModelUpdated = new Subject<void>();
 
   get onViewModelChanged(): Subject<void> {
@@ -52,22 +53,6 @@ export class DmReader
   read(): void {
     this.readViewModel().subscribe();
   }
-
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  setVersion(value: number): void {
-    throw new Error('not implemented');
-  }
-
-/**
- * TODO: Remove deprecated code
- * @deprecated The method should not be used
- */
-  get version(): number {
-  throw new Error('not implemented');
-}
 
 
 

@@ -29,11 +29,7 @@ export interface IDmReader
    */
   get onViewModelReadFromServer():Subject<void>;
 
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  get version(): number
+
 
   /**
    * The response from the previous command

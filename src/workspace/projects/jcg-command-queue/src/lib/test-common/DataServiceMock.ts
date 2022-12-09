@@ -32,11 +32,5 @@ export class DataServiceMock
 
   returns : Observable<ConcurrencyToken>;
 
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  returnsValueOLD! : number;
-
   returnsValue : ConcurrencyToken;
 }

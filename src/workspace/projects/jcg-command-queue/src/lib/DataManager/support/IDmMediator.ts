@@ -12,17 +12,6 @@ export interface IDmMediator
    */
   read():void;
 
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  setVersion(value:number):void;
-
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  get version():number;
 
   /**
    * Sets the DmReader current token

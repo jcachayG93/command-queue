@@ -6,7 +6,7 @@ import {CommandQueueViewModelReaderService} from "./command-queue-view-model-rea
 import {DmReader} from "../DataManager/support/Imp/DmReader";
 import {ExecuteCommandFunctionFactory} from "../DataManager/support/Imp/ExecuteCommandFunctionFactory";
 import {CommandQueueDataManagerImp} from "../DataManager/CommandQueueDataManagerImp";
-import {DmWritter} from "../DataManager/support/Imp/DmWritter";
+import {DmWriter} from "../DataManager/support/Imp/DmWriter";
 import {QueueFactory} from "../Queue/QueueFactory";
 import {Injectable} from "@angular/core";
 import {Logger} from "../DataManager/support/Logger";
@@ -23,7 +23,7 @@ const commandQueueDataManagerFactory =
       new ExecuteCommandFunctionFactory(dmReader, updateViewModelFunctionFactory, dataService);
 
     const queueFactory = new QueueFactory(logger);
-    const dmWriter = new DmWritter(queueFactory, executeFnFactory, dmReader);
+    const dmWriter = new DmWriter(queueFactory, executeFnFactory, dmReader);
 
     const dm = new CommandQueueDataManagerImp(dmReader, dmWriter, logger);
 
