@@ -10,7 +10,7 @@ export class ViewModelReaderMock
     this.readReturns = new ViewModelImp();
     this.readReturns.version = 10;
     this.moq.setup(s=>
-    s.read()).returns(of(this.readReturns));
+    s.readOLD()).returns(of(this.readReturns));
   }
   private moq : Mock<CommandQueueViewModelReaderService>;
 
@@ -21,7 +21,7 @@ export class ViewModelReaderMock
 
   verifyRead():void
   {
-    this.moq.verify(s=>s.read());
+    this.moq.verify(s=>s.readOLD());
   }
 
   readReturns : ViewModelImp;

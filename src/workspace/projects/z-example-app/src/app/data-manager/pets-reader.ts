@@ -16,7 +16,7 @@ export class PetsReader
   }
 
 
-  read(): Observable<CommandQueueViewModel> {
+  readOLD(): Observable<CommandQueueViewModel> {
     return this.ds.getData();
   }
 }

@@ -10,8 +10,5 @@ export interface CommandQueueViewModel {
    */
   version : number;
 
-  /**
-   * The model version details represented by this view-model.
-   */
-  concurrencyToken:ConcurrencyToken;
+
 }

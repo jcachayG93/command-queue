@@ -22,7 +22,7 @@ export class DmReader
 
   readViewModel(): Observable<void> {
     return new Observable<void>(obs=>{
-      this.reader.read()
+      this.reader.readOLD()
         .subscribe({
           next:v=>{
             this._viewModel = v;
