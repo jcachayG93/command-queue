@@ -10,7 +10,7 @@ export class DataServiceMock
     this.returnsValue = 10;
     this.returns = of(this.returnsValue);
     this.moq.setup(s=>
-    s.execute(It.IsAny(), It.IsAny()))
+    s.executeOLD(It.IsAny(), It.IsAny()))
       .returns(this.returns);
   }
   private moq : Mock<CommandQueueDataService>;
@@ -23,7 +23,7 @@ export class DataServiceMock
   verifyExecute(version: number, cmd: CommandQueueCommand):void
   {
     this.moq.verify(s=>
-    s.execute(version, cmd));
+    s.executeOLD(version, cmd));
   }
 
   returns : Observable<number>;

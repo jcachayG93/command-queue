@@ -23,7 +23,7 @@ export class PetsDataService extends CommandQueueDataService {
     return this.ds.addPet(version, cmd.name);
   }
 
-  execute(version: number, cmd: CommandQueueCommand): Observable<number> {
+  executeOLD(version: number, cmd: CommandQueueCommand): Observable<number> {
     if (cmd instanceof AddPetCommand) {
       return this.handle_AddPet(version, cmd);
     }
