@@ -1,5 +1,4 @@
 import {
-  CommandQueueReaderResponse,
   CommandQueueViewModelReaderService
 } from "../api/command-queue-view-model-reader.service";
 import {ViewModelImp} from "./ViewModelImp";
@@ -7,6 +6,7 @@ import {Mock} from "moq.ts";
 import {of} from "rxjs";
 import {ConcurrencyTokenImp} from "./ConcurrencyTokenImp";
 import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
+import {CommandQueueReaderResponseDto} from "../api/command-queue-reader-response.dto";
 
 export class ViewModelReaderMock
 {
@@ -34,7 +34,7 @@ export class ViewModelReaderMock
     this.moq.verify(s=>s.read());
   }
 
-  readReturns : CommandQueueReaderResponse;
+  readReturns : CommandQueueReaderResponseDto;
 
 
 }

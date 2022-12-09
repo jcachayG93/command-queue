@@ -1,7 +1,6 @@
-import {CommandQueueViewModel} from "./command-queue-view-model";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
-import {ConcurrencyToken} from "./concurrency-token";
+import {CommandQueueReaderResponseDto} from "./command-queue-reader-response.dto";
 
 /**
  * Knows how to read the view model from the remote server
@@ -15,11 +14,6 @@ export abstract class CommandQueueViewModelReaderService {
   /**
    * Reads the ViewModel from the server
    */
-  abstract read(): Observable<CommandQueueReaderResponse>;
+  abstract read(): Observable<CommandQueueReaderResponseDto>;
 }
 
-export interface CommandQueueReaderResponse
-{
-  viewModel : CommandQueueViewModel;
-  token : ConcurrencyToken;
-}
