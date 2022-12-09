@@ -5,9 +5,10 @@ import {Observable, Subject} from "rxjs";
 import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
 import {Logger} from "./support/Logger";
+import { ConcurrencyToken } from "../api/concurrency-token";
 
-export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
-{
+export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
+
 
   constructor(
     private reader : IDmReader,
@@ -45,8 +46,10 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService
     return this.writer.writeErrorOccurred;
   }
 
-  get modelVersion(): number {
-    return this.reader.version;
+
+
+  get currentToken(): ConcurrencyToken | null {
+    return this.reader.currentToken;
   }
 
   get developerLogs(): string[] {

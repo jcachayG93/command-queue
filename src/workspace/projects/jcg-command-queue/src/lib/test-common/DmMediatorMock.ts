@@ -1,6 +1,7 @@
 import {ViewModelImp} from "./ViewModelImp";
 import {IDmMediator} from "../DataManager/support/IDmMediator";
 import {It, Mock} from "moq.ts";
+import {ConcurrencyToken} from "jcg-command-queue";
 
 
 export class DmMediatorMock
@@ -8,8 +9,7 @@ export class DmMediatorMock
   constructor() {
     this.moq = new Mock<IDmMediator>();
     this.moq.setup(s=>s.read()).returns();
-    this.moq.setup(s=>s.setVersion(It.IsAny())).returns();
-    this.moq.setup(s=>s.version).returns(10);
+    this.moq.setup(s=>s.setCurrentToken(It.IsAny())).returns();
     this.moq.setup(s=>s.viewModel).returns(new ViewModelImp());
     this.moq.setup(s=>s.emitViewModelUpdated()).returns();
   }
@@ -24,9 +24,12 @@ export class DmMediatorMock
   {
     this.moq.verify(s=>s.read());
   }
-  verifySetVersion(value:number):void
+
+
+  verifySetCurrentToken(value:ConcurrencyToken):void
   {
-    this.moq.setup(s=>s.setVersion(value));
+    this.moq.verify(s=>
+    s.setCurrentToken(value));
   }
 
   verifyEmitViewModelUpdated():void

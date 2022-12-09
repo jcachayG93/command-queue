@@ -2,12 +2,14 @@ import {CommandQueueDataService} from "../api/command-queue-data.service";
 import {It, Mock} from "moq.ts";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Observable, of} from "rxjs";
+import {ConcurrencyToken} from "jcg-command-queue";
+import {ConcurrencyTokenImp} from "./ConcurrencyTokenImp";
 
 export class DataServiceMock
 {
   constructor() {
     this.moq = new Mock<CommandQueueDataService>();
-    this.returnsValue = 10;
+    this.returnsValue = new ConcurrencyTokenImp();
     this.returns = of(this.returnsValue);
     this.moq.setup(s=>
     s.execute(It.IsAny(), It.IsAny()))
@@ -20,13 +22,15 @@ export class DataServiceMock
     return this.moq.object();
   }
 
-  verifyExecute(version: number, cmd: CommandQueueCommand):void
+  verifyExecute(currentToken : ConcurrencyToken, cmd: CommandQueueCommand):void
   {
     this.moq.verify(s=>
-    s.execute(version, cmd));
+    s.execute(currentToken, cmd));
   }
 
-  returns : Observable<number>;
 
-  returnsValue : number;
+
+  returns : Observable<ConcurrencyToken>;
+
+  returnsValue : ConcurrencyToken;
 }

@@ -2,6 +2,7 @@ import {Observable, Subject} from "rxjs";
 import {CommandQueueCommand} from "./command-queue-command";
 import {CommandQueueViewModel} from "./command-queue-view-model";
 import {Injectable} from "@angular/core";
+import {ConcurrencyToken} from "./concurrency-token";
 
 /**
  * Allows for adding commands to a queue so they can be processed at the server speed, while updating a copy of a
@@ -58,11 +59,12 @@ export abstract class CommandQueueDataManagerService
    */
   abstract get onWriteErrorOccurred():Subject<Error>;
 
-  /**
-   * Gets the current model version
-   */
-  abstract get modelVersion():number;
 
+
+  /**
+   * The response from the previous command
+   */
+  abstract get currentToken():ConcurrencyToken | null;
   /**
    * Gets the developer logs
    */

@@ -46,7 +46,7 @@ describe("ExecuteCommandFunctionFactory",()=>{
       mediator.verifyEmitViewModelUpdated();
     });
   it('returns function that creates an observable that calls the dataService ' +
-    'passing the command and model version',
+    'passing the command and current token from mediator',
     (done) => {
       // ********* ARRANGE ***********
       let f = sut.create(cmd);
@@ -55,14 +55,15 @@ describe("ExecuteCommandFunctionFactory",()=>{
       f().subscribe({
         complete:()=>{
           // ********* ASSERT ************
-          dataService.verifyExecute(mediator.object.version,cmd);
+
+          dataService.verifyExecute(mediator.object.currentToken!,cmd);
           done();
         }
       });
 
 
     });
-  it('when resolved, the observable sets the model version with the dataService response',
+  it('when resolved, the observable sets the current token with the dataService response',
     (done) => {
       // ********* ARRANGE ***********
       let f = sut.create(cmd);
@@ -71,7 +72,7 @@ describe("ExecuteCommandFunctionFactory",()=>{
       f().subscribe({
         complete:()=>{
           // ********* ASSERT ************
-          mediator.verifySetVersion(dataService.returnsValue);
+          mediator.verifySetCurrentToken(dataService.returnsValue);
           done();
         }
       });

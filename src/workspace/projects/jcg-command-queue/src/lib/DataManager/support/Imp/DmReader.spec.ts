@@ -1,6 +1,7 @@
 import {ViewModelReaderMock} from "../../../test-common/ViewModelReaderMock";
 import {DmReader} from "./DmReader";
 import {Logger} from "../Logger";
+import {ConcurrencyTokenImp} from "../../../test-common/ConcurrencyTokenImp";
 
 describe("DmReader",()=>{
   let reader : ViewModelReaderMock;
@@ -10,8 +11,7 @@ describe("DmReader",()=>{
     sut = new DmReader(reader.object, new Logger());
   });
   it('readViewModel delegates to reader, ' +
-    'sets viewModel, emits onViewModelUpdated and ' +
-    'sets version',
+    'sets viewModel and currentToken with result, emits onViewModelUpdated',
     () => {
       // ********* ARRANGE ***********
       let emitted = false;
@@ -21,9 +21,32 @@ describe("DmReader",()=>{
       sut.readViewModel().subscribe();
       // ********* ASSERT ************
       reader.verifyRead();
-      expect(sut.viewModel).toBe(reader.readReturns);
+      expect(sut.viewModel).toBe(reader.readReturns.viewModel);
+      expect(sut.currentToken).toBe(reader.readReturns.token);
       expect(emitted).toBeTrue();
-      expect(sut.version).toBe(reader.readReturns.version);
+    });
+  it('read, readsViewModel, ' +
+    'sets viewModel and currentToken with result' +
+    'emits onViewModelReadFromServer and onViewModelUpdated',
+    (done) => {
+      // ********* ARRANGE ***********
+      let onViewModelChangedEmitted = false;
+      let onViewModelReadFromServerEmitted = false;
+      sut.onViewModelChanged.subscribe(()=>
+        onViewModelChangedEmitted = true);
+      sut.onViewModelReadFromServer.subscribe(()=>
+        onViewModelReadFromServerEmitted = true);
+      // ********* ACT ***************
+      sut.read();
+      // ********* ASSERT ************
+      setTimeout(()=>{
+        reader.verifyRead();
+        expect(sut.viewModel).toBe(reader.readReturns.viewModel);
+        expect(sut.currentToken).toBe(reader.readReturns.token);
+        expect(onViewModelChangedEmitted).toBeTrue();
+        expect(onViewModelReadFromServerEmitted).toBeTrue();
+        done();
+      },10);
     });
   it('emitViewModelUpdated does that',
     () => {
@@ -36,36 +59,15 @@ describe("DmReader",()=>{
       // ********* ASSERT ************
       expect(emitted).toBeTrue();
     });
-  it('read, readsViewModel, ' +
-    'sets version with viewModel version value' +
-    'emits onViewModelReadFromServer and onViewModelUpdated',
-    (done) => {
-      // ********* ARRANGE ***********
-      let onViewModelChangedEmitted = false;
-      let onViewModelReadFromServerEmitted = false;
-      sut.onViewModelChanged.subscribe(()=>
-        onViewModelChangedEmitted = true);
-      sut.onViewModelReadFromServer.subscribe(()=>
-      onViewModelReadFromServerEmitted = true);
-      // ********* ACT ***************
-      sut.read();
-      // ********* ASSERT ************
-      setTimeout(()=>{
-        reader.verifyRead();
-        expect(sut.version).toBe(reader.readReturns.version);
-        expect(onViewModelChangedEmitted).toBeTrue();
-        expect(onViewModelReadFromServerEmitted).toBeTrue();
-        done();
-      },10);
-    });
-  it('setVersion does that',
+
+  it('setCurrent does that',
     () => {
       // ********* ARRANGE ***********
-
+      const token = new ConcurrencyTokenImp();
       // ********* ACT ***************
-      sut.setVersion(100);
+      sut.setCurrentToken(token);
       // ********* ASSERT ************
-      expect(sut.version).toBe(100);
+      expect(sut.currentToken).toBe(token);
     });
 
 });

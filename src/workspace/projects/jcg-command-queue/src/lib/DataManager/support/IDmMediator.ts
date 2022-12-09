@@ -2,6 +2,8 @@
  * Mediates between parts that compose the DataManager
  */
 import {CommandQueueViewModel} from "../../api/command-queue-view-model";
+import {ConcurrencyToken} from "../../api/concurrency-token";
+
 
 export interface IDmMediator
 {
@@ -10,15 +12,17 @@ export interface IDmMediator
    */
   read():void;
 
-  /**
-   * Tells the reader to set the model version.
-   */
-  setVersion(value:number):void;
 
   /**
-   * Asks the DmReadRelated for the current Version Number
+   * Sets the DmReader current token
+   * @param token
    */
-  get version():number;
+  setCurrentToken(token:ConcurrencyToken):void;
+
+  /**
+   * Gets the DmReader current token
+   */
+  get currentToken():ConcurrencyToken | null;
 
   /**
    * Gets the current view model from the DmReaderRelated

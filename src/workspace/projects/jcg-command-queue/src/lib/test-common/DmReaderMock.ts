@@ -11,7 +11,6 @@ export class DmReaderMock
     this.moq.setup(s=>s.viewModel).returns(new ViewModelImp());
     this.moq.setup(s=>s.onViewModelChanged).returns(new Subject<void>());
     this.moq.setup(s=>s.onViewModelReadFromServer).returns(new Subject<void>());
-    this.moq.setup(s=>s.version).returns(10);
   }
   private moq : Mock<IDmReader>;
 

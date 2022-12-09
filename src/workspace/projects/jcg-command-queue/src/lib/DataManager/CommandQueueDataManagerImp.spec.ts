@@ -83,13 +83,13 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ASSERT ************
       expect(result).toBe(writer.object.writeErrorOccurred);
     });
-  it('get modelVersion delegates to dmReader',
+  it('get current token delegates to reader',
     () => {
       // ********* ARRANGE ***********
 
       // ********* ACT ***************
-      const result = sut.modelVersion;
+      const result = sut.currentToken;
       // ********* ASSERT ************
-      expect(result).toBe(reader.object.version);
+      expect(result).toBe(reader.object.currentToken);
     });
 });

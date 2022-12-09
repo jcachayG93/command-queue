@@ -6,8 +6,8 @@ import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory"
 import {IDmMediator} from "../IDmMediator";
 import {Queue} from "../../../Queue/Queue";
 
-// TODO: Correct spelling mistake
-export class DmWritter
+
+export class DmWriter
   implements IDmWriter
 {
   constructor(

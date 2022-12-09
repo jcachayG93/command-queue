@@ -1,6 +1,6 @@
-import {CommandQueueViewModel} from "./command-queue-view-model";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
+import {CommandQueueReaderResponseDto} from "./command-queue-reader-response.dto";
 
 /**
  * Knows how to read the view model from the remote server
@@ -9,8 +9,11 @@ import {Injectable} from "@angular/core";
   providedIn:'root'
 })
 export abstract class CommandQueueViewModelReaderService {
+
+
   /**
    * Reads the ViewModel from the server
    */
-  abstract read(): Observable<CommandQueueViewModel>;
+  abstract read(): Observable<CommandQueueReaderResponseDto>;
 }
+

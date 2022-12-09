@@ -2,7 +2,7 @@ import {QueueFactoryDouble} from "../../../test-common/QueueFactoryDouble";
 import {ExecuteCommandFunctionFactoryMock} from "../../../test-common/ExecuteCommandFunctionFactoryMock";
 import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
-import {DmWritter} from "./DmWritter";
+import {DmWriter} from "./DmWriter";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {Logger} from "../Logger";
@@ -20,9 +20,9 @@ describe("DmWritter",()=>{
     cmd = (new Mock<CommandQueueCommand>()).object();
 
   })
-  function createSut():DmWritter
+  function createSut():DmWriter
   {
-    return new DmWritter(
+    return new DmWriter(
       queueFactory,
       executeCommandFunctionFactory.object,
       mediator.object
