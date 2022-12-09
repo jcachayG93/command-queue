@@ -2,7 +2,8 @@
  * Mediates between parts that compose the DataManager
  */
 import {CommandQueueViewModel} from "../../api/command-queue-view-model";
-import {ConcurrencyToken} from "jcg-command-queue";
+import {ConcurrencyToken} from "../../api/concurrency-token";
+
 
 export interface IDmMediator
 {

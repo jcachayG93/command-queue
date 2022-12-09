@@ -7,11 +7,7 @@ import {ConcurrencyToken} from "./concurrency-token";
   providedIn:'root'
 })
 export abstract class CommandQueueDataService {
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  abstract executeOLD(version: number, cmd: CommandQueueCommand): Observable<number>;
+
 
   /**
    * A data service that can run commands on a remote server

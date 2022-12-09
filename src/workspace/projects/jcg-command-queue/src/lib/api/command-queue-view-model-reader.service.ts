@@ -10,11 +10,7 @@ import {ConcurrencyToken} from "./concurrency-token";
   providedIn:'root'
 })
 export abstract class CommandQueueViewModelReaderService {
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  abstract readOLD(): Observable<CommandQueueViewModel>;
+
 
   /**
    * Reads the ViewModel from the server

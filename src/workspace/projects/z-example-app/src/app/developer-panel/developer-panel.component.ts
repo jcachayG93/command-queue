@@ -25,7 +25,7 @@ export class DeveloperPanelComponent {
   }
 
   get localVersion():number {
-    return this.commandQueueDataManager.modelVersion;
+    throw new Error('Not Implemented');
   }
   get remoteServerVersion():number {
 

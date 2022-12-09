@@ -59,11 +59,7 @@ export abstract class CommandQueueDataManagerService
    */
   abstract get onWriteErrorOccurred():Subject<Error>;
 
-  /**
-   * TODO: Remove deprecated code
-   * @deprecated The method should not be used
-   */
-  abstract get modelVersion():number;
+
 
   /**
    * The response from the previous command
