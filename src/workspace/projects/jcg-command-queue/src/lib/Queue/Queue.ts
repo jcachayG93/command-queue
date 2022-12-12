@@ -35,6 +35,8 @@ export class Queue
     this.commandsInQueue++;
   }
 
+
+
   /**
    * How many commands were ran in the lifetime of this instance
    */
