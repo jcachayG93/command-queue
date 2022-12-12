@@ -1,7 +1,7 @@
 import {ViewModelImp} from "./ViewModelImp";
 import {IDmMediator} from "../DataManager/support/IDmMediator";
 import {It, Mock} from "moq.ts";
-import {ConcurrencyToken} from "jcg-command-queue";
+import {ConcurrencyToken} from "../api/concurrency-token";
 
 
 export class DmMediatorMock
