@@ -2,8 +2,8 @@ import {CommandQueueDataService} from "../api/command-queue-data.service";
 import {It, Mock} from "moq.ts";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Observable, of} from "rxjs";
-import {ConcurrencyToken} from "jcg-command-queue";
 import {ConcurrencyTokenImp} from "./ConcurrencyTokenImp";
+import {ConcurrencyToken} from "../api/concurrency-token";
 
 export class DataServiceMock
 {

@@ -24,6 +24,12 @@ export class ExecuteCommandFunctionFactoryMock
     this.moq.verify(s=>s.create(cmd));
   }
 
+  setup(forCommand:CommandQueueCommand, returns: IExecuteCommandFunction)
+  {
+    this.moq.setup(s=>
+    s.create(forCommand))
+      .returns(returns);
+  }
   returns : IExecuteCommandFunction;
 
 }
