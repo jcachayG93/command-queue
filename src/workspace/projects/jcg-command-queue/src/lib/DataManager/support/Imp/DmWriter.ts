@@ -3,7 +3,7 @@ import {Subject} from "rxjs";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {IDmMediator} from "../IDmMediator";
-import {QueueFactoryV2} from "../../../QueueV2/QueueFactoryV2";
+import {QueueFactory} from "../../../QueueV2/QueueFactory";
 import {IQueue} from "../../../QueueV2/IQueue";
 
 
@@ -11,14 +11,14 @@ export class DmWriter
   implements IDmWriter
 {
   constructor(
-    private queueFactory : QueueFactoryV2,
+    private queueFactory : QueueFactory,
     private mediator : IDmMediator
   ) {
     this._queue = this.queueFactory.create();
   }
 
   get pendingCommands(): CommandQueueCommand[] {
-        throw new Error("Method not implemented.");
+        return this._queue.pendingCommands;
     }
 
   private _queue : IQueue;
@@ -27,10 +27,6 @@ export class DmWriter
     this._queue.cancelAll();
     this._queue = this.queueFactory.create();
     this.mediator.read();
-  }
-
-  get commandsInQueue(): number {
-    return this._queue.pendingCommands.length;
   }
 
   executeCommand(cmd: CommandQueueCommand): void {

@@ -7,7 +7,6 @@ export class DmWriterMock
 {
   constructor() {
     this.moq = new Mock<IDmWriter>();
-    this.moq.setup(s=>s.commandsInQueue).returns(10);
     this.moq.setup(s=>s.executeCommand(It.IsAny())).returns();
     this.moq.setup(s=>s.cancelAllCommands()).returns();
     this.moq.setup(s=>

@@ -1,10 +1,9 @@
 import {IQueue} from "./IQueue";
-import {Queue} from "../Queue/Queue";
 import {IExecuteCommandFunctionFactory} from "../DataManager/support/IExecuteCommandFunctionFactory";
 import {Logger} from "../DataManager/support/Logger";
-import {QueueV2} from "./QueueV2";
+import {Queue} from "./Queue";
 
-export class QueueFactoryV2
+export class QueueFactory
 {
   constructor(
     private logger : Logger,
@@ -13,7 +12,7 @@ export class QueueFactoryV2
   }
   create():IQueue
   {
-    return new QueueV2(
+    return new Queue(
       this.logger,
       this.executeFunctionFactory
     );

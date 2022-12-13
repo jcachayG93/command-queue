@@ -5,11 +5,8 @@ import {IQueue} from "./IQueue";
 import {ConcurrencyVersionMismatchError} from "../api/errors/concurrency-version-mismatch-error";
 
 
-/**
-   * @deprecated The method should not be used
-   * // TODO: Remove deprecated code
-   */
-export class QueueV2 implements IQueue {
+
+export class Queue implements IQueue {
   constructor(
     private logger : Logger,
     private executeFunctionFactory : IExecuteCommandFunctionFactory

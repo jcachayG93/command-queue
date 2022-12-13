@@ -28,12 +28,6 @@ export abstract class CommandQueueDataManagerService
   abstract get viewModel() : CommandQueueViewModel | null;
 
   /**
-     * @deprecated The method should not be used
-     * // TODO: Remove deprecated code
-     */
-  abstract get commandsInQueue():number;
-
-  /**
    * Emits when the view model is updated
    */
   abstract get onViewModelChanged():Subject<void>;
@@ -55,7 +49,9 @@ export abstract class CommandQueueDataManagerService
   abstract cancelCommands():void;
 
   /**
-   * The pending commands in the queue
+   * The pending commands in the queue. The changes from this command may already been
+   * applied to the local view-model, but, the queue contains those that have not yet been
+   * processed by the server
    */
   abstract get pendingCommands():CommandQueueCommand[];
 

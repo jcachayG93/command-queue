@@ -21,9 +21,6 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
     this.writer.cancelAllCommands();
   }
 
-  get commandsInQueue(): number {
-    return this.writer.commandsInQueue;
-  }
 
   executeCommand(cmd: CommandQueueCommand): void {
 

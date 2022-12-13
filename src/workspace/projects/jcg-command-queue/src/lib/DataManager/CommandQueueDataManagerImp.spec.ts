@@ -26,16 +26,7 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ASSERT ************
       writer.verifyCancelAllCommands();
     });
-  it('get commandsInQueue delegates to writer',
-    () => {
-      // ********* ARRANGE ***********
 
-      // ********* ACT ***************
-      const result = sut.commandsInQueue;
-      // ********* ASSERT ************
-      expect(result).toBe(writer.object.commandsInQueue);
-
-    });
   it('executeCommand, delegates to writer',
     () => {
       // ********* ARRANGE ***********

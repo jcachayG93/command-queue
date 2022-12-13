@@ -1,4 +1,4 @@
-import {QueueV2} from "./QueueV2";
+import {Queue} from "./Queue";
 import {Logger} from "../DataManager/support/Logger";
 import {It, Mock} from "moq.ts";
 import {CommandQueueCommand} from "../api/command-queue-command";
@@ -9,13 +9,13 @@ import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFun
 
 describe('Queue',()=>{
   let executeFunctionFactory : ExecuteCommandFunctionFactoryMock;
-  let sut : QueueV2;
+  let sut : Queue;
 
   beforeEach(()=>{
     executeFunctionFactory = new ExecuteCommandFunctionFactoryMock();
     const logger = new Mock<Logger>();
     logger.setup(s=>s.addLog(It.IsAny(),It.IsAny())).returns();
-    sut = new QueueV2(logger.object(),
+    sut = new Queue(logger.object(),
       executeFunctionFactory.object);
   });
   it('when the command executes, creates an ' +

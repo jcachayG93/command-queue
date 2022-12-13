@@ -48,16 +48,6 @@ describe("DmWritter",()=>{
       expect(queueFactory.timesCreateWasCalled).toBeGreaterThan(1);
       expect(mediator.verifyRead());
     });
-  it('commandsInQueue delegates to queue',
-    () => {
-      // ********* ARRANGE ***********
-      const sut = createSut();
-      // ********* ACT ***************
-      const result = sut.commandsInQueue;
-      // ********* ASSERT ************
-      expect(result).toBe(queueFactory
-        .returns.pendingCommands.length);
-    });
 
   it('execute command, adds command to queue',
     () => {
@@ -90,5 +80,16 @@ describe("DmWritter",()=>{
       expect(queueFactory.timesCreateWasCalled).toBeGreaterThan(1);
       mediator.verifyRead();
       expect(onErrorOcurredArgs!).toEqual(error);
+    });
+
+  it('get pendingCommands delegates to queue',
+    () => {
+      // ********* ARRANGE ***********
+      const sut = createSut();
+      // ********* ACT ***************
+      const result = sut.pendingCommands;
+      // ********* ASSERT ************
+      expect(result).toBe(queueFactory
+        .returns.pendingCommands);
     });
 });

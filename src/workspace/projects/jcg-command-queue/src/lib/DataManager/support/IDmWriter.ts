@@ -7,11 +7,7 @@ import {Subject} from "rxjs";
 
 export interface IDmWriter
 {
-  /**
-     * @deprecated The method should not be used
-     * // TODO: Remove deprecated code
-     */
-  get commandsInQueue():number;
+
 
   /**
    * The queue pending commands

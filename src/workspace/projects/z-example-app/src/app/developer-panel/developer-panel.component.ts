@@ -22,7 +22,7 @@ export class DeveloperPanelComponent {
     return this.dataService as PetsDataService;
   }
   get commandsInQueue():number {
-    return this.commandQueueDataManager.commandsInQueue;
+    return this.commandQueueDataManager.pendingCommands.length;
   }
 
   get localVersion():number {
