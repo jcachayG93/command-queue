@@ -11,6 +11,7 @@ import {QueueFactory} from "../Queue/QueueFactory";
 import {Injectable} from "@angular/core";
 import {Logger} from "../DataManager/support/Logger";
 import {UpdateViewModelFunctionFactoryMock} from "../test-common/UpdateViewModelFunctionFactoryMock";
+import {QueueFactoryV2} from "../QueueV2/QueueFactoryV2";
 
 const commandQueueDataManagerFactory =
   (dataService : CommandQueueDataService,
@@ -22,8 +23,8 @@ const commandQueueDataManagerFactory =
     const executeFnFactory =
       new ExecuteCommandFunctionFactory(dmReader, updateViewModelFunctionFactory, dataService);
 
-    const queueFactory = new QueueFactory(logger);
-    const dmWriter = new DmWriter(queueFactory, executeFnFactory, dmReader);
+    const queueFactory = new QueueFactoryV2(logger, executeFnFactory);
+    const dmWriter = new DmWriter(queueFactory, dmReader);
 
     const dm = new CommandQueueDataManagerImp(dmReader, dmWriter, logger);
 

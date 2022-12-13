@@ -12,11 +12,15 @@ export class DmWriter
 {
   constructor(
     private queueFactory : QueueFactoryV2,
-    private executeCommandFunctionFactory : IExecuteCommandFunctionFactory,
     private mediator : IDmMediator
   ) {
     this._queue = this.queueFactory.create();
   }
+
+  get pendingCommands(): CommandQueueCommand[] {
+        throw new Error("Method not implemented.");
+    }
+
   private _queue : IQueue;
 
   cancelAllCommands(): void {
@@ -30,9 +34,8 @@ export class DmWriter
   }
 
   executeCommand(cmd: CommandQueueCommand): void {
-    let fn = this.executeCommandFunctionFactory
-      .create(cmd);
-    this._queue?.add(fn,(e)=>{
+
+    this._queue?.add(cmd,(e)=>{
       this._queue.cancelAll();
       this._queue = this.queueFactory.create();
       this.mediator.read();

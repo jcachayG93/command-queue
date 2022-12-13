@@ -1,20 +1,18 @@
-import {QueueFactoryDouble} from "../../../test-common/QueueFactoryDouble";
+
 import {ExecuteCommandFunctionFactoryMock} from "../../../test-common/ExecuteCommandFunctionFactoryMock";
 import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
 import {DmWriter} from "./DmWriter";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
-import {Logger} from "../Logger";
+import {QueueFactoryDoubleV2} from "../../../test-common/QueueFactoryDoubleV2";
 
 describe("DmWritter",()=>{
-  let queueFactory : QueueFactoryDouble;
-  let executeCommandFunctionFactory : ExecuteCommandFunctionFactoryMock;
+  let queueFactory : QueueFactoryDoubleV2;
   let mediator : DmMediatorMock;
 
   let cmd : CommandQueueCommand;
   beforeEach(()=>{
-    queueFactory = new QueueFactoryDouble(new Logger());
-    executeCommandFunctionFactory = new ExecuteCommandFunctionFactoryMock();
+    queueFactory = new QueueFactoryDoubleV2();
     mediator = new DmMediatorMock();
     cmd = (new Mock<CommandQueueCommand>()).object();
 
@@ -23,7 +21,6 @@ describe("DmWritter",()=>{
   {
     return new DmWriter(
       queueFactory,
-      executeCommandFunctionFactory.object,
       mediator.object
     );
   }
@@ -59,17 +56,9 @@ describe("DmWritter",()=>{
       const result = sut.commandsInQueue;
       // ********* ASSERT ************
       expect(result).toBe(queueFactory
-        .returns.commandsInQueue);
+        .returns.pendingCommands.length);
     });
-  it('executeCommand, creates execute command function',
-    () => {
-      // ********* ARRANGE ***********
-      const sut = createSut();
-      // ********* ACT ***************
-      sut.executeCommand(cmd);
-      // ********* ASSERT ************
-      executeCommandFunctionFactory.verifyCreate(cmd);
-    });
+
   it('execute command, adds command to queue',
     () => {
       // ********* ARRANGE ***********
@@ -77,8 +66,8 @@ describe("DmWritter",()=>{
       // ********* ACT ***************
       sut.executeCommand(cmd);
       // ********* ASSERT ************
-      expect(queueFactory.returns.test_addArgs!.f)
-        .toEqual(executeCommandFunctionFactory.returns);
+      expect(queueFactory.returns.test_addArgs!.cmd)
+        .toEqual(cmd);
 
     });
   it('execute command, adds command with errorCallback, that when executed, ' +

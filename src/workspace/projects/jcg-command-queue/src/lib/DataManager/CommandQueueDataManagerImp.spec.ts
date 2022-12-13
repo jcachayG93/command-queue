@@ -92,4 +92,14 @@ describe("CommandQueueDataManagerImp",()=>{
       // ********* ASSERT ************
       expect(result).toBe(reader.object.currentToken);
     });
+  it('pendingCommands delegates to writer',
+    () => {
+      // ********* ARRANGE ***********
+
+      // ********* ACT ***************
+      const result = sut.pendingCommands;
+      // ********* ASSERT ************
+
+      expect(result).toBe(writer.object.pendingCommands);
+    });
 });

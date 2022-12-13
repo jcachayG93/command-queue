@@ -64,4 +64,8 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
     return this.reader.onViewModelReadFromServer;
   }
 
+  get pendingCommands(): CommandQueueCommand[] {
+    return this.writer.pendingCommands;
+  }
+
 }

@@ -12,6 +12,9 @@ export class DmWriterMock
     this.moq.setup(s=>s.cancelAllCommands()).returns();
     this.moq.setup(s=>
     s.writeErrorOccurred).returns(new Subject<Error>());
+    this.moq.setup(s=>
+    s.pendingCommands)
+      .returns([]);
   }
   private moq : Mock<IDmWriter>;
 
@@ -28,5 +31,6 @@ export class DmWriterMock
   {
     this.moq.verify(s=>s.cancelAllCommands());
   }
+
 
 }

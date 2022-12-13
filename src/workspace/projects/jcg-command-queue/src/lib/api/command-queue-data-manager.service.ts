@@ -28,8 +28,9 @@ export abstract class CommandQueueDataManagerService
   abstract get viewModel() : CommandQueueViewModel | null;
 
   /**
-   * The number of commands in the queue
-   */
+     * @deprecated The method should not be used
+     * // TODO: Remove deprecated code
+     */
   abstract get commandsInQueue():number;
 
   /**
@@ -53,6 +54,10 @@ export abstract class CommandQueueDataManagerService
    */
   abstract cancelCommands():void;
 
+  /**
+   * The pending commands in the queue
+   */
+  abstract get pendingCommands():CommandQueueCommand[];
 
   /**
    * Emits when a write error occurred

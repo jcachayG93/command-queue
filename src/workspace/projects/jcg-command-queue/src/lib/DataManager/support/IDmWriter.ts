@@ -8,9 +8,15 @@ import {Subject} from "rxjs";
 export interface IDmWriter
 {
   /**
-   * Gets the number of commands currently in the queue
-   */
+     * @deprecated The method should not be used
+     * // TODO: Remove deprecated code
+     */
   get commandsInQueue():number;
+
+  /**
+   * The queue pending commands
+   */
+  get pendingCommands():CommandQueueCommand[];
 
   /**
    * Adds the command to the queue
