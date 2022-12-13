@@ -4,7 +4,10 @@ import {Mock} from "moq.ts";
 import {Logger} from "../DataManager/support/Logger";
 
 
-
+/**
+   * @deprecated The method should not be used
+   * // TODO: Remove deprecated code
+   */
 export class QueueDouble extends Queue
 {
   constructor() {

@@ -1,23 +1,23 @@
 import {IDmWriter} from "../IDmWriter";
 import {Subject} from "rxjs";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
-import {QueueFactory} from "../../../Queue/QueueFactory";
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {IDmMediator} from "../IDmMediator";
-import {Queue} from "../../../Queue/Queue";
+import {QueueFactoryV2} from "../../../QueueV2/QueueFactoryV2";
+import {IQueue} from "../../../QueueV2/IQueue";
 
 
 export class DmWriter
   implements IDmWriter
 {
   constructor(
-    private queueFactory : QueueFactory,
+    private queueFactory : QueueFactoryV2,
     private executeCommandFunctionFactory : IExecuteCommandFunctionFactory,
     private mediator : IDmMediator
   ) {
     this._queue = this.queueFactory.create();
   }
-  private _queue : Queue;
+  private _queue : IQueue;
 
   cancelAllCommands(): void {
     this._queue.cancelAll();
@@ -26,7 +26,7 @@ export class DmWriter
   }
 
   get commandsInQueue(): number {
-    return this._queue.commandsInQueue;
+    return this._queue.pendingCommands.length;
   }
 
   executeCommand(cmd: CommandQueueCommand): void {

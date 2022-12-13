@@ -1,7 +1,6 @@
 import {QueueFactoryDouble} from "../../../test-common/QueueFactoryDouble";
 import {ExecuteCommandFunctionFactoryMock} from "../../../test-common/ExecuteCommandFunctionFactoryMock";
 import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
-import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {DmWriter} from "./DmWriter";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
