@@ -32,7 +32,7 @@ describe('Queue',()=>{
         cmds.forEach(cmd=>
         executeFunctionFactory.verifyCreate(cmd));
         done();
-      },10);
+      },50);
     });
   it('executes commands in a queue',
     (done) => {
@@ -109,20 +109,24 @@ describe('Queue',()=>{
       // ********* ARRANGE ***********
 
       let errorCallbackWasInvoked = false;
-      const cmd1 = executeFunctionFactory.setupWithDelay(30,1);
+      const cmd1 = executeFunctionFactory.setupWithDelay(50,1);
       const cmd2 = executeFunctionFactory.addCommandThatThrowsError();
       const cmd3 = executeFunctionFactory.setupWithDelay(0,3);
+      const cmd4 = executeFunctionFactory.setupWithDelay(0,3);
 
       // ********* ACT ***************
 
       sut.add(cmd1,e=>{});
       sut.add(cmd2,e=>{errorCallbackWasInvoked = true});
       sut.add(cmd3,()=>{});
+      sut.add(cmd4,()=>{});
       // ********* ASSERT ************
-      setTimeout((done)=>{
+      setTimeout(()=>{
         expect(sut.pendingCommands.length).toBe(0);
+        expect(errorCallbackWasInvoked).toBeTrue();
+
         done();
-      },50);
+      },100);
     });
   it('commandsRan returns number of commands that has been ran',
     (done) => {

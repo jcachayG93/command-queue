@@ -24,7 +24,7 @@ export class QueueV2 implements IQueue {
       this.current = action().catch(()=>this.cancelAll());
     } else
     {
-      this.current = this.current.then(action,()=>this.cancelAll());
+      this.current = this.current.then(action,action);
     }
   }
 
@@ -58,6 +58,7 @@ export class QueueV2 implements IQueue {
             },50);
             resolve()},
           error:err=>{
+            this._pendingCommands.shift();
             if (err instanceof ConcurrencyVersionMismatchError)
             {
               this.log(`observable threw concurrency mismatch error`);
@@ -65,6 +66,7 @@ export class QueueV2 implements IQueue {
             {
               this.log(`observable threw non concurrency version mismatch error`);
             }
+            this.cancelAll();
             errorCallback(err);
             reject(err)}
         });
