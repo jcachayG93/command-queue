@@ -17,10 +17,10 @@ const commandQueueDataManagerFactory =
     const dmReader = new DmReader(reader, logger);
 
     const executeFnFactory =
-      new ExecuteCommandFunctionFactory(dmReader, updateViewModelFunctionFactory, dataService);
+      new ExecuteCommandFunctionFactory(dmReader, dataService);
 
     const queueFactory = new QueueFactory(logger, executeFnFactory);
-    const dmWriter = new DmWriter(queueFactory, dmReader);
+    const dmWriter = new DmWriter(queueFactory, dmReader, updateViewModelFunctionFactory);
 
     const dm = new CommandQueueDataManagerImp(dmReader, dmWriter, logger);
 
