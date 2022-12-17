@@ -12,6 +12,7 @@ export class QueueMock
   : CommandQueueCommand[] = [];
   add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void): void {
     this.test_addArgs = new QueueAddArgs(cmd, errorCallback);
+    this.test_addArgsSequence.push(this.test_addArgs);
   }
 
   cancelAll(): void {
@@ -31,6 +32,7 @@ export class QueueMock
   }
 
   test_addArgs : QueueAddArgs | null = null;
+  test_addArgsSequence : QueueAddArgs[]=[];
   test_cancelAllWasCalled = false;
 }
 
