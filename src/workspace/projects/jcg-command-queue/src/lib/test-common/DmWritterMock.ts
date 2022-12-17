@@ -3,6 +3,7 @@ import {It, Mock} from "moq.ts";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Subject} from "rxjs";
 import {QueueMock} from "./QueueMock";
+import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
 
 export class DmWriterMock
 {
@@ -23,6 +24,10 @@ export class DmWriterMock
     this.moq.setup(s=>
     s.emitWriteErrorOccurred(It.IsAny()))
       .returns();
+
+    this.moq.setup(s=>
+    s.executeCommands(It.IsAny(), It.IsAny()))
+      .returns();
   }
   private moq : Mock<IDmWriter>;
 
@@ -34,6 +39,11 @@ export class DmWriterMock
   verifyExecuteCommand(cmd:CommandQueueCommand):void
   {
     this.moq.verify(s=>s.executeCommand(cmd));
+  }
+  verifyExecuteCommands(cmds:CommandQueueCommand[], assertFunction : IAssertViewModelFunction)
+  {
+    this.moq.verify(s=>
+    s.executeCommands(cmds, assertFunction));
   }
   verifyCancelAllCommands()
   {

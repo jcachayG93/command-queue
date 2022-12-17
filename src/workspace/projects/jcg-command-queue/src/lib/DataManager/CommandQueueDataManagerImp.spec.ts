@@ -1,10 +1,10 @@
 import {DmReaderMock} from "../test-common/DmReaderMock";
 import {DmWriterMock} from "../test-common/DmWritterMock";
 import {CommandQueueDataManagerImp} from "./CommandQueueDataManagerImp";
-import {ViewModelImp} from "../test-common/ViewModelImp";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {Logger} from "./support/Logger";
+import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
 
 describe("CommandQueueDataManagerImp",()=>{
   let reader : DmReaderMock;
@@ -35,6 +35,16 @@ describe("CommandQueueDataManagerImp",()=>{
       sut.executeCommand(cmd)
       // ********* ASSERT ************
       writer.verifyExecuteCommand(cmd);
+    });
+  it('execute commands delegates to writer',
+    () => {
+      // ********* ARRANGE ***********
+      const cmds : CommandQueueCommand[]=[];
+      const assertFunction = new Mock<IAssertViewModelFunction>().object();
+      // ********* ACT ***************
+      sut.executeCommands(cmds, assertFunction);
+      // ********* ASSERT ************
+      writer.verifyExecuteCommands(cmds, assertFunction);
     });
   it('onViewModelChanged, delegates to reader',
     () => {
