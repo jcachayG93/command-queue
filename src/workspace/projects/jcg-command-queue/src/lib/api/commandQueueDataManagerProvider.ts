@@ -8,6 +8,7 @@ import {CommandQueueDataManagerImp} from "../DataManager/CommandQueueDataManager
 import {DmWriter} from "../DataManager/support/Imp/DmWriter";
 import {Logger} from "../DataManager/support/Logger";
 import {QueueFactory} from "../QueueV2/QueueFactory";
+import {WriteErrorHandler} from "../DataManager/support/Imp/WriteErrorHandler";
 
 const commandQueueDataManagerFactory =
   (dataService : CommandQueueDataService,
@@ -17,10 +18,11 @@ const commandQueueDataManagerFactory =
     const dmReader = new DmReader(reader, logger);
 
     const executeFnFactory =
-      new ExecuteCommandFunctionFactory(dmReader, updateViewModelFunctionFactory, dataService);
+      new ExecuteCommandFunctionFactory(dmReader, dataService);
 
     const queueFactory = new QueueFactory(logger, executeFnFactory);
-    const dmWriter = new DmWriter(queueFactory, dmReader);
+    const errorHandler = new WriteErrorHandler();
+    const dmWriter = new DmWriter(queueFactory, dmReader, updateViewModelFunctionFactory, errorHandler);
 
     const dm = new CommandQueueDataManagerImp(dmReader, dmWriter, logger);
 

@@ -6,6 +6,7 @@ import {IDmReader} from "./support/IDmReader";
 import {IDmWriter} from "./support/IDmWriter";
 import {Logger} from "./support/Logger";
 import { ConcurrencyToken } from "../api/concurrency-token";
+import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
 
 export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
 
@@ -25,6 +26,12 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
   executeCommand(cmd: CommandQueueCommand): void {
 
     this.writer.executeCommand(cmd);
+  }
+
+  executeCommands(
+    cmds: CommandQueueCommand[],
+    assertFunction: IAssertViewModelFunction): void {
+    this.writer.executeCommands(cmds, assertFunction);
   }
 
   get onViewModelChanged(): Subject<void> {
@@ -64,5 +71,7 @@ export class CommandQueueDataManagerImp extends CommandQueueDataManagerService {
   get pendingCommands(): CommandQueueCommand[] {
     return this.writer.pendingCommands;
   }
+
+
 
 }

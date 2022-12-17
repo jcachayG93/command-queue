@@ -1,6 +1,6 @@
 import {ViewModelImp} from "./ViewModelImp";
 import {CommandQueueUpdateViewModelFunctionFactoryService} from "../api/command-queue-update-view-model-function-factory.service";
-import {It, Mock} from "moq.ts";
+import {It, Mock, Times} from "moq.ts";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {IUpdateViewModelFunction} from "../api/IUpdateViewModelFunction";
 
@@ -44,7 +44,7 @@ export class UpdateViewModelFunctionMock
 
   verify(vm:ViewModelImp)
   {
-    this.moq.verify(instance => instance(vm));
+    this.moq.verify(instance => instance(vm), Times.AtLeastOnce());
   }
 
 

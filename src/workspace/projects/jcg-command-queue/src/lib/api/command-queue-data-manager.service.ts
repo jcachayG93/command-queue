@@ -3,6 +3,7 @@ import {CommandQueueCommand} from "./command-queue-command";
 import {CommandQueueViewModel} from "./command-queue-view-model";
 import {Injectable} from "@angular/core";
 import {ConcurrencyToken} from "./concurrency-token";
+import {IAssertViewModelFunction} from "./IAssertViewModelFunction";
 
 /**
  * Allows for adding commands to a queue so they can be processed at the server speed, while updating a copy of a
@@ -42,6 +43,13 @@ export abstract class CommandQueueDataManagerService
    * @param cmd
    */
   abstract executeCommand(cmd : CommandQueueCommand):void;
+
+  /**
+   * Adds the commands to the queue and updates the view-model.
+   * Will apply the assert function to the resulting view-model.
+   */
+  abstract executeCommands(cmds:CommandQueueCommand[],
+                  assertFunction : IAssertViewModelFunction):void;
 
   /**
    * Cancel all remaining commands, reload the view model
