@@ -1,5 +1,5 @@
 import {
-  CommandQueueViewModelReaderService
+  CommandQueueViewModelReader
 } from "../api/command-queue-view-model-reader.service";
 import {ViewModelImp} from "./ViewModelImp";
 import {Mock} from "moq.ts";
@@ -11,7 +11,7 @@ import {CommandQueueReaderResponseDto} from "../api/command-queue-reader-respons
 export class ViewModelReaderMock
 {
   constructor() {
-    this.moq = new Mock<CommandQueueViewModelReaderService>();
+    this.moq = new Mock<CommandQueueViewModelReader>();
     let vm = new ViewModelImp();
     let token = new ConcurrencyTokenImp();
     this.readReturns = {
@@ -22,9 +22,9 @@ export class ViewModelReaderMock
     this.moq.setup(s=>
     s.read()).returns(of(this.readReturns));
   }
-  private moq : Mock<CommandQueueViewModelReaderService>;
+  private moq : Mock<CommandQueueViewModelReader>;
 
-  get object():CommandQueueViewModelReaderService
+  get object():CommandQueueViewModelReader
   {
     return this.moq.object();
   }

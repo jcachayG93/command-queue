@@ -1,24 +1,24 @@
 import {Injectable} from "@angular/core";
-import {CommandQueueDataManagerV2} from "../../../../jcg-command-queue/src/lib/DataManager/CommandQueueDataManagerV2";
+
 import {
-  CommandQueueViewModelReaderService
+  CommandQueueViewModelReader
 } from "../../../../jcg-command-queue/src/lib/api/command-queue-view-model-reader.service";
-import {QueueFactory} from "../../../../jcg-command-queue/src/lib/QueueV2/QueueFactory";
 import {
-  CommandQueueUpdateViewModelFunctionFactoryService
-} from "../../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory.service";
+  CommandQueueUpdateViewModelFunctionFactory
+} from "../../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory";
+import {CommandQueueDataManager, QueueFactory} from "../../../../jcg-command-queue/src/public-api";
 
 
 @Injectable({
   providedIn:'root'
 })
 export class AppDataManagerService
-  extends CommandQueueDataManagerV2
+  extends CommandQueueDataManager
 {
   constructor(
-    reader : CommandQueueViewModelReaderService,
+    reader : CommandQueueViewModelReader,
     queueFactory : QueueFactory,
-    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService
+    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactory
   ) {
     super(
       reader,

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PetsViewModel} from "../data-manager/pets-view-model";
 import {AddPetCommand} from "../data-manager/add-pet-command";
-import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
 import {
   ConcurrencyVersionMismatchError
 } from "../../../../jcg-command-queue/src/lib/api/errors/concurrency-version-mismatch-error";

@@ -10,17 +10,14 @@ import { PetsGridComponent } from './pets-grid/pets-grid.component';
 import {FormsModule} from "@angular/forms";
 import {CommandQueueDataService} from "../../../jcg-command-queue/src/lib/api/command-queue-data.service";
 import {PetsDataService} from "./data-manager/pets-data.service";
-import {CommandQueueViewModelReaderService} from "../../../jcg-command-queue/src/lib/api/command-queue-view-model-reader.service";
-import {PetsReader} from "./data-manager/pets-reader";
-import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory.service";
-import {PetsUpdateViewModelFunctionFactory} from "./data-manager/pets-update-view-model-function-factory";
+import {CommandQueueViewModelReader} from "../../../jcg-command-queue/src/lib/api/command-queue-view-model-reader.service";
+
 import { DeveloperPanelComponent } from './developer-panel/developer-panel.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrency-version-mismatch-dialog.component';
-import {AppDataManagerService} from "./data-manager/app-data-manager.service";
 import {DataManagerProvider} from "./data-manager/DataManagerProvider";
 import {ServerDataService} from "./server-data.service";
 

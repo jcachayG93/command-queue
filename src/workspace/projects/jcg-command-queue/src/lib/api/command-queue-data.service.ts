@@ -1,11 +1,8 @@
 import {CommandQueueCommand} from "./command-queue-command";
 import {Observable} from "rxjs";
-import {Injectable} from "@angular/core";
 import {ConcurrencyToken} from "./concurrency-token";
 
-@Injectable({
-  providedIn:'root'
-})
+
 export abstract class CommandQueueDataService {
 
 

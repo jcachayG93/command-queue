@@ -1,23 +1,24 @@
 import {Observable, Subject} from "rxjs";
-import {CommandQueueViewModelReaderService} from "../api/command-queue-view-model-reader.service";
+import {CommandQueueViewModelReader} from "../api/command-queue-view-model-reader.service";
 import {CommandQueueViewModel} from "../api/command-queue-view-model";
 import {ConcurrencyToken} from "../api/concurrency-token";
 import {QueueFactory} from "../QueueV2/QueueFactory";
 import {
-  CommandQueueUpdateViewModelFunctionFactoryService
-} from "../api/command-queue-update-view-model-function-factory.service";
+  CommandQueueUpdateViewModelFunctionFactory
+} from "./command-queue-update-view-model-function-factory";
 import {IQueue} from "../QueueV2/IQueue";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
-import {ICurrentTokenContainer} from "./ICurrentTokenContainer";
+import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
 
-export class CommandQueueDataManagerV2
+
+export class CommandQueueDataManager
   implements ICurrentTokenContainer
 {
   constructor(
-    private reader : CommandQueueViewModelReaderService,
+    private reader : CommandQueueViewModelReader,
     private queueFactory : QueueFactory,
-    private updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService) {
+    private updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactory) {
     this.initializeQueue();
   }
 

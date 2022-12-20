@@ -1,5 +1,5 @@
 import {
-  CommandQueueViewModelReaderService
+  CommandQueueViewModelReader
 } from "jcg-command-queue";
 
 import {map, Observable} from "rxjs";
@@ -13,7 +13,7 @@ import {CommandQueueReaderResponseDto} from "../../../../jcg-command-queue/src/l
   providedIn:'root'
 })
 export class PetsReader
-  extends CommandQueueViewModelReaderService
+  extends CommandQueueViewModelReader
 {
   constructor(private ds : ServerDataService) {
     super();

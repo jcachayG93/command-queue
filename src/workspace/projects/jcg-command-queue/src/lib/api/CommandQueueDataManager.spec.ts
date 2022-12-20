@@ -3,15 +3,15 @@ import {QueueFactoryDoubleV2} from "../test-common/QueueFactoryDoubleV2";
 import {UpdateViewModelFunctionFactoryMock} from "../test-common/UpdateViewModelFunctionFactoryMock";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Mock} from "moq.ts";
-import {CommandQueueDataManagerV2} from "./CommandQueueDataManagerV2";
+import {CommandQueueDataManager} from "./CommandQueueDataManager";
 import {Logger} from "./support/Logger";
 import {finalize, Observable} from "rxjs";
 import {AssertViewModelFunctionMock} from "../test-common/AssertViewModelFunctionMock";
-import {CommandQueueViewModelReaderService} from "../api/command-queue-view-model-reader.service";
+import {CommandQueueViewModelReader} from "../api/command-queue-view-model-reader.service";
 import {QueueFactory} from "../QueueV2/QueueFactory";
 import {
-  CommandQueueUpdateViewModelFunctionFactoryService
-} from "../api/command-queue-update-view-model-function-factory.service";
+  CommandQueueUpdateViewModelFunctionFactory
+} from "./command-queue-update-view-model-function-factory";
 import {CommandQueueViewModel} from "../api/command-queue-view-model";
 
 describe('CommandQueueDataManagerV2',()=>{
@@ -200,12 +200,12 @@ describe('CommandQueueDataManagerV2',()=>{
     });
 });
 
-export class TestDouble extends CommandQueueDataManagerV2
+export class TestDouble extends CommandQueueDataManager
 {
   constructor(
-    reader : CommandQueueViewModelReaderService,
+    reader : CommandQueueViewModelReader,
     queueFactory : QueueFactory,
-    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService
+    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactory
   ) {
     super(reader, queueFactory
     , updateViewModelFunctionFactory);

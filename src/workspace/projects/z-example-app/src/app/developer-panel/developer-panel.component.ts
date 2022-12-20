@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {CommandQueueDataManagerService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data-manager.service";
 import {PetsDataService} from "../data-manager/pets-data.service";
 import {CommandQueueDataService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data.service";
 import {ServerDataService} from "../server-data.service";
@@ -15,13 +14,9 @@ export class DeveloperPanelComponent {
 
   constructor(
     private commandQueueDataManager : AppDataManagerService,
-    private dataService : CommandQueueDataService,
     private serverDataService : ServerDataService) { }
 
-  private get petsDataService():PetsDataService
-  {
-    return this.dataService as PetsDataService;
-  }
+
   get commandsInQueue():number {
     return this.commandQueueDataManager.pendingCommands.length;
   }

@@ -1,4 +1,4 @@
-import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory.service";
+import {CommandQueueUpdateViewModelFunctionFactory} from "../../../../jcg-command-queue/src/lib/api/command-queue-update-view-model-function-factory";
 import {PetsViewModel} from "./pets-view-model";
 import {CommandQueueCommand} from "../../../../jcg-command-queue/src/lib/api/command-queue-command";
 import {IUpdateViewModelFunction} from "../../../../jcg-command-queue/src/lib/api/IUpdateViewModelFunction";
@@ -9,7 +9,7 @@ import {Injectable} from "@angular/core";
   providedIn:'root'
 })
 export class PetsUpdateViewModelFunctionFactory
-  extends CommandQueueUpdateViewModelFunctionFactoryService
+  extends CommandQueueUpdateViewModelFunctionFactory
 {
   create(cmd: CommandQueueCommand): IUpdateViewModelFunction {
     if (cmd instanceof AddPetCommand)

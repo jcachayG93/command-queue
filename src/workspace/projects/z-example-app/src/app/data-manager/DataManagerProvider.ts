@@ -1,8 +1,8 @@
 import {
-  CommandQueueDataManagerV2,
+  CommandQueueDataManager,
   CommandQueueDataService,
-  CommandQueueUpdateViewModelFunctionFactoryService,
-  CommandQueueViewModelReaderService, QueueFactory,
+  CommandQueueUpdateViewModelFunctionFactory,
+  CommandQueueViewModelReader, QueueFactory,
 } from "jcg-command-queue";
 import {AppDataManagerService} from "./app-data-manager.service";
 import {PetsDataService} from "./pets-data.service";
@@ -21,7 +21,7 @@ const dataManagerFactory =
   const updateVmFunctionFactory = new PetsUpdateViewModelFunctionFactory();
   const queueFactory = new QueueFactory(dataService);
   const reader = new PetsReader(ds);
-  return new CommandQueueDataManagerV2(reader, queueFactory, updateVmFunctionFactory);
+  return new CommandQueueDataManager(reader, queueFactory, updateVmFunctionFactory);
   }
 
 export const DataManagerProvider = {
