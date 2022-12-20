@@ -19,20 +19,11 @@
           </tr>
         </table>
       </div>
-      <div class="col logs">
-        <table>
-          <tr>
-            <th>Logs:</th>
-          </tr>
-          <tr *ngFor="let log of developerLogs">
-            <td>{{log}}</td>
-          </tr>
-        </table>
-      </div>
+
     </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="incrementServerModelVersion()">Increment Server Version</button>
-    <button mat-button (click)="resetLogs()">Reset Logs</button>
+
   </mat-card-actions>
 </mat-card>

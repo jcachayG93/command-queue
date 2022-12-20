@@ -1,6 +1,5 @@
 import {Observable, Subject} from "rxjs";
 import {CommandQueueViewModelReaderService} from "../api/command-queue-view-model-reader.service";
-import {Logger} from "./support/Logger";
 import {CommandQueueViewModel} from "../api/command-queue-view-model";
 import {ConcurrencyToken} from "../api/concurrency-token";
 import {QueueFactory} from "../QueueV2/QueueFactory";
@@ -16,8 +15,7 @@ export class CommandQueueDataManagerV2
   constructor(
     private reader : CommandQueueViewModelReaderService,
     private queueFactory : QueueFactory,
-    private updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService,
-    private logger : Logger) {
+    private updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService) {
     this.initializeQueue();
   }
 
@@ -32,6 +30,10 @@ export class CommandQueueDataManagerV2
 
   currentToken : ConcurrencyToken | null = null;
 
+  get pendingCommands(): CommandQueueCommand[] {
+    return this.queue.pendingCommands;
+  }
+
   queue! : IQueue;
 
   readViewModel():Observable<void>
@@ -44,7 +46,7 @@ export class CommandQueueDataManagerV2
             this.currentToken = r.token;
             this.onViewModelReadFromServer.next();
             this.onViewModelUpdated.next();
-            this.logger.addLog("DmReader","View model was read from server");
+
             obs.complete();
           },
           error:e=>obs.error(e)

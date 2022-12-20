@@ -35,8 +35,7 @@ describe('CommandQueueDataManagerV2',()=>{
     sut = new TestDouble(
       reader.object,
       queueFactory,
-      updateViewModelFunctionFactory.object,
-      new Logger()
+      updateViewModelFunctionFactory.object
     );
     assertFunction = new AssertViewModelFunctionMock();
     sut.viewModel = new Mock<CommandQueueViewModel>().object();
@@ -58,6 +57,16 @@ describe('CommandQueueDataManagerV2',()=>{
       sut.initializeQueue();
       // ********* ASSERT ************
       expect(sut.queue).toBe(queueFactory.returns);
+    });
+  it('pendingCommands delegates to queue',
+    () => {
+      // ********* ARRANGE ***********
+
+      // ********* ACT ***************
+      const result = sut.pendingCommands;
+      // ********* ASSERT ************
+      expect(result).toBe(queueFactory
+        .returns.pendingCommands);
     });
   it('read view model delegates to reader, sets view-model and current token' +
     'with result, emits onViewModelUpdated and onViewModelReadFromServer',
@@ -184,10 +193,10 @@ export class TestDouble extends CommandQueueDataManagerV2
   constructor(
     reader : CommandQueueViewModelReaderService,
     queueFactory : QueueFactory,
-    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService,
-    logger : Logger) {
+    updateViewModelFunctionFactory : CommandQueueUpdateViewModelFunctionFactoryService
+  ) {
     super(reader, queueFactory
-    , updateViewModelFunctionFactory,logger);
+    , updateViewModelFunctionFactory);
   }
   override readViewModel(): Observable<void> {
     return super.readViewModel()
