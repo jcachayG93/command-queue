@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrency-version-mismatch-dialog.component';
 import {AppDataManagerService} from "./data-manager/app-data-manager.service";
 import {DataManagerProvider} from "./data-manager/DataManagerProvider";
+import {ServerDataService} from "./server-data.service";
 
 @NgModule({
   declarations: [
@@ -41,9 +42,7 @@ import {DataManagerProvider} from "./data-manager/DataManagerProvider";
     MatDialogModule
   ],
   providers: [
-    { provide: CommandQueueDataService, useClass: PetsDataService},
-    { provide: CommandQueueViewModelReaderService, useClass: PetsReader},
-    { provide: CommandQueueUpdateViewModelFunctionFactoryService, useClass: PetsUpdateViewModelFunctionFactory},
+    {provide: ServerDataService},
     DataManagerProvider
   ],
   bootstrap: [AppComponent]
