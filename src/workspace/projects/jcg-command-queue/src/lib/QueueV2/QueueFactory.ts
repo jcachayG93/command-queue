@@ -6,14 +6,12 @@ import {Queue} from "./Queue";
 export class QueueFactory
 {
   constructor(
-    private logger : Logger,
     private executeFunctionFactory : IExecuteCommandFunctionFactory
   ) {
   }
   create():IQueue
   {
     return new Queue(
-      this.logger,
       this.executeFunctionFactory
     );
 

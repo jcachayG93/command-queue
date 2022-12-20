@@ -8,7 +8,6 @@ import {ConcurrencyVersionMismatchError} from "../api/errors/concurrency-version
 
 export class Queue implements IQueue {
   constructor(
-    private logger : Logger,
     private executeFunctionFactory : IExecuteCommandFunctionFactory
   ) {
   }
@@ -60,13 +59,6 @@ export class Queue implements IQueue {
             resolve()},
           error:err=>{
             this._pendingCommands.shift();
-            if (err instanceof ConcurrencyVersionMismatchError)
-            {
-              this.log(`observable threw concurrency mismatch error`);
-            } else
-            {
-              this.log(`observable threw non concurrency version mismatch error`);
-            }
             this.cancelAll();
             errorCallback(err);
             reject(err)}
@@ -76,13 +68,10 @@ export class Queue implements IQueue {
     }
   }
 
-  private log(message : string):void
-  {
-    this.logger.addLog("Queue",message);
-  }
+
 
   cancelAll(): void {
-    this.log("Cancel all was called");
+
     this.cancellationToken.CancellationRequested = true;
   }
 

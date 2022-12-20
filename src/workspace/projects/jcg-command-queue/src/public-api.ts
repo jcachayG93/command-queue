@@ -17,4 +17,6 @@ export * from './lib/api/command-queue-view-model';
 export * from './lib/api/command-queue-view-model-reader.service';
 export {CommandQueueReaderResponseDto} from "./lib/api/command-queue-reader-response-dto";
 export * from './lib/DataManager/CommandQueueDataManagerV2';
+export * from './lib/QueueV2/IQueue';
+export * from './lib/QueueV2/QueueFactory';
 

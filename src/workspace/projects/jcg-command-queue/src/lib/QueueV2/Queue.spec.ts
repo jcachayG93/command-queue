@@ -13,9 +13,7 @@ describe('Queue',()=>{
 
   beforeEach(()=>{
     executeFunctionFactory = new ExecuteCommandFunctionFactoryMock();
-    const logger = new Mock<Logger>();
-    logger.setup(s=>s.addLog(It.IsAny(),It.IsAny())).returns();
-    sut = new Queue(logger.object(),
+    sut = new Queue(
       executeFunctionFactory.object);
   });
   it('when the command executes, creates an ' +
