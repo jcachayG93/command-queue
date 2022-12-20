@@ -66,8 +66,6 @@ without having to wait for it. If an error occurs, the remaining commands in the
 
 ### Inner workings
 
-#### See **CommandQueueDataManagerImp.ts**
-It delegates to either a Reader or a Writer (injected in the constructor)
 
 #### Reader
 See **IDmReader** interface.

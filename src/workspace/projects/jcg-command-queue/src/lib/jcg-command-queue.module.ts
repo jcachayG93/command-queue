@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import {commandQueueDataManagerProvider} from "./api/commandQueueDataManagerProvider";
 
 
 

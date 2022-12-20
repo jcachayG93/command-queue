@@ -1,9 +1,7 @@
 import {IExecuteCommandFunctionFactory} from "../IExecuteCommandFunctionFactory";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {IExecuteCommandFunction} from "../IExecuteCommandFunction";
-import {IDmMediator} from "../IDmMediator";
 import {CommandQueueViewModel} from "../../../api/command-queue-view-model";
-import {CommandQueueUpdateViewModelFunctionFactoryService} from "../../../api/command-queue-update-view-model-function-factory.service";
 import {CommandQueueDataService} from "../../../api/command-queue-data.service";
 import {Observable, observable} from "rxjs";
 import {ICurrentTokenContainer} from "../../ICurrentTokenContainer";

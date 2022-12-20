@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConcurrencyVersionMismatchDialogComponent } from './services/concurrency-version-mismatch-dialog.component';
 import {AppDataManagerService} from "./data-manager/app-data-manager.service";
+import {DataManagerProvider} from "./data-manager/DataManagerProvider";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import {AppDataManagerService} from "./data-manager/app-data-manager.service";
     { provide: CommandQueueDataService, useClass: PetsDataService},
     { provide: CommandQueueViewModelReaderService, useClass: PetsReader},
     { provide: CommandQueueUpdateViewModelFunctionFactoryService, useClass: PetsUpdateViewModelFunctionFactory},
-    { provide: AppDataManagerService }
+    DataManagerProvider
   ],
   bootstrap: [AppComponent]
 })

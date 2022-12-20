@@ -1,4 +1,4 @@
-import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
+
 import {ExecuteCommandFunctionFactory} from "./ExecuteCommandFunctionFactory";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
