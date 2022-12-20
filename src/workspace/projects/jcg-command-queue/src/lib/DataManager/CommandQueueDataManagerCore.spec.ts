@@ -116,6 +116,13 @@ describe('CommandQueueDataManagerV2',()=>{
         .verify(sut.viewModel!);
       expect(viewModelUpdated).toBeTrue();
 
+      expect(queueFactory
+        .returns
+        .test_addArgs?.cmd).toBe(cmd);
+      expect(queueFactory
+        .returns
+        .test_addArgs?.tokenContainer).toBe(sut);
+
       const error = new Error();
 
       queueFactory
@@ -126,7 +133,8 @@ describe('CommandQueueDataManagerV2',()=>{
       expect(sut.test_ReadViewModelWasCalled).toBeTrue();
     });
 
-  it('executeCommands creates update vm function and updates the view-model for ' +
+  it('executeCommands creates update vm function and updates the view-model ' +
+    'for ' +
     'each command',
     () => {
       // ********* ARRANGE ***********
@@ -174,6 +182,10 @@ describe('CommandQueueDataManagerV2',()=>{
         expect(queueFactory
           .returns
           .test_addArgsSequence[i].cmd).toBe(commands[i]);
+
+        expect(queueFactory
+          .returns
+          .test_addArgsSequence[i].tokenContainer).toBe(sut);
       }
 
       // test the error callback

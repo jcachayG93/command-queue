@@ -9,7 +9,6 @@ import {commandQueueDataManagerProvider} from "./api/commandQueueDataManagerProv
   imports: [
   ],
   providers:[
-    commandQueueDataManagerProvider
   ]
 })
 export class JcgCommandQueueModule { }

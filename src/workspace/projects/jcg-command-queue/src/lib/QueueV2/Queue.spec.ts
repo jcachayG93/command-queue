@@ -5,16 +5,19 @@ import {CommandQueueCommand} from "../api/command-queue-command";
 import {Observable, delay} from "rxjs";
 import {IExecuteCommandFunctionFactory} from "../DataManager/support/IExecuteCommandFunctionFactory";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
+import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
+import {CurrentTokenContainerMock} from "../test-common/current-token-container-mock";
 
 
 describe('Queue',()=>{
   let executeFunctionFactory : ExecuteCommandFunctionFactoryMock;
   let sut : Queue;
-
+  let tokenContainer : ICurrentTokenContainer;
   beforeEach(()=>{
     executeFunctionFactory = new ExecuteCommandFunctionFactoryMock();
     sut = new Queue(
       executeFunctionFactory.object);
+    tokenContainer = new CurrentTokenContainerMock().object;
   });
   it('when the command executes, creates an ' +
     'execute function and invokes it',
@@ -24,11 +27,11 @@ describe('Queue',()=>{
         .setupWithRandomDelay(0,10);
       // ********* ACT ***************
       cmds.forEach(cmd=>
-      sut.add(cmd,e=>{}));
+      sut.add(cmd,e=>{}, tokenContainer));
       // ********* ASSERT ************
       setTimeout(()=>{
         cmds.forEach(cmd=>
-        executeFunctionFactory.verifyCreate(cmd));
+        executeFunctionFactory.verifyCreate(cmd, tokenContainer));
         done();
       },50);
     });
@@ -40,7 +43,7 @@ describe('Queue',()=>{
 
       // ********* ACT ***************
       cmds.forEach(cmd=>
-        sut.add(cmd,()=>{}));
+        sut.add(cmd,()=>{}, tokenContainer));
 
       // ********* ASSERT ************
 
@@ -62,10 +65,10 @@ describe('Queue',()=>{
 
 
       // ********* ACT ***************
-      sut.add(cmd1,(e)=>{});
+      sut.add(cmd1,(e)=>{}, tokenContainer);
       // This command invokes sut.cancelAll, see the callback above
-      sut.add(cancellingCommand,(e)=>{});
-      sut.add(cmd3,(e)=>{});
+      sut.add(cancellingCommand,(e)=>{}, tokenContainer);
+      sut.add(cmd3,(e)=>{}, tokenContainer);
 
       // ********* ASSERT ************
 
@@ -90,10 +93,10 @@ describe('Queue',()=>{
       })
 
       // ********* ACT ***************
-      sut.add(cmd1,(e)=>{});
+      sut.add(cmd1,(e)=>{}, tokenContainer);
       // This command does the verification, see callback above
-      sut.add(commandThatVerifies,(e)=>{});
-      sut.add(cmd3,(e)=>{});
+      sut.add(commandThatVerifies,(e)=>{}, tokenContainer);
+      sut.add(cmd3,(e)=>{}, tokenContainer);
 
       // ********* ASSERT ************
 
@@ -114,10 +117,10 @@ describe('Queue',()=>{
 
       // ********* ACT ***************
 
-      sut.add(cmd1,e=>{});
-      sut.add(cmd2,e=>{errorCallbackWasInvoked = true});
-      sut.add(cmd3,()=>{});
-      sut.add(cmd4,()=>{});
+      sut.add(cmd1,e=>{}, tokenContainer);
+      sut.add(cmd2,e=>{errorCallbackWasInvoked = true}, tokenContainer);
+      sut.add(cmd3,()=>{},  tokenContainer);
+      sut.add(cmd4,()=>{}, tokenContainer);
       // ********* ASSERT ************
       setTimeout(()=>{
         expect(sut.pendingCommands.length).toBe(0);
@@ -135,9 +138,9 @@ describe('Queue',()=>{
         expect(sut.commandsRan).toBe(3);
         done();
       });
-      sut.add(cmd1,e=>{});
-      sut.add(cmd2,e=>{});
-      sut.add(cmd3,e=>{});
+      sut.add(cmd1,e=>{}, tokenContainer);
+      sut.add(cmd2,e=>{}, tokenContainer);
+      sut.add(cmd3,e=>{}, tokenContainer);
       // ********* ASSERT ************
 
     });
@@ -148,9 +151,9 @@ describe('Queue',()=>{
       const cancellingCommand = executeFunctionFactory.setupWithCallback(()=>sut.cancelAll());
       const cancelledCommand = executeFunctionFactory.setupWithDelay(10,1);
       // ********* ACT ***************
-      sut.add(cmd1,e=>{});
-      sut.add(cancellingCommand,e=>{});
-      sut.add(cancelledCommand,e=>{});
+      sut.add(cmd1,e=>{}, tokenContainer);
+      sut.add(cancellingCommand,e=>{}, tokenContainer);
+      sut.add(cancelledCommand,e=>{}, tokenContainer);
       // ********* ASSERT ************
       setTimeout(()=>{
         expect(sut.commandsCancelled).toBe(1);
@@ -171,9 +174,9 @@ export class ExecuteCommandFunctionFactoryMock
     return this.moq.object();
   }
 
-  verifyCreate(cmd:CommandQueueCommand)
+  verifyCreate(cmd:CommandQueueCommand, tokenContainer : ICurrentTokenContainer)
   {
-    this.moq.verify(s=>s.create(cmd));
+    this.moq.verify(s=>s.create(cmd, tokenContainer));
   }
 
   /**
@@ -186,7 +189,7 @@ export class ExecuteCommandFunctionFactoryMock
 
   private setup(forCommand:CommandQueueCommand, returns : IExecuteCommandFunction)
   {
-    this.moq.setup(s=>s.create(forCommand))
+    this.moq.setup(s=>s.create(forCommand, It.IsAny()))
       .returns(returns);
   }
 

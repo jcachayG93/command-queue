@@ -9,8 +9,10 @@ import {
 import {IQueue} from "../QueueV2/IQueue";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
+import {ICurrentTokenContainer} from "./ICurrentTokenContainer";
 
 export class CommandQueueDataManagerV2
+  implements ICurrentTokenContainer
 {
   constructor(
     private reader : CommandQueueViewModelReaderService,
@@ -66,10 +68,11 @@ export class CommandQueueDataManagerV2
       .create(cmd);
     updateVmFunction(this.viewModel!);
     this.onViewModelUpdated.next();
+
     this.queue.add(cmd,(e)=>{
       this.cancelAllCommands();
       this.onWriteErrorOccurred.next(e);
-    });
+    },this);
   }
 
   executeCommands(commands : CommandQueueCommand[],
@@ -94,7 +97,7 @@ export class CommandQueueDataManagerV2
       this.queue.add(cmd,e=>{
         this.cancelAllCommands();
         this.onWriteErrorOccurred.next(e as Error);
-      })
+      },this);
     })
   }
 
