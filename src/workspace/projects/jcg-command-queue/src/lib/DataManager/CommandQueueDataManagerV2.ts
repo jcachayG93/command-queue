@@ -40,7 +40,9 @@ export class CommandQueueDataManagerV2
 
   readViewModel():Observable<void>
   {
+
     return new Observable<void>(obs=>{
+
       this.reader.read()
         .subscribe({
           next:r=>{

@@ -1,9 +1,8 @@
 import {
   CommandQueueViewModelReaderService
-} from "../../../../jcg-command-queue/src/lib/api/command-queue-view-model-reader.service";
+} from "jcg-command-queue";
 
 import {map, Observable} from "rxjs";
-import {CommandQueueViewModel} from "../../../../jcg-command-queue/src/lib/api/command-queue-view-model";
 import {Injectable} from "@angular/core";
 import {ServerDataService} from "../server-data.service";
 import {ServerResponse} from "./server-response";
@@ -20,7 +19,7 @@ export class PetsReader
     super();
   }
 
-  read(): Observable<CommandQueueReaderResponseDto> {
+  override read(): Observable<CommandQueueReaderResponseDto> {
     return this.ds.getData()
       .pipe(map(this.map));
   }
