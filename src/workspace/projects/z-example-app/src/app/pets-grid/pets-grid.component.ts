@@ -6,6 +6,7 @@ import {
   ConcurrencyVersionMismatchError
 } from "../../../../jcg-command-queue/src/lib/api/errors/concurrency-version-mismatch-error";
 import {ConcurrencyVersionMismatchDialogService} from "../services/concurrency-version-mismatch-dialog.service";
+import {AppDataManagerService} from "../data-manager/app-data-manager.service";
 
 @Component({
   selector: 'app-pets-grid',
@@ -14,7 +15,7 @@ import {ConcurrencyVersionMismatchDialogService} from "../services/concurrency-v
 })
 export class PetsGridComponent implements OnInit {
 
-  constructor(private commandQueueDataManager : CommandQueueDataManagerService,
+  constructor(private commandQueueDataManager : AppDataManagerService,
               private dialog : ConcurrencyVersionMismatchDialogService) { }
 
   ngOnInit(): void {

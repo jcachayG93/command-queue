@@ -3,12 +3,12 @@ import {CommandQueueCommand} from "../api/command-queue-command";
 import {IExecuteCommandFunctionFactory} from "../DataManager/support/IExecuteCommandFunctionFactory";
 import {IQueue} from "./IQueue";
 import {ConcurrencyVersionMismatchError} from "../api/errors/concurrency-version-mismatch-error";
+import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
 
 
 
 export class Queue implements IQueue {
   constructor(
-    private logger : Logger,
     private executeFunctionFactory : IExecuteCommandFunctionFactory
   ) {
   }
@@ -16,9 +16,9 @@ export class Queue implements IQueue {
   /**
    * Adds a command to the queue
    */
-  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void)
+  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void, tokenContainer : ICurrentTokenContainer)
     : void {
-    const action = this.createAction(cmd, errorCallback);
+    const action = this.createAction(cmd, errorCallback, tokenContainer);
 
     if (this.current == null)
     {
@@ -35,7 +35,8 @@ export class Queue implements IQueue {
 
   private createAction(
     cmd:CommandQueueCommand,
-    errorCallback:(e:Error)=>void)
+    errorCallback:(e:Error)=>void,
+    tokenContainer : ICurrentTokenContainer)
   :()=>Promise<void>
   {
     this._pendingCommands.push(cmd);
@@ -50,7 +51,7 @@ export class Queue implements IQueue {
       }
       return new Promise<void>((resolve,reject)=>{
         this._commandsRan++;
-        const f = this.executeFunctionFactory.create(cmd);
+        const f = this.executeFunctionFactory.create(cmd, tokenContainer);
         const subscription = f().subscribe({
           complete:()=>{
             this._pendingCommands.shift();
@@ -60,13 +61,6 @@ export class Queue implements IQueue {
             resolve()},
           error:err=>{
             this._pendingCommands.shift();
-            if (err instanceof ConcurrencyVersionMismatchError)
-            {
-              this.log(`observable threw concurrency mismatch error`);
-            } else
-            {
-              this.log(`observable threw non concurrency version mismatch error`);
-            }
             this.cancelAll();
             errorCallback(err);
             reject(err)}
@@ -76,13 +70,10 @@ export class Queue implements IQueue {
     }
   }
 
-  private log(message : string):void
-  {
-    this.logger.addLog("Queue",message);
-  }
+
 
   cancelAll(): void {
-    this.log("Cancel all was called");
+
     this.cancellationToken.CancellationRequested = true;
   }
 

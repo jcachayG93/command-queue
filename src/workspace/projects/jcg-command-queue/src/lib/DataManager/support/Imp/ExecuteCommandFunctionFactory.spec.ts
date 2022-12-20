@@ -1,21 +1,21 @@
-import {DmMediatorMock} from "../../../test-common/DmMediatorMock";
+
 import {ExecuteCommandFunctionFactory} from "./ExecuteCommandFunctionFactory";
 import {ViewModelImp} from "../../../test-common/ViewModelImp";
 import {CommandQueueCommand} from "../../../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {DataServiceMock} from "../../../test-common/DataServiceMock";
+import {CurrentTokenContainerMock} from "../../../test-common/current-token-container-mock";
 
 describe("ExecuteCommandFunctionFactory",()=>{
-  let mediator : DmMediatorMock;
+  let currentTokenContainer : CurrentTokenContainerMock;
   let dataService : DataServiceMock;
   let cmd : CommandQueueCommand;
   let sut : ExecuteCommandFunctionFactory<ViewModelImp>;
   beforeEach(()=>{
-    mediator = new DmMediatorMock();
+    currentTokenContainer = new CurrentTokenContainerMock();
     dataService = new DataServiceMock();
     cmd = (new Mock<CommandQueueCommand>()).object();
     sut = new ExecuteCommandFunctionFactory<ViewModelImp>(
-      mediator.object,
       dataService.object);
   });
 
@@ -23,14 +23,14 @@ describe("ExecuteCommandFunctionFactory",()=>{
     'passing the command and current token from mediator',
     (done) => {
       // ********* ARRANGE ***********
-      let f = sut.create(cmd);
+      let f = sut.create(cmd, currentTokenContainer.object);
 
       // ********* ACT ***************
       f().subscribe({
         complete:()=>{
           // ********* ASSERT ************
 
-          dataService.verifyExecute(mediator.object.currentToken!,cmd);
+          dataService.verifyExecute(currentTokenContainer.currentToken,cmd);
           done();
         }
       });
@@ -40,13 +40,13 @@ describe("ExecuteCommandFunctionFactory",()=>{
   it('when resolved, the observable sets the current token with the dataService response',
     (done) => {
       // ********* ARRANGE ***********
-      let f = sut.create(cmd);
+      let f = sut.create(cmd, currentTokenContainer.object);
 
       // ********* ACT ***************
       f().subscribe({
         complete:()=>{
           // ********* ASSERT ************
-          mediator.verifySetCurrentToken(dataService.returnsValue);
+          currentTokenContainer.verifySetCurrentToken(dataService.returnsValue);
           done();
         }
       });

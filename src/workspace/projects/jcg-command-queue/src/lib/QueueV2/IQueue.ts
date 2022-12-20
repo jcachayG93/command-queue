@@ -1,4 +1,5 @@
 import {CommandQueueCommand} from "../api/command-queue-command";
+import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
 
 export interface IQueue {
 
@@ -11,7 +12,8 @@ export interface IQueue {
   /**
    * Adds a command to the queue
    */
-  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void): void;
+  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void,
+      tokenContainer : ICurrentTokenContainer): void;
 
   cancelAll(): void;
 }

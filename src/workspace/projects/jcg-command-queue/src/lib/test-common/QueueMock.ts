@@ -2,6 +2,7 @@
 import {IQueue} from "../QueueV2/IQueue";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {IExecuteCommandFunction} from "../DataManager/support/IExecuteCommandFunction";
+import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
 
 export class QueueMock
   implements IQueue
@@ -10,8 +11,9 @@ export class QueueMock
   private _commandsCancelled = 10;
   private _pendingCommands
   : CommandQueueCommand[] = [];
-  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void): void {
-    this.test_addArgs = new QueueAddArgs(cmd, errorCallback);
+  add(cmd: CommandQueueCommand, errorCallback: (e: Error) => void,
+      tokenContainer : ICurrentTokenContainer): void {
+    this.test_addArgs = new QueueAddArgs(cmd, errorCallback, tokenContainer);
     this.test_addArgsSequence.push(this.test_addArgs);
   }
 
@@ -40,7 +42,8 @@ export class QueueAddArgs
 {
   constructor(
     public cmd: CommandQueueCommand,
-    public errorCallback: (e: Error) => void) {
+    public errorCallback: (e: Error) => void,
+    public tokenContainer : ICurrentTokenContainer) {
 
   }
 }

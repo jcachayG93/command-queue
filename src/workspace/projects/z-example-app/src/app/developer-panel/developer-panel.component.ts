@@ -4,6 +4,7 @@ import {PetsDataService} from "../data-manager/pets-data.service";
 import {CommandQueueDataService} from "../../../../jcg-command-queue/src/lib/api/command-queue-data.service";
 import {ServerDataService} from "../server-data.service";
 import {ServerResponse} from "../data-manager/server-response";
+import {AppDataManagerService} from "../data-manager/app-data-manager.service";
 
 @Component({
   selector: 'app-developer-panel',
@@ -13,7 +14,7 @@ import {ServerResponse} from "../data-manager/server-response";
 export class DeveloperPanelComponent {
 
   constructor(
-    private commandQueueDataManager : CommandQueueDataManagerService,
+    private commandQueueDataManager : AppDataManagerService,
     private dataService : CommandQueueDataService,
     private serverDataService : ServerDataService) { }
 
@@ -42,15 +43,7 @@ export class DeveloperPanelComponent {
     this.serverDataService.incrementModelVersion();
   }
 
-  get developerLogs():string[]
-  {
-    return this.commandQueueDataManager.developerLogs;
-  }
 
-  resetLogs():void
-  {
-    this.commandQueueDataManager.resetLogs();
-  }
 
   get commandsPercentage():number
   {
