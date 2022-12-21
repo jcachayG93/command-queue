@@ -4,7 +4,6 @@ import {UpdateViewModelFunctionFactoryMock} from "../test-common/UpdateViewModel
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {Mock} from "moq.ts";
 import {CommandQueueDataManager} from "./CommandQueueDataManager";
-import {Logger} from "./support/Logger";
 import {finalize, Observable} from "rxjs";
 import {AssertViewModelFunctionMock} from "../test-common/AssertViewModelFunctionMock";
 import {CommandQueueViewModelReader} from "../api/command-queue-view-model-reader.service";

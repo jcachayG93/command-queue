@@ -10,6 +10,7 @@ import {IQueue} from "../QueueV2/IQueue";
 import {CommandQueueCommand} from "../api/command-queue-command";
 import {IAssertViewModelFunction} from "../api/IAssertViewModelFunction";
 import {ICurrentTokenContainer} from "../DataManager/ICurrentTokenContainer";
+import {IUpdateViewModelFunction} from "./IUpdateViewModelFunction";
 
 
 export class CommandQueueDataManager
@@ -32,6 +33,11 @@ export class CommandQueueDataManager
   viewModel : CommandQueueViewModel | null = null;
 
   currentToken : ConcurrencyToken | null = null;
+
+  protected createUpdateViewModelFunction(cmd:CommandQueueCommand):IUpdateViewModelFunction
+  {
+    return this.updateViewModelFunctionFactory.create(cmd);
+  }
 
   get pendingCommands(): CommandQueueCommand[] {
     return this.queue.pendingCommands;
@@ -67,8 +73,7 @@ export class CommandQueueDataManager
 
   executeCommand(cmd:CommandQueueCommand):void
   {
-    const updateVmFunction = this.updateViewModelFunctionFactory
-      .create(cmd);
+    const updateVmFunction = this.createUpdateViewModelFunction(cmd);
     updateVmFunction(this.viewModel!);
     this.onViewModelUpdated.next();
 
@@ -82,8 +87,7 @@ export class CommandQueueDataManager
                   assertFunction : IAssertViewModelFunction):void
   {
     commands.forEach(cmd=>{
-      const updateVmFunction = this.updateViewModelFunctionFactory
-        .create(cmd);
+      const updateVmFunction = this.createUpdateViewModelFunction(cmd);
       updateVmFunction(this.viewModel!);
     });
     try {
