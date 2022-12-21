@@ -71,16 +71,23 @@ export class CommandQueueDataManager
     this.readViewModel().subscribe();
   }
 
+  protected addToQueue(cmd:CommandQueueCommand, errorCallback:(e:Error)=>void)
+  {
+    this.queue.add(cmd, errorCallback, this);
+  }
+
   executeCommand(cmd:CommandQueueCommand):void
   {
     const updateVmFunction = this.createUpdateViewModelFunction(cmd);
     updateVmFunction(this.viewModel!);
     this.onViewModelUpdated.next();
 
-    this.queue.add(cmd,(e)=>{
+    this.addToQueue(cmd,(e)=>{
       this.cancelAllCommands();
       this.onWriteErrorOccurred.next(e);
-    },this);
+    });
+
+
   }
 
   executeCommands(commands : CommandQueueCommand[],
@@ -101,10 +108,11 @@ export class CommandQueueDataManager
     this.onViewModelUpdated.next();
 
     commands.forEach(cmd=>{
-      this.queue.add(cmd,e=>{
+
+      this.addToQueue(cmd,e=>{
         this.cancelAllCommands();
         this.onWriteErrorOccurred.next(e as Error);
-      },this);
+      });
     })
   }
 
