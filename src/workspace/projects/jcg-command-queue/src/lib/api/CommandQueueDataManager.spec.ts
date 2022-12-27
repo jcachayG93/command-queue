@@ -209,23 +209,24 @@ export class TestDouble extends CommandQueueDataManager
     super(reader, queueFactory
     , updateViewModelFunctionFactory);
   }
-  override readViewModel(): Observable<void> {
-    return super.readViewModel()
-      .pipe(finalize(()=>this.test_ReadViewModelWasCalled = true));
-  }
 
-  override initializeQueue() {
+    override readViewModel(): Observable<void> {
+        return super.readViewModel()
+            .pipe(finalize(() => this.test_ReadViewModelWasCalled = true));
+    }
+
+    override initializeQueue() {
     super.initializeQueue();
     this.test_initializeQueueWasCalled = true;
   }
 
-  override cancelAllCommands() {
-    super.cancelAllCommands();
-    this.test_cancelAllWasCalled = true;
+    override cancelAllCommands() {
+        super.cancelAllCommands();
+        this.test_cancelAllWasCalled = true;
 
-  }
+    }
 
-  test_cancelAllWasCalled = false;
+    test_cancelAllWasCalled = false;
 
   test_ReadViewModelWasCalled = false;
 

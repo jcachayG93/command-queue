@@ -17,4 +17,6 @@ export {CommandQueueReaderResponseDto} from "./lib/api/command-queue-reader-resp
 export * from './lib/api/CommandQueueDataManager';
 export * from './lib/QueueV2/IQueue';
 export * from './lib/QueueV2/QueueFactory';
+export * from "./lib/api/ICommandQueueDataManager";
+
 
